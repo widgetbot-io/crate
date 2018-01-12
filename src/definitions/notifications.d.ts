@@ -39,5 +39,6 @@ export namespace Notifications {
             }[]
             everyone: boolean
         }
+        loading: boolean
     }
 }

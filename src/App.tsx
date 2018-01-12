@@ -11,7 +11,6 @@ import { Embed } from './components/Embed'
 import { Toggle } from './components/Toggle'
 import { Toasts } from './components/Toasts'
 const JSON5 = require('json5')
-let classes
 /**
  * Container for all crate instances
  */
@@ -37,7 +36,7 @@ class Crate extends React.Component {
       messages: []
     }
   }
-  embed: any
+  classes: any
 
   constructor(config: Config) {
     super(config)
@@ -59,7 +58,7 @@ class Crate extends React.Component {
 
   componentWillMount() {
     this.parse.then((config) => {
-      classes = jss(config)
+      this.classes = jss(config)
       this.setState({
         config: config
       })
@@ -89,8 +88,9 @@ class Crate extends React.Component {
   }
 
   render() {
+    let { classes } = this
     return (
-      classes ? (
+      this.classes ? (
         <div className={`crate ${classes.crate}`}>
           {JSON.stringify(this.state)}
           <Embed
@@ -126,7 +126,7 @@ class Crate extends React.Component {
       if (script && script.innerHTML) {
         config = script.innerHTML
         if (config.indexOf('new Crate') >= 0) {
-          config = `{${config.substring(config.lastIndexOf('{')+1,config.lastIndexOf('}'))}}`
+          config = config.match(/\{([\s\S]*)+\}/)[0]
         }
         config = JSON5.parse(config)
       } else {
@@ -154,19 +154,28 @@ class Crate extends React.Component {
   }
 
   listener(message: Notifications.message) {
-    if (typeof message === 'object' && message.timestamp) {
-      let { unread, pinged, messages } = this.state.notifications
+    if (typeof message === 'object') {
+      if (message.timestamp) {
+        let { unread, pinged, messages } = this.state.notifications
 
-      if (!this.state.view.open && unread < 99) unread++
-      if (message.mentions.everyone) pinged = true
-      
-      this.setState({
-        notifications: {
-          pinged: pinged,
-          unread: unread,
-          messages: messages
-        }
-      })
+        if (!this.state.view.open && unread < 99) unread++
+        if (message.mentions.everyone) pinged = true
+        
+        this.setState({
+          notifications: {
+            pinged: pinged,
+            unread: unread,
+            messages: messages
+          }
+        })
+      } else if (typeof message.loading === 'boolean') {
+        this.setState({
+          view: {
+            ...this.state.view,
+            loading: message.loading
+          }
+        })
+      }
     }
   }
 }
