@@ -2,7 +2,7 @@ declare var window: any
 const JSON5 = require('json5')
 import * as ReactDOM from "react-dom"
 
-import { Renderer } from './renderer'
+import { Renderer } from './Renderer'
 import ParseConfig from './components/Config'
 import log from './components/Log'
 import jss from './jss/App'
