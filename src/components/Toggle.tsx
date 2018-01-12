@@ -63,7 +63,7 @@ class Indicator extends React.Component<UnreadIndicator, {}> {
         let { unread, pinged } = this.props
         return (
             <div className={`${classes.indicator} ${pinged ? classes['indicator-pinged'] : ''}`}>
-                {unread !== 0 && unread}
+                {unread !== 0 ? unread > 99 ? '99' : unread : ''}
             </div>
         )
     }
