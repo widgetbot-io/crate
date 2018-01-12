@@ -1,3 +1,10 @@
+import { Config } from './config'
+
 export interface View {
-  view: string | 'hidden' | 'expanded'
+  view: {
+    open: boolean
+    opened: boolean // Has to be set to true for the iframe to render
+    loading: boolean
+  }
+  config: any | Config
 }

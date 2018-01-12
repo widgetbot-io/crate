@@ -1,13 +1,23 @@
+import { Config } from '../definitions/config'
 import jss from 'jss'
-const preset = require('jss-preset-default')
 const color = require('color')
+// @ts-ignore
+import camelCase from 'jss-camel-case'
+// @ts-ignore
+import nested from 'jss-nested'
 
-jss.setup(preset)
+// @ts-ignore
+jss.use(camelCase(), nested())
 
-const styles = {
-  crate: {
-    '-webkit-tap-highlight-color': 'transparent'
+export default (config: Config) => {
+  const styles = {
+    crate: {
+      '& *': {
+        WebkitTapHighlightColor: 'transparent',
+        userSelect: 'none'
+      }
+    }
   }
+  
+  return jss.createStyleSheet(styles).attach().classes
 }
-
-export default jss.createStyleSheet(styles).attach().classes
