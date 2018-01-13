@@ -14,9 +14,9 @@ export default (config: Config) => {
     'popup': {
       zIndex: '2147483000 !important',
       position: 'fixed !important',
-      right: '20px !important',
+      [config.position.x]: '20px !important',
       height: 'calc(100% - 20px - 75px - 20px) !important',
-      bottom: 'calc(20px + 75px) !important',
+      [config.position.y]: 'calc(20px + 75px) !important',
       width: '370px !important',
       minHeight: '250px !important',
       maxHeight: '590px !important',

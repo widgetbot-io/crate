@@ -15,9 +15,10 @@ export class Renderer extends React.Component {
   // @ts-ignore custom state handler
   classes = this.props.api.state.classes
   
-  componentWillReceiveProps() {
-    console.log('props')
+  componentDidMount() {
+    window.addEventListener('message', ({data}) => this.listener(data), false)
   }
+
   render() {
     let { classes } = this.state
     // @ts-ignore custom state handler
@@ -26,7 +27,6 @@ export class Renderer extends React.Component {
     return (
       classes ? (
         <div className={`crate ${classes.crate}`}>
-          {JSON.stringify(this.state)}
           <Embed
             view={this.state.view}
             config={this.state.config} />
@@ -49,12 +49,16 @@ export class Renderer extends React.Component {
   }
 
   listener(message: Notifications.message) {
+    // console.log(message)
     if (typeof message === 'object') {
       if (message.timestamp) {
         let { unread, pinged, messages } = this.state.notifications
 
         if (!this.state.view.open) unread++
-        if (message.mentions.everyone) pinged = true
+        if (message.mentions.everyone || message.pinged) pinged = true
+
+        console.log(messages.length)
+        messages.push(message)
         
         this.setState({
           notifications: {

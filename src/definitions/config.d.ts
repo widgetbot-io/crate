@@ -4,10 +4,10 @@ export interface Config {
   /**
    * WidgetBot widget options
    */
-  beta    ?: boolean              // Whether to use the beta domain or not
-  options ?: string | number      // WidgetBot widget options
   server   : string               // Your guilds ID
   channel  : string               // Channel ID
+  options ?: string | number      // WidgetBot widget options
+  beta    ?: boolean              // Whether to use the beta domain or not
   
   /**
    * Aesthetic options
@@ -16,6 +16,10 @@ export interface Config {
   theme   ?: 'material' | 'default'
   colors  ?: {
     toggle?: string
+  }
+  position: {
+    x: 'left' | 'right'
+    y: 'top' | 'bottom'
   }
 
   /**
@@ -26,9 +30,16 @@ export interface Config {
       enable: boolean
     }
     toasts?: {
-      enable: boolean
+      enable       : boolean
+      maxMessages ?: number // Max amount of messages to display on screen
+      maxHeight   ?: string // Max height of the toast container, CSS `calc()` can be used
     }
   }
+
+  /**
+   * General options
+   */
+  delay  ?: boolean // Only load the widget once the button has been clicked
 
   /**
    * Overrides

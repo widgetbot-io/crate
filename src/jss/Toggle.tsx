@@ -14,8 +14,8 @@ export default (config: Config) => {
     'toggle': {
       zIndex: '2147483000 !important',
       position: 'fixed !important',
-      bottom: '20px !important',
-      right: '20px !important',
+      [config.position.y]: '20px !important',
+      [config.position.x]: '20px !important',
       width: '60px !important',
       height: '60px !important',
       borderRadius: '50% !important',
@@ -45,7 +45,7 @@ export default (config: Config) => {
     },
   
   
-    'button-open': {
+    'button-glyph': {
       display: 'block !important',
       position: 'absolute !important',
       top: '0 !important',
@@ -53,12 +53,29 @@ export default (config: Config) => {
       height: '100% !important',
       width: '100% !important',
       transition: 'transform .16s linear, opacity .08s linear !important',
-      backgroundPosition: '50% !important',
+      backgroundSize: '50% 50% !important',
+      backgroundPosition: 'center !important',
       backgroundRepeat: 'no-repeat !important',
       pointerEvents: 'none !important',
     },
+    'button-open': {
+      backgroundImage: `url(${JSON.stringify(config.logo)}) !important`,
+    },
+    'button-open:toggled': {
+      opacity: '1 !important',
+      transform: 'rotate(30deg) scale(0) !important',
+    },
     'button-close': {
-  
+      backgroundImage: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOBAMAAADtZjDiAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAG1BMVEUAAAD///////////////////////////8AAADr8xjQAAAAB3RSTlMAM7cPx7jIAE21/gAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAABESURBVAjXYxAyYGBgYFZkUHcG0ialDCYlBgzM7slA7MxgUgaUNCkzdgfJMbunlIDUMpiUg7hwGiYOVQfTBzMHZi7UHgCB3RAZ7HszogAAAABJRU5ErkJggg==) !important',
+      backgroundPosition: '50% !important',
+      backgroundSize: '14px 14px !important',
+      backgroundRepeat: 'no-repeat !important',
+      opacity: '0 !important',
+      transform: 'rotate(-30deg) !important',
+    },
+    'button-close:toggled': {
+      opacity: '1 !important',
+      transform: 'rotate(0deg) !important',
     },
   
   

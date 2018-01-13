@@ -1,19 +1,21 @@
 import * as React from "react";
 import { View } from '../definitions/view'
 import jss from '../jss/Embed'
-let classes
 
 interface Props extends View {
     
 }
 
 export class Embed extends React.Component<Props, {}> {
+    classes: any
+
     componentWillMount() {
         let { config } = this.props
-        classes = jss(config)
+        this.classes = jss(config)
     }
     render() {
         let { view, config } = this.props
+        let { classes } = this
         return (
             <div className={`${classes.popup} ${view.open ? classes['popup-open'] : ``}`}>
                 {view.loading &&
