@@ -37,10 +37,10 @@ export class Renderer extends React.Component {
             toggle={api.toggle.bind(this)}
             notifications={this.state.notifications} />
 
-          <Toasts
+          {!this.state.view.open && <Toasts
             view={this.state.view}
             config={this.state.config}
-            messages={this.state.notifications.messages} />
+            messages={this.state.notifications.messages} />}
         </div>
       ) : (
         <div />
