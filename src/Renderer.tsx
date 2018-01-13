@@ -57,8 +57,8 @@ export class Renderer extends React.Component {
         if (!this.state.view.open) unread++
         if (message.mentions.everyone || message.pinged) pinged = true
 
-        console.log(messages.length)
         messages.push(message)
+        messages = messages.slice(-this.state.config.notifications.toasts.maxMessages)
         
         this.setState({
           notifications: {

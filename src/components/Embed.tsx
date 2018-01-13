@@ -13,6 +13,7 @@ export class Embed extends React.Component<Props, {}> {
         let { config } = this.props
         this.classes = jss(config)
     }
+    
     render() {
         let { view, config } = this.props
         let { classes } = this

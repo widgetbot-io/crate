@@ -6,6 +6,7 @@ import { Renderer } from './Renderer'
 import ParseConfig from './components/Config'
 import log from './components/Log'
 import jss from './jss/App'
+import DeepMerge from './components/DeepMerge'
 
 // Crate sandbox
 let global = {
@@ -76,10 +77,7 @@ class StateHandler {
     ParseConfig(config).then((config) => {
       this.setState({
         classes: jss(config),
-        config: {
-          ...this.state.config,
-          ...config
-        },
+        config: DeepMerge(this.state.config, config),
         view: {
           ...this.state.view,
           opened: config.delay ? false : true
