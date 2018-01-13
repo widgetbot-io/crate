@@ -21,6 +21,7 @@ export default (config: Config) => {
       overflow: 'hidden',
       display: 'flex !important',
       opacity: '1 !important',
+      padding: '7px 0', // To prevent shadows from being cut
       [`padding-${config.position.y}`]: '20px !important',
       flexDirection: 'column !important',
       transition: 'opacity 0.4s ease,transform 0.2s cubic-bezier(0.47, 0, 0.75, 0.72)',
