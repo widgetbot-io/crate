@@ -1,6 +1,6 @@
 {
   "name": "widgetbot-crate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Clean & powerful popup Discord widgets for your website",
   "main": "dist/bundle",
   "typings": "dist/bundle",
