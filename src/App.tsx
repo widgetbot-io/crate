@@ -7,7 +7,6 @@ import { Renderer } from './Renderer'
 import ParseConfig from './components/Config'
 import log from './components/Log'
 import jss from './jss/App'
-import DeepMerge from './components/DeepMerge'
 
 // Crate sandbox
 let global = {
@@ -56,7 +55,8 @@ class StateHandler {
         },
         toasts: {
           enable: true,
-          maxMessages: 50,
+          visibilityTime: 10,
+          maxMessages: 5,
           maxHeight: 'calc(70% - 100px)'
         }
       },
@@ -73,16 +73,17 @@ class StateHandler {
       pinged: false,
       messages: []
     },
-    classes: {}
+    classes: {},
+    session: btoa(`${+new Date()}`)
   }
   react: any
   node: any
 
   constructor(config) {
-    ParseConfig(config).then((config) => {
+    ParseConfig(this.state, config).then((config) => {
       this.setState({
         classes: jss(config),
-        config: DeepMerge(this.state.config, config),
+        config: config,
         view: {
           ...this.state.view,
           opened: config.delay ? false : true

@@ -15,7 +15,8 @@ export default (config: Config) => {
       zIndex: '2147483000 !important',
       position: 'fixed !important',
       [config.position.y]: '80px !important',
-      [config.position.x]: '20px !important',
+      [config.position.x]: '0 !important',
+      [`padding-${config.position.x}`]: '20px !important',
       width: '300px !important',
       maxHeight: `${config.notifications.toasts.maxHeight} !important`,
       overflow: 'hidden',
@@ -23,7 +24,7 @@ export default (config: Config) => {
       opacity: '1 !important',
       padding: '7px 0', // To prevent shadows from being cut
       [`padding-${config.position.y}`]: '20px !important',
-      flexDirection: 'column !important',
+      flexDirection: 'column-reverse !important',
       transition: 'opacity 0.4s ease,transform 0.2s cubic-bezier(0.47, 0, 0.75, 0.72)',
       transform: 'initial !important',
       pointerEvents: 'none !important',
@@ -33,9 +34,17 @@ export default (config: Config) => {
       display: 'block !important',
       flex: '1 0 100% !important',
       textAlign: `${config.position.x} !important`,
-      WebkitAnimation: 'toastSlide 0.2s ease',
-      animation: 'toastSlide 0.2s ease',
+      transition: 'all 0.5s cubic-bezier(0, 0.8, 0.25, 1.18) !important',
     },
+    'toast-hidden': {
+      opacity: '0 !important',
+      transform: `translate(${config.position.x === 'left' ? '-20px' : '20px'}) !important`,
+    },
+    'toast-visible': {
+      opacity: '1 !important',
+      transform: 'initial !important',
+    },
+    
     'toast-avatar': {
       height: '35px !important',
       margin: config.position.x === 'right' ? '6px 0 0 15px !important' : '6px 15px 0 0 !important',
@@ -77,17 +86,6 @@ export default (config: Config) => {
         width: '0 !important',
       }
     },
-
-    '@keyframes toastSlide': {
-      '0%': {
-        transform: 'translate(20px)',
-        opacity: '',
-      },
-      '100%': {
-        opacity: '1',
-        transform: 'translate(0',
-      }
-    }
   }
   
   return jss.createStyleSheet(styles).attach().classes

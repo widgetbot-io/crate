@@ -49,8 +49,10 @@ export class Renderer extends React.Component {
   }
 
   listener(msg: any) {
-    if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.config.session) {
+    if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.session) {
       let { event, data } = msg
+      let { config } = this.state
+      let { toasts, indicator } = this.state.config.notifications
       /**
        * New message
        */
@@ -58,11 +60,19 @@ export class Renderer extends React.Component {
         let message: Notifications.message = data
         let { unread, pinged, messages } = this.state.notifications
 
-        if (!this.state.view.open) unread++
-        if (message.mentions.everyone || message.pinged) pinged = true
+        if (indicator.enable) {
+          if (!this.state.view.open) unread++
+          if (message.mentions.everyone || message.pinged) pinged = true
+        }
 
-        messages.push(message)
-        messages = messages.slice(-this.state.config.notifications.toasts.maxMessages)
+        if (toasts.enable) {
+          // Push to start of array
+          messages.unshift({
+            expiration: toasts.visibilityTime ? +new Date() + (1000 * toasts.visibilityTime) : false,
+            message: message
+          })
+          messages = messages.slice(0, this.state.config.notifications.toasts.maxMessages)
+        }
         
         this.setState({
           notifications: {

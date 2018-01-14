@@ -1,6 +1,11 @@
 import { Config } from '../definitions/config'
+import DeepMerge from '../components/DeepMerge'
 
-export default (config: Config) => {
+/**
+ * Resolves a valid configuration object, inheriting properties
+ * that are undefined from the default configuration
+ */
+export default (state: any, config: Config) => {
   return new Promise<Config>((resolve: Function, reject: Function) => {
     /**
      * Parse the configuration
@@ -10,10 +15,10 @@ export default (config: Config) => {
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
         if (!config.options) config.options = '0002'
         if (!config.query) config.query = {
-          session: +new Date(),
+          session: state.session,
         }
         if (!config.url) config.url = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/${queryString(config.query)}`
-        resolve(config)
+        resolve(DeepMerge(state.config, config))
       } else {
         reject(`Invalid configuration (missing the server or channel properties)! refer to https://github.com/widgetbot-io/crate`)
       }
