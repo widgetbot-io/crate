@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"
 import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Toasts'

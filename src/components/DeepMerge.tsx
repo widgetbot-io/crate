@@ -8,13 +8,13 @@ export default function mergeDeep(target, source) {
     Object.keys(source).forEach(key => {
       if (isObject(source[key])) {
         if (!(key in target))
-          Object.assign(output, { [key]: source[key] });
+          Object.assign(output, { [key]: source[key] })
         else
-          output[key] = mergeDeep(target[key], source[key]);
+          output[key] = mergeDeep(target[key], source[key])
       } else {
-        Object.assign(output, { [key]: source[key] });
+        Object.assign(output, { [key]: source[key] })
       }
-    });
+    })
   }
-  return output;
+  return output
 }
