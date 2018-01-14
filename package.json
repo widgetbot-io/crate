@@ -9,7 +9,7 @@
   "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --colors --port 3000 --open",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack -p --config webpack.config.js"
   },
   "dependencies": {
     "@types/color": "^2.0.0",
