@@ -6,7 +6,7 @@ import * as React from "react"
 import { Renderer } from './Renderer'
 import ParseConfig from './components/Config'
 import log from './components/Log'
-import Icons from './components/Icons'
+import { Icons } from './components/Icons'
 import jss from './jss/App'
 
 // Crate sandbox
@@ -44,7 +44,7 @@ class StateHandler {
       options: '0002',
       beta: false,
       
-      logo: Icons.widgetbot,
+      logo: Icons('widgetbot'),
       theme: 'default',
       colors: {
         toggle: '#7289DA'
@@ -101,11 +101,7 @@ class StateHandler {
         <Renderer api={this} ref={renderer => { this.react = renderer }} />, this.node
       )
     }).catch((error) => {
-      if (typeof error === 'string') {
-        log('error', error)
-      } else {
-        log('error', 'Failed to parse configuration!', error)
-      }
+      log('error', error)
     })
   }
 
@@ -143,15 +139,21 @@ class Crate extends StateHandler {
   }
 }
 
-window.Crate = Crate
+window.Crate = Crate;
 
 // Load crate from inside script tag
-let config = document.currentScript && document.currentScript.innerHTML
-if (config && config.indexOf('{') >= 0) {
-  // Regex to extract config object as string
-  if (config.indexOf('new Crate') >= 0) config = config.match(/\{([\s\S]*)+\}/)[0]
-  // Parse the config object
-  config = JSON5.parse(config)
-  // Create a new global crate object
-  window.crate = new Crate(config)
-}
+(() => {
+  let config = document.currentScript && document.currentScript.innerHTML
+  if (config && config.indexOf('{') >= 0) {
+    // Regex to extract config object as string
+    if (config.indexOf('new Crate') >= 0) config = config.match(/\{([\s\S]*)+\}/)[0]
+    try {
+      // Parse the config object
+      config = JSON5.parse(config)
+    } catch(error) {
+      return log('error', 'Failed to parse configuration!', error)
+    }
+    // Create a new global crate object
+    window.crate = new Crate(config)
+  }
+})()

@@ -1,6 +1,6 @@
 import { Config } from '../definitions/config'
-import DeepMerge from '../components/DeepMerge'
-import Icons from '../components/Icons'
+import DeepMerge from './DeepMerge'
+import { Icons } from './Icons'
 
 /**
  * Resolves a valid configuration object, inheriting properties
@@ -15,14 +15,15 @@ export default (state: any, config: Config) => {
       if (config.server && config.channel) {
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
         if (!config.options) config.options = '0002'
-        if (typeof config.logo === 'string') {
-          if (config.logo.toLowerCase() === 'discord') config.logo = Icons.discord
-          if (config.logo.toLowerCase() === 'intercom') config.logo = Icons.intercom
-        }
+        
+        if (config.logo === 'discord') config.logo = Icons('discord')
+        if (config.logo === 'intercom') config.logo = Icons('intercom')
+
         if (!config.query) config.query = {
           session: state.session,
         }
         if (!config.url) config.url = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/${queryString(config.query)}`
+        
         resolve(DeepMerge(state.config, config))
       } else {
         reject(`Invalid configuration (missing the server or channel properties)! refer to https://github.com/widgetbot-io/crate`)
