@@ -15,8 +15,11 @@ let global = {
   sessions: 0
 }
 global.insertionPoint.setAttribute('github', 'https://github.com/widgetbot-io/crate')
-global.insertionPoint.classList.add('☄️crate')
-document.body.appendChild(global.insertionPoint)
+global.insertionPoint.classList.add('crate')
+// Wait for the DOM to load before inserting
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.appendChild(global.insertionPoint)
+})
 
 /**
  * Due to React trying enforcing a "strict" state handler,
@@ -72,7 +75,8 @@ class StateHandler {
     },
     classes: {}
   }
-  renderer: any
+  react: any
+  node: any
 
   constructor(config) {
     ParseConfig(config).then((config) => {
@@ -86,13 +90,13 @@ class StateHandler {
       })
 
       // Mount DOM node
-      let inserter = document.createElement('div')
-      inserter.classList.add(`crate-${global.sessions}`)
-      global.insertionPoint.appendChild(inserter)
+      this.node = document.createElement('div')
+      this.node.classList.add(`crate-${global.sessions}`)
+      global.insertionPoint.appendChild(this.node)
       global.sessions ++
       ReactDOM.render(
         // @ts-ignore custom state handler
-        <Renderer api={this} ref={renderer => { this.renderer = renderer }} />, inserter
+        <Renderer api={this} ref={renderer => { this.react = renderer }} />, this.node
       )
     }).catch((error) => {
       if (typeof error === 'string') {
@@ -109,7 +113,7 @@ class StateHandler {
       this.state[state] = newState[state]
     })
     // Force re-render of the renderer
-    if (this.renderer) this.renderer.forceUpdate()
+    if (this.react) this.react.forceUpdate()
   }
 }
 
@@ -130,6 +134,10 @@ class Crate extends StateHandler {
         messages: []
       }
     })
+  }
+
+  remove() {
+    global.insertionPoint.removeChild(this.node)
   }
 }
 
