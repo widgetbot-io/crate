@@ -47,4 +47,5 @@ export interface Config {
   scheme  ?: 'dark' | 'light' // Override to prevent using the same scheme as the widget
   domain  ?: string           // Override the domain
   url     ?: string           // Override the Widget URL
+  query   ?: any              // Override the query string
 }

@@ -1,10 +1,13 @@
+const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: './src/App.tsx',
-  output: {
-    filename: 'dist/bundle.js'
-  },
+	output: {
+		path: path.resolve(__dirname) + '/dist',
+		filename: 'bundle.js',
+		publicPath: '/'
+	},
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',
@@ -42,4 +45,9 @@ module.exports = {
      */
     new UglifyJsPlugin()
   ],
+
+  devServer: {
+		contentBase: './dist/',
+		hot: true
+	},
 }

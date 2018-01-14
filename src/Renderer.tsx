@@ -48,10 +48,14 @@ export class Renderer extends React.Component {
     )
   }
 
-  listener(message: Notifications.message) {
-    // console.log(message)
-    if (typeof message === 'object') {
-      if (message.timestamp) {
+  listener(msg: any) {
+    if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.config.session) {
+      let { event, data } = msg
+      /**
+       * New message
+       */
+      if (event === 'message:new') {
+        let message: Notifications.message = data
         let { unread, pinged, messages } = this.state.notifications
 
         if (!this.state.view.open) unread++
@@ -67,11 +71,15 @@ export class Renderer extends React.Component {
             messages: messages
           }
         })
-      } else if (typeof message.loading === 'boolean') {
+      }
+      /**
+       * Loading complete event
+       */
+      if (event === 'loading:success') {
         this.setState({
           view: {
             ...this.state.view,
-            loading: message.loading
+            loading: false
           }
         })
       }
@@ -82,6 +90,5 @@ export class Renderer extends React.Component {
     // @ts-ignore custom state handler
     let { api } = this.props
     api.setState(state)
-    this.forceUpdate()
   }
 }
