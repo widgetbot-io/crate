@@ -1,5 +1,6 @@
 import { Config } from '../definitions/config'
 import DeepMerge from '../components/DeepMerge'
+import Icons from '../components/Icons'
 
 /**
  * Resolves a valid configuration object, inheriting properties
@@ -14,6 +15,10 @@ export default (state: any, config: Config) => {
       if (config.server && config.channel) {
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
         if (!config.options) config.options = '0002'
+        if (typeof config.logo === 'string') {
+          if (config.logo.toLowerCase() === 'discord') config.logo = Icons.discord
+          if (config.logo.toLowerCase() === 'intercom') config.logo = Icons.intercom
+        }
         if (!config.query) config.query = {
           session: state.session,
         }

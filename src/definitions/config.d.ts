@@ -16,7 +16,7 @@ export interface Config {
   /**
    * Aesthetic options
    */
-  logo    ?: Url | 'intercom' | 'discord' //
+  logo    ?: Url | 'intercom' | 'discord'
   theme   ?: 'material' | 'default'
   colors  ?: {
     toggle     ?: string          // Crate toggle button color
