@@ -1,3 +1,4 @@
+declare var window: any
 import * as React from "react"
 import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
@@ -59,7 +60,7 @@ class Toast extends React.Component<ToastProps, {}> {
         let { last, classes, expiration } = this.props
 
         if (last) {
-            setTimeout(() => { this.toast.classList.add(classes['toast-visible']) }, 10)
+            setTimeout(() => { this.show() }, 10)
             if (expiration) this.expirationChecker()
         }
     }
@@ -68,12 +69,27 @@ class Toast extends React.Component<ToastProps, {}> {
         this.mounted = false
     }
 
+    show() {
+        let { classes } = this.props
+        this.toast.classList.add(classes['toast-visible'])
+    }
+
+    hide() {
+        let { classes } = this.props
+        let { ReactGA } = window.globalCrate
+        ReactGA.event({
+          category: 'Toast',
+          action: 'Hide'
+        })
+        this.toast.classList.remove(classes['toast-visible'])
+        this.toast.classList.add(classes['toast-hidden'])
+    }
+
     expirationChecker() {
-        let { classes, expiration } = this.props
+        let { expiration } = this.props
         if (this.mounted) {
             if (+new Date() > expiration) {
-                this.toast.classList.remove(classes['toast-visible'])
-                this.toast.classList.add(classes['toast-hidden'])
+                this.hide()
                 setTimeout(() => {
                     this.setState({
                         render: false

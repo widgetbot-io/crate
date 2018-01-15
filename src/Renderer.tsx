@@ -1,3 +1,4 @@
+declare var window: any
 import * as React from "react"
 
 import { Config } from './definitions/config'
@@ -49,6 +50,7 @@ export class Renderer extends React.Component {
   }
 
   listener(msg: any) {
+    let { ReactGA } = window.globalCrate
     if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.session) {
       let { event, data } = msg
       let { config } = this.state
@@ -72,6 +74,10 @@ export class Renderer extends React.Component {
             message: message
           })
           messages = messages.slice(0, this.state.config.notifications.toasts.maxMessages)
+          ReactGA.event({
+            category: 'Toast',
+            action: 'Show'
+          })
         }
         
         this.setState({

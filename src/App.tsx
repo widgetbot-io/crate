@@ -9,10 +9,12 @@ import log from './components/Log'
 import { Icons } from './components/Icons'
 import jss from './jss/App'
 
+
 // Crate sandbox
-let global = {
+let global = window.globalCrate = {
   insertionPoint: /* :smirk: */ document.createElement('div'),
-  sessions: 0
+  sessions: 0,
+  ReactGA: require('react-ga')
 }
 global.insertionPoint.setAttribute('github', 'https://github.com/widgetbot-io/crate')
 global.insertionPoint.classList.add('crate')
@@ -100,6 +102,15 @@ class StateHandler {
         // @ts-ignore custom state handler
         <Renderer api={this} ref={renderer => { this.react = renderer }} />, this.node
       )
+
+      // Analytics
+      let { ReactGA } = global
+      ReactGA.initialize('UA-107130316-3', { debug: true })
+      ReactGA.pageview(window.location.origin)
+      ReactGA.set({
+        server: config.server,
+        channel: config.channel
+      })
     }).catch((error) => {
       log('error', error)
     })
@@ -131,6 +142,11 @@ class Crate extends StateHandler {
         pinged: false,
         messages: []
       }
+    })
+    let { ReactGA } = global
+    ReactGA.event({
+      category: 'Toggle',
+      action: this.state.view.open ? 'Open' : 'Close'
     })
   }
 
