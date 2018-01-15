@@ -24,8 +24,8 @@ export default (state: any, config: Config) => {
         }
 
         if (config.buttons) {
-          if (config.buttons.upper) config.query.bu = config.buttons.upper
-          if (config.buttons.lower) config.query.bl = config.buttons.lower
+          if (config.buttons.primary) config.query.bu = config.buttons.primary
+          if (config.buttons.secondary) config.query.bl = config.buttons.secondary
         }
 
         if (!config.url) config.url = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/${queryString(config.query)}`

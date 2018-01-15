@@ -9,8 +9,8 @@ export interface Config {
   options ?: string | number      // WidgetBot widget options
   beta    ?: boolean              // Whether to use the beta domain or not
   buttons ?: {
-    upper ?: string               // WidgetBot `Start chatting` button text
-    lower ?: string               // WidgetBot `Open discord` button text
+    primary   ?: string
+    secondary ?: string
   }
   
   /**
