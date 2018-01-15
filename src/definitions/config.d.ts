@@ -47,6 +47,7 @@ export interface Config {
    * General options
    */
   delay  ?: boolean // Only load the widget once the button has been clicked
+  debug  ?: boolean // Debug crate
 
   /**
    * Overrides

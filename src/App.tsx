@@ -45,6 +45,7 @@ class StateHandler {
       channel: '355719584830980096',
       options: '0002',
       beta: false,
+      debug: false,
       
       logo: Icons('widgetbot'),
       theme: 'default',
@@ -105,7 +106,7 @@ class StateHandler {
 
       // Analytics
       let { ReactGA } = global
-      ReactGA.initialize('UA-107130316-3', { debug: true })
+      ReactGA.initialize('UA-107130316-3', { debug: config.debug })
       ReactGA.pageview(window.location.origin)
       ReactGA.set({
         server: config.server,
