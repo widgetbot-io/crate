@@ -22,6 +22,12 @@ export default (state: any, config: Config) => {
         if (!config.query) config.query = {
           session: state.session,
         }
+
+        if (config.buttons) {
+          if (config.buttons.upper) config.query.bu = config.buttons.upper
+          if (config.buttons.lower) config.query.bl = config.buttons.lower
+        }
+
         if (!config.url) config.url = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/${queryString(config.query)}`
         
         resolve(DeepMerge(state.config, config))
