@@ -8,7 +8,7 @@ export interface Config {
   channel  : string               // Channel ID
   options ?: string | number      // WidgetBot widget options
   beta    ?: boolean              // Whether to use the beta domain or not
-  buttons ?: {
+  buttons ?: {                    // Change text of buttons
     primary   ?: string
     secondary ?: string
   }
