@@ -19,9 +19,13 @@ let global = window.globalCrate = {
 global.insertionPoint.setAttribute('github', 'https://github.com/widgetbot-io/crate')
 global.insertionPoint.classList.add('crate')
 // Wait for the DOM to load before inserting
-document.addEventListener('DOMContentLoaded', () => {
+if (document.body) {
   document.body.appendChild(global.insertionPoint)
-})
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.appendChild(global.insertionPoint)
+  })
+}
 
 /**
  * Due to React trying enforcing a "strict" state handler,
