@@ -1,8 +1,56 @@
+---
+---
+<!--
+{% include crate.asc %}
+*****************************************************************************************************-->
+<head>
+	<meta charset="UTF-8">
+	<title>WidgetBot Crate demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" type="image/png" href="crate.png"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<link rel="stylesheet" href="./demo.css?{{site.time|date:"%s"}}">
+</head>
 <body>
-    <script src="https://crate.widgetbot.io/v2">
-      new Crate({
-          server: '299881420891881473',
-          channel: '355719584830980096',
-      })
-    </script>
-  </body>
+	<div class="row">
+		<div class="col s12 m7">
+			<div class="card indigo lighten-2">
+				<div class="card-content">
+					<table class="bordered white-text">
+						<tbody>
+							<tr>
+								<td>Build time</td>
+								<td>{{site.time|date:"%H:%M:%S"}}</td>
+							</tr>
+							<tr>
+								<td>Build date</td>
+								<td>{{page.date|date: "%d/%m/%Y"}}</td>
+							</tr>
+							<tr>
+								<td>Build number</td>
+								<td>{{site.time|date:"%s"}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-action">
+					<a href="https://widgetbot.io" class="indigo-text text-lighten-5 right">Get started</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tap-target indigo lighten-2 white-text" data-activates="WidgetBot__toggle">
+		<div class="tap-target-content">
+			<h5>Welcome to Crate! &#128522;</h5>
+			<p>Click this button to preview the demo<br><i class="light">make sure to say something!</i></p>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script src="./crate.js?{{site.time|date:"%s"}}" server="299881420891881473|355719584830980096" options="0|0|0|2" beta ignore execute="setTimeout(function(){$('.tap-target').tapTarget('open')}, 1000)"></script>
+</body>
+</html>
+
+{% comment %}
+<script src="crate.js" server="299881420891881473|355719584830980096" options="0|0|0|2" button1="Hello world!" button2="test" css="http://example.com/style.css" beta autoopen delay defer slide logo="http://google.com/favicon.ico" intercom interval="3000></script>
+{% endcomment %}
