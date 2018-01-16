@@ -43,6 +43,7 @@ export default (config: Config) => {
     'iframe': {
       position: 'absolute !important',
       top: '0 !important',
+      left: '0 !important',
       width: '100% !important',
       height: '100% !important',
       border: '0 !important',
