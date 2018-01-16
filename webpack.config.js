@@ -3,11 +3,11 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: './src/App.tsx',
-	output: {
-		path: path.resolve(__dirname) + '/dist',
-		filename: 'bundle.js',
-		publicPath: '/'
-	},
+  output: {
+    path: path.resolve(__dirname) + '/dist',
+    filename: 'crate.min.js',
+    publicPath: '/'
+  },
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',
@@ -33,12 +33,12 @@ module.exports = {
       }
     ]
   },
-  
+
   plugins: process.argv[1].indexOf('webpack-dev-server') !== -1 ? [
     /**
      * Development
      */
-    
+
   ] : [
     /**
      * Production
@@ -47,7 +47,7 @@ module.exports = {
   ],
 
   devServer: {
-		contentBase: './dist/',
-		hot: true
-	},
+    contentBase: './dist/',
+    hot: true
+  }
 }
