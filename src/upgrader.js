@@ -13,7 +13,7 @@ var position = {
 
 
 if (crateTag.getAttribute('left') != null) position.x = 'left'
-if (crateTag.getAttribute('top') != null) position.x = 'top'
+if (crateTag.getAttribute('top') != null) position.y = 'top'
 
 
 var options = '0002'
