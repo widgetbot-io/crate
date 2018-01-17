@@ -51,7 +51,7 @@ class StateHandler {
       beta: false,
       debug: false,
       
-      logo: Icons('widgetbot'),
+      logo: Icons(),
       theme: 'default',
       colors: {
         toggle: '#7289DA'

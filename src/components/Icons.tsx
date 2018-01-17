@@ -1,5 +1,5 @@
 interface icons {
-  name: 'widgetbot' | 'discord' | 'intercom'
+  name: 'widgetbot' | 'discord' | 'intercom' | any
 }
 
 export function Icons<icons>(name) {
