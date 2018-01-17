@@ -33,8 +33,8 @@ export default (state: any, config: Config) => {
           }
         }
         
-        if (config.logo === 'discord') config.logo = Icons('discord')
-        if (config.logo === 'intercom') config.logo = Icons('intercom')
+        if (config.logo === 'discord') config.logo = Icons(config.colors.toggle, 'discord')
+        if (config.logo === 'intercom') config.logo = Icons(config.colors.toggle, 'intercom')
 
         if (!config.query) config.query = {
           session: state.session,
