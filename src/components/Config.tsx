@@ -14,7 +14,23 @@ export default (state: any, config: Config) => {
     if (typeof config === 'object') {
       if (config.server && config.channel) {
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
+        
         if (!config.options) config.options = '0002'
+
+        if (config.position) {
+          if (config.position.x && !(config.position.x == 'left' || config.position.x == 'right')) {
+            return reject(`Invalid configuration!
+            position.x equals "${config.position.x}" but it can only equal "left" or "right"!
+            
+            refer to https://github.com/widgetbot-io/crate`)
+          }
+          if (config.position.y && !(config.position.y == 'top' || config.position.y == 'bottom')) {
+            return reject(`Invalid configuration
+            position.y equals "${config.position.y}" but it can only equal "top" or "bottom"!
+            
+            refer to https://github.com/widgetbot-io/crate`)
+          }
+        }
         
         if (config.logo === 'discord') config.logo = Icons('discord')
         if (config.logo === 'intercom') config.logo = Icons('intercom')
@@ -32,10 +48,16 @@ export default (state: any, config: Config) => {
         
         resolve(DeepMerge(state.config, config))
       } else {
-        reject(`Invalid configuration (missing the server or channel properties)! refer to https://github.com/widgetbot-io/crate`)
+        reject(`Invalid configuration
+        missing the server or channel properties!
+        
+        refer to https://github.com/widgetbot-io/crate`)
       }
     } else {
-      reject('Invalid configuration (not an object)! refer to https://github.com/widgetbot-io/crate')
+      reject(`Invalid configuration 
+      not an object!
+      
+      refer to https://github.com/widgetbot-io/crate`)
     }
   })
 }
