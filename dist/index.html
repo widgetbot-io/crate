@@ -1,0 +1,123 @@
+<!--
+    _________                __          
+    \_   ___ \____________ _/  |_  ____  
+    /    \  \/\_  __ \__  \\   __\/ __ \ 
+    \     \____|  | \// __ \|  | \  ___/ 
+     \______  /|__|  (____  /__|  \___  >
+            \/            \/          \/ 
+    - - - - - - - - - - - - - - - - - - -
+
+            Copyright Sam Denty 2018
+ https://samdd.me - https://discord.gg/yN2x7sp
+                     ---
+             Distributed under the 
+    Attribution-NonCommercial-NoDerivatives 
+           4.0 International License
+                     ---
+
+     Intellectual property of WidgetBot
+      widgetbot.io - discord.gg/wXt3sCG
+______________________________________________
+
+BUILD TIME: 18:38:13  (01/16/18)  [1516127893]
+______________________________________________
+
+            _   _             
+    ___ ___| |_|_|___ ___ ___ 
+   | . | . |  _| | . |   |_ -|
+   |___|  _|_| |_|___|_|_|___|
+       |_|                    
+
+- server        : [STRING]    WidgetBot server tags     ~ format: `123/123` `123|123`
+- options       : [STRING]    WidgetBot server options  ~ format: `0002` `0|0|0|2`
+- delay         : [OPTION]    Prevents loading of WidgetBot embed frame on load, instead it's loaded once the button is clicked for first time
+- defer         : [OPTION]    Load the Crate source, only after the page has finished loading (increases page load times)
+- notoast       : [OPTION]    Disable message toasts
+- autoopen      : [OPTION]    Automatically open the Widget on every page load
+- ignore        : [OPTION]    Ignore cookies that open the widget on page load
+- quiet         : [OPTION]    Suppress all console.log's
+- interval      : [NUMBER]    Wait a certain amount of milliseconds before showing WidgetBot toggle icon
+- execute       : [JSCODE]    Execute javascript after crate has fully loaded
+
+WIDGETBOT EMBED CUSTOMIZATION
+- beta          : [OPTION]    Load the beta version of WidgetBot
+- button1       : [STRING]    Open discord    /  Click to join
+- button2       : [STRING]    Start chatting  /  people in this guild
+- color1        : [HEX   ]    Custom background-color for the widget  ~ format: `ffffff` `000000`
+- color2        : [HEX   ]    Custom button for the widget            ~ format: `ffffff` `000000`
+- username      : [STRING]    Use a static username for all chatters
+- avatar        : [URL   ]    Use a custom avatar for guest chatters
+- params        : [STRING]    Append custom parameters to the widget URL ~ format: `a=hello&b=world`
+
+STYLE CUSTOMIZATION
+- css           : [URL]       Load an external Crate stylesheet (instead of included one) ~ see https://crate.widgetbot.io/crate.css
+- color         : [STRING]    Change the Crate toggle button color
+- logo          : [URL  ]     Change the Crate toggle button logo
+- theme-color   : [STRING]    Choose a custom theme-color to be switched to when crate is expanded (Chrome-Mobile only)
+- top           : [OPTION]    Float on top of screen
+- left          : [OPTION]    Float on left of screen
+- slide         : [OPTION]    Slide in animation on page load (instead of pop in animation)
+- intercom      : [OPTION]    Style the toggle icon according to the inter.com style
+- discord       : [OPTION]    Use a discord logo instead of the WidgetBot logo
+
+     _    ____ ___ 
+    / \  |  _ \_ _|
+   / _ \ | |_) | | 
+  / ___ \|  __/| | 
+ /_/   \_\_|  |___|
+
+
+ crate.start()    |  Start the crate service
+ crate.stop()     |  Stop the crate service
+ crate.toggle()   |  Toggle the widget
+ crate.open()     |  Open the widget
+ crate.close()    |  Close the widget
+*****************************************************************************************************-->
+<head>
+  <meta charset="UTF-8">
+  <title>WidgetBot Crate demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="crate.png"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="./demo.css?1516127893">
+</head>
+<body>
+  <div class="row">
+    <div class="col s12 m7">
+      <div class="card indigo lighten-2">
+        <div class="card-content">
+          <table class="bordered white-text">
+            <tbody>
+              <tr>
+                <td>Build time</td>
+                <td>18:38:13</td>
+              </tr>
+              <tr>
+                <td>Build date</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Build number</td>
+                <td>1516127893</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-action">
+          <a href="https://widgetbot.io" class="indigo-text text-lighten-5 right">Get started</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tap-target indigo lighten-2 white-text" data-activates="WidgetBot__toggle">
+    <div class="tap-target-content">
+      <h5>Welcome to Crate! &#128522;</h5>
+      <p>Click this button to preview the demo<br>
+        <i class="light">make sure to say something!</i></p>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="./crate.js?1516127893" server="299881420891881473|355719584830980096" options="0|0|0|2" beta ignore execute="setTimeout(function(){$('.tap-target').tapTarget('open')}, 1000)"></script>
+</body>
+</html>
