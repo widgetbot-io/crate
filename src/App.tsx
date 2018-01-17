@@ -82,7 +82,7 @@ class StateHandler {
       messages: []
     },
     classes: {},
-    session: btoa(`${+new Date()}`)
+    session: Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date()
   }
   react: any
   node: any
