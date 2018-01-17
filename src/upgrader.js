@@ -25,24 +25,26 @@ if (crateTag.getAttribute('beta') != null) beta = true
 
 
 var buttons = {}
-if (crateTag.getAttribute('button1')) buttons.primary = crateTag.getAttribute('button1')
-if (crateTag.getAttribute('button2')) buttons.secondary = crateTag.getAttribute('button2')
+if (crateTag.getAttribute('button1') != null) buttons.primary = crateTag.getAttribute('button1')
+if (crateTag.getAttribute('button2') != null) buttons.secondary = crateTag.getAttribute('button2')
 
 
 var colors = {}
-if (crateTag.getAttribute('color')) colors.toggle = crateTag.getAttribute('color')
-if (crateTag.getAttribute('color1')) colors.background = crateTag.getAttribute('color1')
-if (crateTag.getAttribute('color2')) colors.button = crateTag.getAttribute('color2')
+if (crateTag.getAttribute('color') != null) colors.toggle = crateTag.getAttribute('color')
+if (crateTag.getAttribute('color1') != null) colors.background = crateTag.getAttribute('color1')
+if (crateTag.getAttribute('color2') != null) colors.button = crateTag.getAttribute('color2')
 
 
 var notifications = {
 	toasts: {}
 }
-if (crateTag.getAttribute('notoast')) notifications.toasts.enable = false
+// Wait until they complain first
+// if (crateTag.getAttribute('notoast') != null) notifications.toasts.enable = false
 
 
 var delay = false
-if (crateTag.getAttribute('delay')) delay = true
+// Wait until they complain first
+// if (crateTag.getAttribute('delay') != null) delay = true
 
 
 var config = {
