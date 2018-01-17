@@ -7,18 +7,58 @@ interface Props extends View {
 }
 
 export class Embed extends React.Component<Props, {}> {
+    state = {
+        block: false,
+        opacity: true
+    }
     classes: any
+    timeout: any
 
     componentWillMount() {
-        let { config } = this.props
+        let { config, view } = this.props
         this.classes = jss(config)
+        this.setState({
+            block: view.open,
+            opacity: view.open
+        })
+    }
+
+    componentWillReceiveProps(nextProps: any) {
+        /**
+         * Overcomes the issue of display: none preventing transitions
+         */
+        let { view } = nextProps
+        if (view.open !== this.state.block || view.open !== this.state.opacity) {
+            clearTimeout(this.timeout)
+            if (view.open === true) {
+                // Opened
+                this.setState({
+                    block: true
+                })
+                setTimeout(() => {
+                    this.setState({
+                        opacity: true
+                    })
+                }, 0)
+            } else {
+                // Closed
+                this.setState({
+                    opacity: false
+                })
+                this.timeout = setTimeout(() => {
+                    this.setState({
+                        block: false
+                    })
+                }, 250)
+            }
+        }
     }
     
     render() {
         let { view, config } = this.props
         let { classes } = this
         return (
-            <div className={`${classes.popup} ${view.open ? classes['popup-open'] : ``}`}>
+            <div className={`${classes.popup} ${this.state.block ? classes['popup-block'] : ``} ${this.state.opacity ? classes['popup-open'] : ``}`}>
                 {view.loading &&
                     <svg className={classes['loading-svg']}>
                         <path fill={config.options.split('')[2] === '1' ? '#FFFFFF' : '#7289da'} d="M231.857 268.344l44.317 45.268-47.03 46.043-44.318-45.267z" />

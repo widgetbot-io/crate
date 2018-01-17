@@ -33,6 +33,10 @@ export default (config: Config) => {
       MozUserSelect: 'none !important',
       MsUserSelect: 'none !important',
       userSelect: 'none !important',
+      display: 'none !important'
+    },
+    'popup-block': {
+      display: 'block !important'
     },
     'popup-open': {
       boxShadow: '0 5px 40px rgba(0,0,0,0.3) !important',
@@ -47,9 +51,6 @@ export default (config: Config) => {
       width: '100% !important',
       height: '100% !important',
       border: '0 !important',
-    },
-    'iframe-open': {
-  
     },
     'loading-svg': {
       position: 'absolute !important',
