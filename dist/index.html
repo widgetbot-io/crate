@@ -6,11 +6,12 @@
     </head>
     <body style="background: #000">
         <!-- Main -->
-        <script src="./bundle.js">
+        <script src="./crate.min.js">
             new Crate({
                 server: '299881420891881473',
                 channel: '336898706869583872',
                 beta: true,
+                options: '0002',
                 delay: false,
                 colors: {
                     toggle: '#73bf60'
@@ -22,7 +23,8 @@
                 },
                 notifications: {
                     toasts: {
-                        maxMessages: 5
+                        visibilityTime: 0,
+                        maxMessages: 5,
                     }
                 }
             })

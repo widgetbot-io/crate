@@ -6,7 +6,7 @@ export interface Config {
    */
   server   : string               // Your guilds ID
   channel  : string               // Channel ID
-  options ?: string | number      // WidgetBot widget options
+  options ?: string               // WidgetBot widget options
   beta    ?: boolean              // Whether to use the beta domain or not
   buttons ?: {                    // Change text of buttons
     primary   ?: string

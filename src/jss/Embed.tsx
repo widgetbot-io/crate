@@ -17,6 +17,7 @@ export default (config: Config) => {
       [config.position.x]: '20px !important',
       height: 'calc(100% - 20px - 75px - 20px) !important',
       [config.position.y]: 'calc(20px + 75px) !important',
+      backgroundColor: `${config.options.split('')[2] === '1' ? '#FFFFFF' : '#36393E'} !important`,
       width: '370px !important',
       minHeight: '250px !important',
       maxHeight: '590px !important',
@@ -38,7 +39,6 @@ export default (config: Config) => {
       opacity: '1 !important',
       pointerEvents: 'initial !important',
       transform: 'translate(0) !important',
-      backgroundColor: '#36393E !important',
     },
     'iframe': {
       position: 'absolute !important',

@@ -106,7 +106,7 @@ class Toast extends React.Component<ToastProps, {}> {
         return (
             this.state.render ? (
                 <div className={`${classes.toast} ${last ? classes['toast-hidden'] : ''}`} ref={toast => this.toast = toast}>
-                    <img src={message.author.avatar} className={classes['toast-avatar']}/>
+                    <img src={message.author.avatar || 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'} className={classes['toast-avatar']}/>
                     <div className={classes['toast-message']}>
                         {message.content}
                     </div>

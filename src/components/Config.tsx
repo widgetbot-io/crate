@@ -15,20 +15,21 @@ export default (state: any, config: Config) => {
       if (config.server && config.channel) {
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
         
-        if (!config.options) config.options = '0002'
+        if (!config.options) {
+          config.options = '0002'
+        } else {
+          config.options = config.options.toString()
+          if (config.options.length !== 4) {
+            return reject(`config.options should be 4 numbers long, but it's "${config.options.length}" characters long! with the value of "${config.options}"`)
+          }
+        }
 
         if (config.position) {
           if (config.position.x && !(config.position.x == 'left' || config.position.x == 'right')) {
-            return reject(`Invalid configuration!
-            position.x equals "${config.position.x}" but it can only equal "left" or "right"!
-            
-            refer to https://github.com/widgetbot-io/crate`)
+            return reject(`config.position.x equals "${config.position.x}" but it can only equal "left" or "right"! you likely mixed up your axes`)
           }
           if (config.position.y && !(config.position.y == 'top' || config.position.y == 'bottom')) {
-            return reject(`Invalid configuration
-            position.y equals "${config.position.y}" but it can only equal "top" or "bottom"!
-            
-            refer to https://github.com/widgetbot-io/crate`)
+            return reject(`config.position.y equals "${config.position.y}" but it can only equal "top" or "bottom"! you likely mixed up your axes`)
           }
         }
         
@@ -48,16 +49,10 @@ export default (state: any, config: Config) => {
         
         resolve(DeepMerge(state.config, config))
       } else {
-        reject(`Invalid configuration
-        missing the server or channel properties!
-        
-        refer to https://github.com/widgetbot-io/crate`)
+        reject(`missing the server or channel properties!`)
       }
     } else {
-      reject(`Invalid configuration 
-      not an object!
-      
-      refer to https://github.com/widgetbot-io/crate`)
+      reject(`not an object!`)
     }
   })
 }

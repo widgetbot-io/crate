@@ -117,7 +117,7 @@ class StateHandler {
         channel: config.channel
       })
     }).catch((error) => {
-      log('error', error)
+      log('error', `Invalid configuration!\n${error}\n\nrefer to https://github.com/widgetbot-io/crate`)
     })
   }
 
