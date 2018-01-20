@@ -1,0 +1,33 @@
+{
+  "name": "@cloudflare-apps/example",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "lint": "standard --fix ./source/**/*.js || true"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudflare-apps/example-app.git"
+  },
+  "author": "Cloudflare Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cloudflare-apps/example-app/issues"
+  },
+  "homepage": "https://github.com/cloudflare-apps/example-app#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "^9.0.2"
+  },
+  "standard": {
+    "globals": [
+      "INSTALL",
+      "INSTALL_OPTIONS",
+      "INSTALL_SCOPE",
+      "INSTALL_PRODUCT",
+      "INSTALL_ID"
+    ]
+  }
+}

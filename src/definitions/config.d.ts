@@ -12,12 +12,12 @@ export interface Config {
     primary   ?: string
     secondary ?: string
   }
-  
+
   /**
    * Aesthetic options
    */
   logo    ?: Url | 'intercom' | 'discord' | any
-  theme   ?: 'material' | 'default'
+  style   ?: 'material' | 'default'
   colors  ?: {
     toggle     ?: string          // Crate toggle button color
     background ?: string          // WidgetBot widget background

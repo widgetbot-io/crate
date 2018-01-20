@@ -5,5 +5,5 @@ export default function (type: 'info' | 'error' | 'warn', message: any, ref?: an
   } else if (type === 'error') {
     color = '#f9aeae'
   }
-  console[type](`%c☄️ [Crate] %c${message}\n`, 'color: #40b8ff', `color: ${color}`, ref)
+  console[type](`%c\u2604\uFE0F [Crate] %c${message}\n`, 'color: #40b8ff', `color: ${color}`, ref)
 }

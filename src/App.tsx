@@ -50,7 +50,7 @@ class StateHandler {
       options: '0002',
       beta: false,
       debug: false,
-      
+
       logo: Icons(),
       theme: 'default',
       colors: {
@@ -155,7 +155,18 @@ class Crate extends StateHandler {
     })
   }
 
+  show() {
+    if (!global.insertionPoint.contains(this.node))
+      global.insertionPoint.appendChild(this.node)
+  }
+
+  hide() {
+    if (global.insertionPoint.contains(this.node))
+      global.insertionPoint.removeChild(this.node)
+  }
+
   remove() {
+    ReactDOM.unmountComponentAtNode(this.node)
     global.insertionPoint.removeChild(this.node)
   }
 }
