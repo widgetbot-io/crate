@@ -103,7 +103,7 @@ class StateHandler {
               opened: true
             }
           })
-        }, 5000)
+        }, 3000)
       }
 
       // Mount DOM node
@@ -147,11 +147,7 @@ class StateHandler {
     ParseConfig(this.state, config, true).then((config) => {
       this.setState({
         classes: jss(config),
-        config: config,
-        view: {
-          ...this.state.view,
-          opened: config.delay ? false : true
-        }
+        config: config
       })
     }).catch((error) => {
       log('error', `Invalid configuration!\n${error}\n\nrefer to https://github.com/widgetbot-io/crate`)
