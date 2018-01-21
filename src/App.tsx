@@ -127,7 +127,7 @@ class StateHandler {
         channel: config.channel
       })
     }).catch((error) => {
-      log('error', `Invalid configuration!\n${error}\n\nrefer to https://github.com/widgetbot-io/crate`)
+      log('error', `Invalid configuration!\n${error}\n\nrefer to https://docs.widgetbot.io`)
     })
   }
 
@@ -152,7 +152,7 @@ class StateHandler {
         config: config
       })
     }).catch((error) => {
-      log('error', `Invalid configuration!\n${error}\n\nrefer to https://github.com/widgetbot-io/crate`)
+      log('error', `Invalid configuration!\n${error}\n\nrefer to https://docs.widgetbot.io`)
     })
   }
 }
