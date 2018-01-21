@@ -27,6 +27,7 @@
           config.style = button.customization.style
 
           config.notifications.indicator.enable = button.customization.indicator
+          if (button.customization.image) config.logo = button.customization.image
           config.notifications.toasts = button.customization.toasts
           config.notifications.toasts.enable = button.customization.showToasts
 

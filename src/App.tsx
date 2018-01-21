@@ -123,13 +123,13 @@ class StateHandler {
   }
 
   // Custom state handler
-  setState(newState: any) {
-    Object.keys(newState).forEach(state => {
+  setState(nextState: any) {
+    Object.keys(nextState).forEach(state => {
       // Force JSS re-render
-      if (newState && JSON.stringify(newState.config) !== JSON.stringify(this.state.config)) {
-        this.state.classes = jss(newState.config)
+      if (nextState && JSON.stringify(nextState.config) !== JSON.stringify(this.state.config)) {
+        this.config(nextState.config)
       }
-      this.state[state] = newState[state]
+      this.state[state] = nextState[state]
     })
     // Force re-render of the renderer
     if (this.react) this.react.forceUpdate()
@@ -137,14 +137,16 @@ class StateHandler {
 
   // Deep merges the new config with the current config
   config(config: any) {
-    if (config) {
-      config = DeepMerge(this.state.config, config)
-      this.state.config = config
-      // Force JSS re-render
-      this.state.classes = jss(config)
-      // Force re-render of the renderer
-      if (this.react) this.react.forceUpdate()
-    }
+    ParseConfig(this.state, config).then((config) => {
+      this.setState({
+        classes: jss(config),
+        config: config,
+        view: {
+          ...this.state.view,
+          opened: config.delay ? false : true
+        }
+      })
+    })
   }
 }
 
