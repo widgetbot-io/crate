@@ -19,7 +19,7 @@ export default (config: Config) => {
       width: '60px !important',
       height: '60px !important',
       borderRadius: '50% !important',
-      transition: 'box-shadow .2s ease-in-out, filter .2s ease-in-out, transform .7s ease !important',
+      transition: 'box-shadow .2s ease-in-out, background 0.1s ease, filter .2s ease-in-out, transform .7s ease !important',
       boxShadow: [
         '0 1px 6px rgba(0,0,0,0.06)',
         '0 2px 32px rgba(0,0,0,0.16)'
@@ -68,7 +68,7 @@ export default (config: Config) => {
       transform: 'rotate(30deg) scale(0) !important',
     },
     'button-close': {
-      backgroundImage: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOBAMAAADtZjDiAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAG1BMVEUAAAD///////////////////////////8AAADr8xjQAAAAB3RSTlMAM7cPx7jIAE21/gAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAABESURBVAjXYxAyYGBgYFZkUHcG0ialDCYlBgzM7slA7MxgUgaUNCkzdgfJMbunlIDUMpiUg7hwGiYOVQfTBzMHZi7UHgCB3RAZ7HszogAAAABJRU5ErkJggg==) !important',
+      backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 50"><path d="M49 45.71l-3.55 3.571-20.6-20.713L3.54 49.997l-3.55-3.572L21.3 24.997-.01 3.57 3.54-.002l21.31 21.427L45.45.713 49 4.284 28.4 24.997" fill="#fff"/></svg>') !important`,
       backgroundPosition: '50% !important',
       backgroundSize: '14px 14px !important',
       backgroundRepeat: 'no-repeat !important',
