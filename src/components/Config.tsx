@@ -29,6 +29,7 @@ export default (state: any, config: Config, relaxed?: boolean) => {
         }
 
         if (config.logo === 'discord') config.logo = Icons(config.colors.toggle, 'discord')
+        if (config.logo === 'widgetbot') config.logo = Icons(config.colors.toggle, 'widgetbot')
         if (config.logo === 'intercom') config.logo = Icons(config.colors.toggle, 'intercom')
 
         if (!config.query) config.query = {
