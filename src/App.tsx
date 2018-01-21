@@ -4,6 +4,7 @@ import * as ReactDOM from "react-dom"
 import * as React from "react"
 
 import { Renderer } from './Renderer'
+import DeepMerge from './components/DeepMerge'
 import ParseConfig from './components/Config'
 import log from './components/Log'
 import { Icons } from './components/Icons'
@@ -124,10 +125,26 @@ class StateHandler {
   // Custom state handler
   setState(newState: any) {
     Object.keys(newState).forEach(state => {
+      // Force JSS re-render
+      if (newState && JSON.stringify(newState.config) !== JSON.stringify(this.state.config)) {
+        this.state.classes = jss(newState.config)
+      }
       this.state[state] = newState[state]
     })
     // Force re-render of the renderer
     if (this.react) this.react.forceUpdate()
+  }
+
+  // Deep merges the new config with the current config
+  config(config: any) {
+    if (config) {
+      config = DeepMerge(this.state.config, config)
+      this.state.config = config
+      // Force JSS re-render
+      this.state.classes = jss(config)
+      // Force re-render of the renderer
+      if (this.react) this.react.forceUpdate()
+    }
   }
 }
 

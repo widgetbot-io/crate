@@ -14,7 +14,15 @@ export class Toggle extends React.Component<Props, {}> {
         let { config } = this.props
         this.classes = jss(config)
     }
-    
+
+    componentWillReceiveProps(nextProps: Props) {
+        // Force JSS re-render
+        if (nextProps && JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
+            this.classes = jss(nextProps.config)
+            this.forceUpdate()
+        }
+    }
+
     render() {
         let { toggle, view, notifications } = this.props
         let { classes } = this
@@ -38,7 +46,7 @@ class ButtonOpen extends React.Component<Buttons, {}> {
         let { view, classes } = this.props
         return (
             <div className={`${classes['button-glyph']} ${classes['button-open']} ${view.open ? classes['button-open:toggled']  : ``}`}>
-                
+
             </div>
         )
     }
@@ -49,7 +57,7 @@ class ButtonClose extends React.Component<Buttons, {}> {
         let { view, classes } = this.props
         return (
             <div className={`${classes['button-glyph']} ${classes['button-close']} ${view.open ? classes['button-close:toggled']  : ``}`}>
-                
+
             </div>
         )
     }

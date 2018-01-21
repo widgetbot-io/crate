@@ -50,9 +50,7 @@
           if (i === 0) {
             if (window.crate && window.crate.state) {
               // Update the state without re-mounting
-              window.crate.setState({
-                config: config
-              })
+              window.crate.config(config)
             } else {
               window.crate = new window.Crate(config)
             }

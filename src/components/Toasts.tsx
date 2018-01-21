@@ -16,6 +16,14 @@ export class Toasts extends React.Component<Props, {}> {
         this.classes = jss(config)
     }
 
+    componentWillReceiveProps(nextProps: Props) {
+        // Force JSS re-render
+        if (nextProps && JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
+            this.classes = jss(nextProps.config)
+            this.forceUpdate()
+        }
+    }
+
     render() {
         let { messages } : { messages: { expiration: number, message: Notifications.message}[] } = this.props
         let { classes } = this

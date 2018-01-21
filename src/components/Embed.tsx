@@ -3,7 +3,7 @@ import { View } from '../definitions/view'
 import jss from '../jss/Embed'
 
 interface Props extends View {
-    
+
 }
 
 export class Embed extends React.Component<Props, {}> {
@@ -23,7 +23,7 @@ export class Embed extends React.Component<Props, {}> {
         })
     }
 
-    componentWillReceiveProps(nextProps: any) {
+    componentWillReceiveProps(nextProps: Props) {
         /**
          * Overcomes the issue of display: none preventing transitions
          */
@@ -52,8 +52,12 @@ export class Embed extends React.Component<Props, {}> {
                 }, 250)
             }
         }
+        if (nextProps && JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
+            this.classes = jss(nextProps.config)
+            this.forceUpdate()
+        }
     }
-    
+
     render() {
         let { view, config } = this.props
         let { classes } = this
