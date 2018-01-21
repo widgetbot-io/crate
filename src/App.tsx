@@ -92,12 +92,19 @@ class StateHandler {
     ParseConfig(this.state, config).then((config) => {
       this.setState({
         classes: jss(config),
-        config: config,
-        view: {
-          ...this.state.view,
-          opened: config.delay ? false : true
-        }
+        config: config
       })
+
+      if (!config.delay) {
+        setTimeout(() => {
+          this.setState({
+            view: {
+              ...this.state.view,
+              opened: true
+            }
+          })
+        }, 5000)
+      }
 
       // Mount DOM node
       this.node = document.createElement('div')
