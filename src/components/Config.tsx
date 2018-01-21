@@ -14,7 +14,7 @@ export default (state: any, config: Config) => {
     if (typeof config === 'object') {
       if (config.server && config.channel) {
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
-        
+
         if (!config.options) {
           config.options = '0002'
         } else {
@@ -32,7 +32,7 @@ export default (state: any, config: Config) => {
             return reject(`config.position.y equals "${config.position.y}" but it can only equal "top" or "bottom"! you likely mixed up your axes`)
           }
         }
-        
+
         if (config.logo === 'discord') config.logo = Icons(config.colors.toggle, 'discord')
         if (config.logo === 'intercom') config.logo = Icons(config.colors.toggle, 'intercom')
 
@@ -46,7 +46,7 @@ export default (state: any, config: Config) => {
         }
 
         if (!config.url) config.url = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/${queryString(config.query)}`
-        
+
         resolve(DeepMerge(state.config, config))
       } else {
         reject(`missing the server or channel properties!`)

@@ -78,24 +78,28 @@ class Toast extends React.Component<ToastProps, {}> {
     }
 
     show() {
-        let { classes } = this.props
-        this.toast.classList.add(classes['toast-visible'])
+        if (this.mounted && this.toast) {
+            let { classes } = this.props
+            this.toast.classList.add(classes['toast-visible'])
+        }
     }
 
     hide() {
-        let { classes } = this.props
-        let { ReactGA } = window.globalCrate
-        ReactGA.event({
-          category: 'Toast',
-          action: 'Hide'
-        })
-        this.toast.classList.remove(classes['toast-visible'])
-        this.toast.classList.add(classes['toast-hidden'])
+        if (this.mounted && this.toast) {
+            let { classes } = this.props
+            let { ReactGA } = window.globalCrate
+            this.toast.classList.remove(classes['toast-visible'])
+            this.toast.classList.add(classes['toast-hidden'])
+            ReactGA.event({
+                category: 'Toast',
+                action: 'Hide'
+            })
+        }
     }
 
     expirationChecker() {
-        let { expiration } = this.props
-        if (this.mounted) {
+        if (this.mounted && this.toast) {
+            let { expiration } = this.props
             if (+new Date() > expiration) {
                 this.hide()
                 setTimeout(() => {

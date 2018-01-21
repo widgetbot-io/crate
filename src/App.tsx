@@ -126,7 +126,7 @@ class StateHandler {
   setState(nextState: any) {
     Object.keys(nextState).forEach(state => {
       // Force JSS re-render
-      if (nextState && JSON.stringify(nextState.config) !== JSON.stringify(this.state.config)) {
+      if (nextState && nextState.config && JSON.stringify(nextState.config) !== JSON.stringify(this.state.config)) {
         this.config(nextState.config)
       }
       this.state[state] = nextState[state]
@@ -146,6 +146,8 @@ class StateHandler {
           opened: config.delay ? false : true
         }
       })
+    }).catch((error) => {
+      log('error', `Invalid configuration!\n${error}\n\nrefer to https://github.com/widgetbot-io/crate`)
     })
   }
 }

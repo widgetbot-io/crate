@@ -45,9 +45,7 @@ class ButtonOpen extends React.Component<Buttons, {}> {
     render() {
         let { view, classes } = this.props
         return (
-            <div className={`${classes['button-glyph']} ${classes['button-open']} ${view.open ? classes['button-open:toggled']  : ``}`}>
-
-            </div>
+            <div className={`${classes['button-glyph']} ${classes['button-open']} ${view.open ? classes['button-open:toggled']  : ``}`} />
         )
     }
 }
@@ -56,9 +54,7 @@ class ButtonClose extends React.Component<Buttons, {}> {
     render() {
         let { view, classes } = this.props
         return (
-            <div className={`${classes['button-glyph']} ${classes['button-close']} ${view.open ? classes['button-close:toggled']  : ``}`}>
-
-            </div>
+            <div className={`${classes['button-glyph']} ${classes['button-close']} ${view.open ? classes['button-close:toggled']  : ``}`} />
         )
     }
 }
