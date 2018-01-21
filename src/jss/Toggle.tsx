@@ -43,8 +43,8 @@ export default (config: Config) => {
       MsAnimation: 'pingedPulse 1.2s infinite cubic-bezier(0.18, 0.89, 0.6, 1.28) !important',
       animation: 'pingedPulse 1.2s infinite cubic-bezier(0.18, 0.89, 0.6, 1.28) !important',
     },
-  
-  
+
+
     'button-glyph': {
       display: 'block !important',
       position: 'absolute !important',
@@ -72,13 +72,14 @@ export default (config: Config) => {
       backgroundRepeat: 'no-repeat !important',
       opacity: '0 !important',
       transform: 'rotate(-30deg) !important',
+      filter: color(config.colors.toggle).luminosity() > 0.6 ? 'invert(1)' : '',
     },
     'button-close:toggled': {
       opacity: '1 !important',
       transform: 'rotate(0deg) !important',
     },
-  
-  
+
+
     'indicator': {
       display: 'block !important',
       width: '20px !important',
@@ -104,8 +105,8 @@ export default (config: Config) => {
       backgroundColor: '#f5c351 !important',
       color: '#000 !important'
     },
-  
-  
+
+
     '@keyframes pingedPulse': {
       to: {
         boxShadow: [

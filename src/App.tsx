@@ -137,7 +137,7 @@ class StateHandler {
 
   // Deep merges the new config with the current config
   config(config: any) {
-    ParseConfig(this.state, config).then((config) => {
+    ParseConfig(this.state, config, true).then((config) => {
       this.setState({
         classes: jss(config),
         config: config,
@@ -209,4 +209,13 @@ window.Crate = Crate;
     // Create a new global crate object
     window.crate = new Crate(config)
   }
+})();
+
+// Crate Event
+(() => {
+  var event = document.createEvent('Event')
+  // @ts-ignore
+  event.Crate = Crate
+  event.initEvent('crate', true, false)
+  window.dispatchEvent(event)
 })()

@@ -1,57 +1,53 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Crate</title>
-    </head>
-    <body style="background: #000">
-        <!-- Main -->
-        <script src="./crate.min.js">
-            new Crate({
-                server: '299881420891881473',
-                channel: '336898706869583872',
-                beta: true,
-                options: '0002',
-                delay: false,
-                colors: {
-                    toggle: '#0ebcff'
-                },
-                logo: 'discord',
-                position: {
-                    x: 'left',
-                    y: 'top'
-                },
-                notifications: {
-                    toasts: {
-                        visibilityTime: 0,
-                        maxMessages: 5,
-                    }
+<body style="background: #000">
+<script src="./crate.min.js" async defer>
+    new Crate({
+        server: '299881420891881473',
+        channel: '336898706869583872',
+        beta: true,
+        options: '0002',
+        delay: true,
+        colors: {
+            toggle: '#0ebcff'
+        },
+        logo: 'discord',
+        position: {
+            x: 'left',
+            y: 'top'
+        },
+        notifications: {
+            toasts: {
+                visibilityTime: 0,
+                maxMessages: 5,
+            }
+        }
+    })
+</script>
+<script>
+    addEventListener('crate', ({ Crate }) => {
+        new Crate({
+            server: '299881420891881473',
+            channel: '336898706869583872',
+            beta: true,
+            options: '0012',
+            delay: true,
+            colors: {
+                "toggle": "#2e3136",
+                "background": "#ffff00",
+                "button": "#0000ff"
+            },
+            delay: true,
+            logo: 'discord',
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            notifications: {
+                toasts: {
+                    visibilityTime: 5,
+                    maxMessages: 5,
                 }
-            })
-        </script>
-        <script>
-            new Crate({
-                server: '299881420891881473',
-                channel: '336898706869583872',
-                beta: true,
-                options: '0012',
-                delay: false,
-                colors: {
-                    toggle: '#fff'
-                },
-                delay: true,
-                logo: 'discord',
-                position: {
-                    x: 'right',
-                    y: 'top'
-                },
-                notifications: {
-                    toasts: {
-                        visibilityTime: 5,
-                        maxMessages: 5,
-                    }
-                }
-            })
-        </script>
-    </body>
-</html>
+            }
+        })
+    })
+</script>
+</body>
