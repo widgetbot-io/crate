@@ -57,9 +57,11 @@ export default (config: Config) => {
       backgroundPosition: 'center !important',
       backgroundRepeat: 'no-repeat !important',
       pointerEvents: 'none !important',
+      borderRadius: '50% !important'
     },
     'button-open': {
-      backgroundImage: `url(${JSON.stringify(config.logo)}) !important`,
+      backgroundImage: `url(${JSON.stringify(config.logo.url)}) !important`,
+      backgroundSize: `${config.logo.size || '50% 50%'} !important`,
     },
     'button-open:toggled': {
       opacity: '1 !important',

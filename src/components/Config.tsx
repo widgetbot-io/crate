@@ -28,9 +28,14 @@ export default (state: any, config: Config, relaxed?: boolean) => {
           return reject(`config.position.y equals "${config.position.y}" but it can only equal "top" or "bottom"! you likely mixed up your axes`)
         }
 
-        if (config.logo === 'discord') config.logo = Icons(config.colors.toggle, 'discord')
-        if (config.logo === 'widgetbot') config.logo = Icons(config.colors.toggle, 'widgetbot')
-        if (config.logo === 'intercom') config.logo = Icons(config.colors.toggle, 'intercom')
+        let logo = {
+          url: config.logo
+        }
+        if (typeof config.logo === 'object' && config.logo.url) logo = config.logo
+        if (config.logo.url === 'discord') config.logo.url = Icons(config.colors.toggle, 'discord')
+        if (config.logo.url === 'widgetbot') config.logo.url = Icons(config.colors.toggle, 'widgetbot')
+        if (config.logo.url === 'intercom') config.logo.url = Icons(config.colors.toggle, 'intercom')
+        config.logo = logo
 
         if (!config.query) config.query = {
           session: state.session,

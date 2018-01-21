@@ -52,7 +52,9 @@ class StateHandler {
       beta: false,
       debug: false,
 
-      logo: Icons(),
+      logo: {
+        url: Icons()
+      },
       theme: 'default',
       colors: {
         toggle: '#7289DA'
