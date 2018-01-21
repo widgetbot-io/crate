@@ -24,13 +24,13 @@ export class Toggle extends React.Component<Props, {}> {
     }
 
     render() {
-        let { toggle, view, notifications } = this.props
+        let { config, toggle, view, notifications } = this.props
         let { classes } = this
         return (
             <div className={`${classes.toggle} ${notifications.pinged ? classes['toggle-pinged'] : ''}`} onClick={toggle.bind(this)}>
                 <ButtonOpen classes={classes} view={view} />
                 <ButtonClose classes={classes}  view={view} />
-                <Indicator classes={classes} unread={notifications.unread} pinged={notifications.pinged} />
+                {config.notifications.indicator.enable && <Indicator classes={classes} unread={notifications.unread} pinged={notifications.pinged} />}
             </div>
         )
     }

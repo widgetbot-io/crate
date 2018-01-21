@@ -15,13 +15,14 @@ export class Renderer extends React.Component {
   state = this.props.api.state
   // @ts-ignore custom state handler
   classes = this.props.api.state.classes
-  
+
   componentDidMount() {
     window.addEventListener('message', ({data}) => this.listener(data), false)
   }
 
   render() {
     let { classes } = this.state
+    let config: Config = this.state.config
     // @ts-ignore custom state handler
     let { api } = this.props
 
@@ -38,7 +39,7 @@ export class Renderer extends React.Component {
             toggle={api.toggle.bind(this)}
             notifications={this.state.notifications} />
 
-          {!this.state.view.open && <Toasts
+          {config.notifications.toasts.enable && !this.state.view.open && <Toasts
             view={this.state.view}
             config={this.state.config}
             messages={this.state.notifications.messages} />}
@@ -79,7 +80,7 @@ export class Renderer extends React.Component {
             action: 'Show'
           })
         }
-        
+
         this.setState({
           notifications: {
             pinged: pinged,
