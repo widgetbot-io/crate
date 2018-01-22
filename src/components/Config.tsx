@@ -41,6 +41,12 @@ export default (state: any, config: Config, relaxed?: boolean) => {
           session: state.session,
         }
 
+        if (config.colors) {
+          if (config.colors.background && config.colors.button) {
+            config.query.c = `${config.colors.background.replace('#', '')}-${config.colors.button.replace('#', '')}`
+          }
+        }
+
         if (config.buttons) {
           if (config.buttons.primary) config.query.bu = config.buttons.primary
           if (config.buttons.secondary) config.query.bl = config.buttons.secondary
