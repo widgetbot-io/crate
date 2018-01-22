@@ -59,7 +59,7 @@ export class Renderer extends React.Component {
       /**
        * New message
        */
-      if (event === 'message:new') {
+      if (event === 'message:new' && !this.state.view.open) {
         let message: Notifications.message = data
         let { unread, pinged, messages } = this.state.notifications
 
