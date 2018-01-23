@@ -48,6 +48,10 @@ export default (state: any, config: Config, relaxed?: boolean) => {
         }
 
         if (config.buttons) {
+          // Fallback
+          if (config.buttons.upper) config.buttons.primary = config.buttons.upper
+          if (config.buttons.lower) config.buttons.secondary = config.buttons.lower
+
           if (config.buttons.primary) config.query.bu = config.buttons.primary
           if (config.buttons.secondary) config.query.bl = config.buttons.secondary
         }
