@@ -28,6 +28,9 @@ if (document.body) {
   })
 }
 
+// Crate console message
+console.log(`%c+%chttps://crate.widgetbot.io\n%c\u2604\uFE0F Popup Discord chat widgets for your website.`, `font-size: 1px; margin-left: 40px; padding: 20px 20px; line-height: 50px;background: url("https://i.imgur.com/S7IIIbE.png"); background-repeat: no-repeat; background-size: 40px 40px; color: transparent;`, `padding-left: 2px; font-size: 14px; color: #7289DA; font-family: "Roboto", sans-serif`, `padding-left: 15px; font-size: 12px; font-family: "Roboto", sans-serif;`);
+
 /**
  * Due to React trying enforcing a "strict" state handler,
  * all states for Crate are manually handled in a class that
