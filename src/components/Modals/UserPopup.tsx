@@ -44,7 +44,7 @@ export class UserPopup extends React.Component<Props, {}> {
               {this.parseTags(user)}
             </div>
           </div>
-          {user.roles && user.roles.length && <div className={`crate-modal-description ${classes.description}`}>
+          {user.roles && user.roles.length > 1 && <div className={`crate-modal-description ${classes.description}`}>
             <Roles classes={classes} roles={user.roles} />
           </div>}
         </div>
@@ -74,7 +74,7 @@ export class UserPopup extends React.Component<Props, {}> {
 
 interface Roles {
   classes: any
-  roles: Modal.roles
+  roles: Modal.roles[]
 }
 
 class Roles extends React.Component<any> {
@@ -84,7 +84,7 @@ class Roles extends React.Component<any> {
       <div className={`crate-modal-roles ${classes.userRoles}`}>
         <div className={`crate-modal-roles-title ${classes.title}`}>{`Role${roles.length > 2 ? 's' : ''}`}</div>
         <div className={`crate-modal-roles ${classes.roles}`}>
-          {roles.map((role, index) => {
+          {roles.map((role: Modal.roles, index) => {
             if (role.name === '@everyone' || '') return null
             const roleColor = role.color.match(/^#000|#000000|#fff|#ffffff$/) ? color('#b9bbbe') : color(role.color)
             return (
