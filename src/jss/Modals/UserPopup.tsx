@@ -139,6 +139,7 @@ export default (config: Config) => {
       width: '12px',
       marginRight: '4px',
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      color: 'inherit'
     },
     'role-name': {
       display: 'inline-block',
