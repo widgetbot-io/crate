@@ -17,7 +17,8 @@ export default (config: Config) => {
       flexDirection: 'column',
       padding: '20px 10px',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'avatar': {
       position: 'relative',
@@ -40,7 +41,8 @@ export default (config: Config) => {
       textTransform: 'uppercase',
       fontWeight: '600',
       fontSize: '16px',
-      padding: '0px 10px'
+      padding: '0px 10px',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'bot': {
       flexShrink: '0',
@@ -53,10 +55,11 @@ export default (config: Config) => {
       background: '#fff',
       color: '#7289da !important',
       lineHeight: '22px',
-      padding: '0 3px'
+      padding: '0 3px',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'link': {
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
 
     'avatar-img': {
@@ -92,26 +95,30 @@ export default (config: Config) => {
       whiteSpace: 'nowrap',
       fontWeight: '700',
       lineHeight: '12px',
-      fontSize: '10px'
+      fontSize: '10px',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
 
     'description': {
       backgroundColor: '#2f3136',
       color: 'rgba(255,255,255,0.8)',
-      padding: '12px 10px 10px'
+      padding: '12px 10px 10px',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'title': {
       color: '#72767d',
       textTransform: 'uppercase',
       marginBottom: '8px',
       fontWeight: '700',
-      fontSize: '12px'
+      fontSize: '12px',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'roles': {
       display: 'flex',
       flexWrap: 'wrap',
       marginTop: '12px',
-      marginBottom: '20px'
+      marginBottom: '20px',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'role': {
       padding: '5px 6px',
@@ -121,7 +128,8 @@ export default (config: Config) => {
       margin: '4px',
       display: 'flex',
       lineHeight: '19px',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'role-color': {
       float: 'left',
@@ -129,7 +137,8 @@ export default (config: Config) => {
       borderRadius: '50%',
       height: '12px',
       width: '12px',
-      marginRight: '4px'
+      marginRight: '4px',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'role-name': {
       display: 'inline-block',
@@ -138,7 +147,8 @@ export default (config: Config) => {
       fontWeight: '500',
       textOverflow: 'ellipsis',
       marginRight: '4px',
-      color: 'rgba(255,255,255,0.8)'
+      color: 'rgba(255,255,255,0.8)',
+      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     }
   }
 

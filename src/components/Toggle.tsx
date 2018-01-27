@@ -27,7 +27,7 @@ export class Toggle extends React.Component<Props, {}> {
         let { config, toggle, view, notifications } = this.props
         let { classes } = this
         return (
-            <div className={`${classes.toggle} ${notifications.pinged ? classes['toggle-pinged'] : ''}`} onClick={toggle.bind(this)}>
+            <div className={`crate-toggle ${classes.toggle} ${notifications.pinged ? `crate-toggle-pinged ${classes['toggle-pinged']}` : ''}`} onClick={toggle.bind(this)}>
                 <ButtonOpen classes={classes} view={view} />
                 <ButtonClose classes={classes}  view={view} />
                 {config.notifications.indicator.enable && <Indicator classes={classes} unread={notifications.unread} pinged={notifications.pinged} />}
@@ -45,7 +45,7 @@ class ButtonOpen extends React.Component<Buttons, {}> {
     render() {
         let { view, classes } = this.props
         return (
-            <div className={`${classes['button-glyph']} ${classes['button-open']} ${view.open ? classes['button-open:toggled']  : ``}`} />
+            <div className={`crate-toggle-glyph crate-toggle-open ${classes['button-glyph']} ${classes['button-open']} ${view.open ? classes['button-open:toggled']  : ``}`} />
         )
     }
 }
@@ -54,7 +54,7 @@ class ButtonClose extends React.Component<Buttons, {}> {
     render() {
         let { view, classes } = this.props
         return (
-            <div className={`${classes['button-glyph']} ${classes['button-close']} ${view.open ? classes['button-close:toggled']  : ``}`} />
+            <div className={`crate-toggle-glyph crate-toggle-close ${classes['button-glyph']} ${classes['button-close']} ${view.open ? classes['button-close:toggled']  : ``}`} />
         )
     }
 }
@@ -70,7 +70,7 @@ class Indicator extends React.Component<UnreadIndicator, {}> {
     render() {
         let { unread, pinged, classes } = this.props
         return (
-            <div className={`${classes.indicator} ${pinged ? classes['indicator-pinged'] : ''}`}>
+            <div className={`crate-unread-indicator ${classes.indicator} ${pinged ? classes['indicator-pinged'] : ''}`}>
                 {unread !== 0 ? unread > 99 ? '99' : unread : ''}
             </div>
         )

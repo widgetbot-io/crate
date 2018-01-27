@@ -22,7 +22,7 @@ export class ImagePopup extends React.Component<Props, {}> {
     let { config, url, toggle } = this.props
     let { classes } = this
     return (
-      <img src={url} onClick={() => { window.open(url); toggle(false) }} className={classes.img} />
+      <img src={url} onClick={() => { window.open(url); toggle(false) }} className={`crate-modal-image ${classes.img}`} />
     )
   }
 }

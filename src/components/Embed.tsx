@@ -62,7 +62,7 @@ export class Embed extends React.Component<Props, {}> {
         let { view, config } = this.props
         let { classes } = this
         return (
-            <div className={`${classes.popup} ${this.state.block ? classes['popup-block'] : ``} ${this.state.opacity ? classes['popup-open'] : ``}`}>
+            <div className={`crate-popup ${classes.popup} ${this.state.block ? classes['popup-block'] : ``} ${this.state.opacity ? classes['popup-open'] : ``}`}>
                 {view.loading &&
                     <svg className={classes['loading-svg']}>
                         <path fill={config.options.split('')[2] === '1' ? '#FFFFFF' : '#7289da'} d="M231.857 268.344l44.317 45.268-47.03 46.043-44.318-45.267z" />

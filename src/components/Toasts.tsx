@@ -29,7 +29,7 @@ export class Toasts extends React.Component<Props, {}> {
     let { messages, openUser } : { messages: { expiration: number, message: Notifications.message }[], openUser: Function } = this.props
     let { classes } = this
     return (
-      <div className={classes['toast-box']}>
+      <div className={`crate-toast-box ${classes['toast-box']}`}>
         {/* Reversing the message array and use column-reverse to prevent the need for scrolling */}
         {messages.map(({ expiration, message }, i: number) => {
           return (<Toast message={message} expiration={expiration} key={message.id} classes={classes} last={i === 0} openUser={openUser.bind(this)} />)
@@ -119,12 +119,12 @@ class Toast extends React.Component<ToastProps, {}> {
     let { message, classes, last, expiration, openUser } = this.props
     return (
       this.state.render ? (
-        <div className={`${classes.toast} ${last ? classes['toast-hidden'] : ''}`} ref={toast => this.toast = toast}>
+        <div className={`crate-toast ${classes.toast} ${last ? classes['toast-hidden'] : ''}`} ref={toast => this.toast = toast}>
           <img
             src={message.author.avatar || 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'}
-            className={classes['toast-avatar']}
+            className={`crate-toast-avatar ${classes['toast-avatar']}`}
             onClick={() => openUser(message.author)} />
-          <div className={classes['toast-message']}>
+          <div className={`crate-toast-message ${classes['toast-message']}`}>
             {message.content}
           </div>
         </div>

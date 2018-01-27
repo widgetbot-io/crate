@@ -33,9 +33,9 @@ export class Modal extends React.Component<Props, {}> {
     return (
       <Transition in={view.modalOpen} timeout={300}>
         {(state) => (
-          <div className={`${classes.modal} ${state ? `${classes.modal}-${state}` : ``}`} onClick={(event) => { event.preventDefault(); if (event.target === event.currentTarget) toggle(false) }}>
-            <div className={`${classes.card} ${modal.type === 'image' ? `${classes.card}-image` : ``}`}>
-              <svg width="18" height="18" viewBox="0 0 12 12" className={`${classes.close} ${modal.type === 'image' ? `${classes.close}-image` : ``}`} onClick={() => toggle(false)}>
+          <div className={`crate-modal ${classes.modal} ${state ? `${classes.modal}-${state}` : ``}`} onClick={(event) => { event.preventDefault(); if (event.target === event.currentTarget) toggle(false) }}>
+            <div className={`crate-modal-card ${classes.card} ${modal.type === 'image' ? `crate-image-modal ${classes.card}-image` : ``}`}>
+              <svg width="18" height="18" viewBox="0 0 12 12" className={`crate-modal-close ${classes.close} ${modal.type === 'image' ? `${classes.close}-image` : ``}`} onClick={() => toggle(false)}>
                 <path d="M0 0h12v12H0" />
                 <path className={`${classes.svg}`} d="M9.5 3.205L8.795 2.5 6 5.295 3.205 2.5l-.705.705L5.295 6 2.5 8.795l.705.705L6 6.705 8.795 9.5l.705-.705L6.705 6" />
               </svg>
