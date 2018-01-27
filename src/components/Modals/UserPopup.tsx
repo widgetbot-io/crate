@@ -13,7 +13,7 @@ export class UserPopup extends React.Component<Props, {}> {
   classes: any
 
   componentWillMount() {
-    let { config } = this.props
+    const { config } = this.props
     this.classes = jss(config)
   }
 
@@ -25,8 +25,8 @@ export class UserPopup extends React.Component<Props, {}> {
   }
 
   render() {
-    let { config, user } = this.props
-    let { classes } = this
+    const { config, user } = this.props
+    const { classes } = this
     return (
       user ? (
         <div>
@@ -55,7 +55,7 @@ export class UserPopup extends React.Component<Props, {}> {
   }
 
   parseTags(user: Modal.user) {
-    let { classes } = this
+    const { classes } = this
     return (
       <span>
         {/^294916911194570754|111783814740594688$/.test(user.id) ? (
@@ -78,8 +78,18 @@ interface Roles {
 }
 
 class Roles extends React.Component<any> {
+  compare(a, b) {
+    if (a.position < b.position)
+      return 1
+    if (a.position > b.position)
+      return -1
+    return 0
+  }
+
   render() {
-    let { classes, roles } = this.props
+    const { classes } = this.props
+    const roles = this.props.user.roles.sort(this.compare)
+
     return (
       <div className={`crate-modal-roles ${classes.userRoles}`}>
         <div className={`crate-modal-roles-title ${classes.title}`}>{`Role${roles.length > 2 ? 's' : ''}`}</div>

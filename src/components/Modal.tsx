@@ -33,7 +33,7 @@ export class Modal extends React.Component<Props, {}> {
     return (
       <Transition in={view.modalOpen} timeout={300}>
         {(state) => (
-          <div className={`crate-modal ${classes.modal} ${state ? `${classes.modal}-${state}` : ``}`} onClick={(event) => { event.preventDefault(); if (event.target === event.currentTarget) toggle(false) }}>
+          <div className={`crate-modal ${classes.modal} ${state ? `${classes.modal}-${state}` : ``}`} onClick={(event) => { if (event.target === event.currentTarget) toggle(false) }}>
             <div className={`crate-modal-card ${classes.card} ${modal.type === 'image' ? `crate-image-modal ${classes.card}-image` : ``}`}>
               <svg width="18" height="18" viewBox="0 0 12 12" className={`crate-modal-close ${classes.close} ${modal.type === 'image' ? `${classes.close}-image` : ``}`} onClick={() => toggle(false)}>
                 <path d="M0 0h12v12H0" />
