@@ -10,7 +10,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --colors --port 3000 --open",
     "build": "webpack --config webpack.config.js --define process.env.NODE_ENV=\"'production'\"",
-    "pull": "git stash && git pull && yarn build"
+    "pull": "git stash && git pull && yarn && yarn build"
   },
   "dependencies": {
     "@types/color": "^2.0.0",
