@@ -7,6 +7,7 @@ import { Notifications } from './definitions/notifications'
 
 import log from './components/Log'
 import { Embed } from './components/Embed'
+import { Modal } from './components/Modal'
 import { Toggle } from './components/Toggle'
 import { Toasts } from './components/Toasts'
 
@@ -17,7 +18,7 @@ export class Renderer extends React.Component {
   classes = this.props.api.state.classes
 
   componentDidMount() {
-    window.addEventListener('message', ({data}) => this.listener(data), false)
+    window.addEventListener('message', ({ data }) => this.listener(data), false)
   }
 
   render() {
@@ -42,18 +43,25 @@ export class Renderer extends React.Component {
           {config.notifications.toasts.enable && !this.state.view.open && <Toasts
             view={this.state.view}
             config={this.state.config}
+            openUser={api.user.bind(this)}
             messages={this.state.notifications.messages} />}
+
+          <Modal
+            view={this.state.view}
+            modal={this.state.modal}
+            config={this.state.config}
+            toggle={api.modal.bind(this)} />
         </div>
       ) : (
-        <div />
-      )
+          <div />
+        )
     )
   }
 
   listener(msg: any) {
     let { ReactGA } = window.globalCrate
     if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.session) {
-      let { event, data } = msg
+      let { event, type, data } = msg
       let { config } = this.state
       let { toasts, indicator } = this.state.config.notifications
       /**
@@ -88,6 +96,33 @@ export class Renderer extends React.Component {
             messages: messages
           }
         })
+      }
+      /**
+       * Modal event
+       */
+      if (event === 'modal') {
+        this.setState({
+          view: {
+            ...this.state.view,
+            modalOpen: true
+          },
+          modal: {
+            type: type,
+            data: data
+          }
+        })
+        if (type === 'user') {
+          ReactGA.event({
+            category: 'UserPopup',
+            action: 'Open'
+          })
+        }
+        if (type === 'image') {
+          ReactGA.event({
+            category: 'Image',
+            action: 'Open'
+          })
+        }
       }
       /**
        * Loading complete event

@@ -49,12 +49,16 @@ export default (state: any, config: Config, relaxed?: boolean) => {
 
         if (config.buttons) {
           // Fallback
+          // @ts-ignore
           if (config.buttons.upper) config.buttons.primary = config.buttons.upper
+          // @ts-ignore
           if (config.buttons.lower) config.buttons.secondary = config.buttons.lower
 
           if (config.buttons.primary) config.query.bu = config.buttons.primary
           if (config.buttons.secondary) config.query.bl = config.buttons.secondary
         }
+
+        if (config.contained) config.query.contained = true
 
         config.url = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/${queryString(config.query)}`
 

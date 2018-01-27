@@ -5,127 +5,132 @@ import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Toasts'
 
 interface Props extends View {
-    messages: any // Notifications.message[]
+  messages: any
+  openUser: any
 }
 
 export class Toasts extends React.Component<Props, {}> {
-    classes: any
+  classes: any
 
-    componentWillMount() {
-        let { config } = this.props
-        this.classes = jss(config)
-    }
+  componentWillMount() {
+    let { config } = this.props
+    this.classes = jss(config)
+  }
 
-    componentWillReceiveProps(nextProps: Props) {
-        // Force JSS re-render
-        if (nextProps && JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
-            this.classes = jss(nextProps.config)
-            this.forceUpdate()
-        }
+  componentWillReceiveProps(nextProps: Props) {
+    // Force JSS re-render
+    if (nextProps && JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
+      this.classes = jss(nextProps.config)
+      this.forceUpdate()
     }
+  }
 
-    render() {
-        let { messages } : { messages: { expiration: number, message: Notifications.message}[] } = this.props
-        let { classes } = this
-        return (
-            <div className={classes['toast-box']}>
-                {/* Reversing the message array and use column-reverse to prevent the need for scrolling */}
-                {messages.map(({expiration, message}, i: number) => {
-                    return( <Toast message={message} expiration={expiration} key={message.id} classes={classes} last={i === 0} /> )
-                })}
-            </div>
-        )
-    }
+  render() {
+    let { messages, openUser } : { messages: { expiration: number, message: Notifications.message }[], openUser: Function } = this.props
+    let { classes } = this
+    return (
+      <div className={classes['toast-box']}>
+        {/* Reversing the message array and use column-reverse to prevent the need for scrolling */}
+        {messages.map(({ expiration, message }, i: number) => {
+          return (<Toast message={message} expiration={expiration} key={message.id} classes={classes} last={i === 0} openUser={openUser.bind(this)} />)
+        })}
+      </div>
+    )
+  }
 }
 
 interface ToastProps {
-    message: Notifications.message
-    expiration: number
-    classes: any
-    last: boolean
+  message: Notifications.message
+  expiration: number
+  classes: any
+  last: boolean
+  openUser: Function
 }
 
 class Toast extends React.Component<ToastProps, {}> {
-    state = {
-        render: true
+  state = {
+    render: true
+  }
+  toast: HTMLElement
+  mounted = true
+
+  componentWillMount() {
+    let { expiration } = this.props
+    /**
+     * Prevent rendering of already expired messages
+     */
+    if (expiration && +new Date() > expiration) {
+      this.setState({
+        render: false
+      })
     }
-    toast: HTMLElement
-    mounted = true
+  }
 
-    componentWillMount() {
-        let { expiration } = this.props
-        /**
-         * Prevent rendering of already expired messages
-         */
-        if (expiration && +new Date() > expiration) {
-            this.setState({
-                render: false
-            })
-        }
+  componentDidMount() {
+    let { last, classes, expiration } = this.props
+
+    if (last) {
+      setTimeout(() => { this.show() }, 10)
+      if (expiration) this.expirationChecker()
     }
+  }
 
-    componentDidMount() {
-        let { last, classes, expiration } = this.props
+  componentWillUnmount() {
+    this.mounted = false
+  }
 
-        if (last) {
-            setTimeout(() => { this.show() }, 10)
-            if (expiration) this.expirationChecker()
-        }
+  show() {
+    if (this.mounted && this.toast) {
+      let { classes } = this.props
+      this.toast.classList.add(classes['toast-visible'])
     }
+  }
 
-    componentWillUnmount() {
-        this.mounted = false
+  hide() {
+    if (this.mounted && this.toast) {
+      let { classes } = this.props
+      let { ReactGA } = window.globalCrate
+      this.toast.classList.remove(classes['toast-visible'])
+      this.toast.classList.add(classes['toast-hidden'])
+      ReactGA.event({
+        category: 'Toast',
+        action: 'Hide'
+      })
     }
+  }
 
-    show() {
-        if (this.mounted && this.toast) {
-            let { classes } = this.props
-            this.toast.classList.add(classes['toast-visible'])
-        }
+  expirationChecker() {
+    if (this.mounted && this.toast) {
+      let { expiration } = this.props
+      if (+new Date() > expiration) {
+        this.hide()
+        setTimeout(() => {
+          this.setState({
+            render: false
+          })
+        }, 400)
+      } else {
+        setTimeout(() => this.expirationChecker(), 500)
+      }
     }
+  }
 
-    hide() {
-        if (this.mounted && this.toast) {
-            let { classes } = this.props
-            let { ReactGA } = window.globalCrate
-            this.toast.classList.remove(classes['toast-visible'])
-            this.toast.classList.add(classes['toast-hidden'])
-            ReactGA.event({
-                category: 'Toast',
-                action: 'Hide'
-            })
-        }
-    }
-
-    expirationChecker() {
-        if (this.mounted && this.toast) {
-            let { expiration } = this.props
-            if (+new Date() > expiration) {
-                this.hide()
-                setTimeout(() => {
-                    this.setState({
-                        render: false
-                    })
-                }, 400)
-            } else {
-                setTimeout(() => this.expirationChecker(), 500)
-            }
-        }
-    }
-
-    render() {
-        let { message, classes, last, expiration } = this.props
-        return (
-            this.state.render ? (
-                <div className={`${classes.toast} ${last ? classes['toast-hidden'] : ''}`} ref={toast => this.toast = toast}>
-                    <img src={message.author.avatar || 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'} className={classes['toast-avatar']}/>
-                    <div className={classes['toast-message']}>
-                        {message.content}
-                    </div>
-                </div>
-            ) : (
-                <div />
-            )
+  render() {
+    let { message, classes, last, expiration, openUser } = this.props
+    return (
+      this.state.render ? (
+        <div className={`${classes.toast} ${last ? classes['toast-hidden'] : ''}`} ref={toast => this.toast = toast}>
+          <img
+            src={message.author.avatar || 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'}
+            className={classes['toast-avatar']}
+            onClick={() => openUser(message.author)} />
+          <div className={classes['toast-message']}>
+            {message.content}
+          </div>
+        </div>
+      ) : (
+          <div />
         )
-    }
+    )
+  }
 }

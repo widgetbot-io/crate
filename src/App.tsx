@@ -43,7 +43,11 @@ class StateHandler {
     view: {
       opened: false,
       open: false,
-      loading: true
+      loading: true,
+      modalOpen: false
+    },
+    modal: {
+
     },
     /**
      * Default configuration
@@ -115,7 +119,7 @@ class StateHandler {
       this.node = document.createElement('div')
       this.node.classList.add(`crate-${global.sessions}`)
       global.insertionPoint.appendChild(this.node)
-      global.sessions ++
+      global.sessions++
       ReactDOM.render(
         // @ts-ignore custom state handler
         <Renderer api={this} ref={renderer => { this.react = renderer }} />, this.node
@@ -184,6 +188,39 @@ class Crate extends StateHandler {
     })
   }
 
+  modal(open: boolean = !this.state.view.modalOpen) {
+    this.setState({
+      view: {
+        ...this.state.view,
+        modalOpen: open
+      }
+    })
+    let { ReactGA } = global
+    ReactGA.event({
+      category: 'Modal',
+      action: this.state.view.modalOpen ? 'Open' : 'Close'
+    })
+  }
+
+  user(user) {
+    this.setState({
+      view: {
+        ...this.state.view,
+        modalOpen: true
+      },
+      modal: {
+        type: 'user',
+        data: user
+      }
+    })
+
+    let { ReactGA } = global
+    ReactGA.event({
+      category: 'UserPopup',
+      action: 'Open'
+    })
+  }
+
   show() {
     if (!global.insertionPoint.contains(this.node))
       global.insertionPoint.appendChild(this.node)
@@ -211,7 +248,7 @@ window.Crate = Crate;
     try {
       // Parse the config object
       config = JSON5.parse(config)
-    } catch(error) {
+    } catch (error) {
       return log('error', 'Failed to parse configuration!', error)
     }
     // Create a new global crate object

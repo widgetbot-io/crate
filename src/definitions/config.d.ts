@@ -30,6 +30,7 @@ export interface Config {
     x: 'left' | 'right'
     y: 'top' | 'bottom'
   }
+  contained: boolean              // Display modals in iframe or in the window
 
   /**
    * Notifications

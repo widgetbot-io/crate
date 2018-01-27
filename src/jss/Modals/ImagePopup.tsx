@@ -1,4 +1,4 @@
-import { Config } from '../definitions/config'
+import { Config } from '../../definitions/config'
 import jss from 'jss'
 const color = require('color')
 // @ts-ignore
@@ -11,17 +11,10 @@ jss.use(camelCase(), nested())
 
 export default (config: Config) => {
   const styles = {
-    crate: {
-      '& *': {
-        WebkitTapHighlightColor: 'transparent',
-        userSelect: 'none'
-      },
-      '& img': {
-        WebkitUserDrag: 'none',
-        KhtmlUserDrag: 'none',
-        MozUserDrag: 'none',
-        OUserDrag: 'none',
-      }
+    'img': {
+      cursor: 'pointer',
+      maxWidth: '70vw',
+      maxHeight: '70vh',
     }
   }
 

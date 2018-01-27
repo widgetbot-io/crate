@@ -44,12 +44,14 @@ export default (config: Config) => {
       opacity: '1 !important',
       transform: 'initial !important',
     },
-    
+
     'toast-avatar': {
       height: '35px !important',
       margin: config.position.x === 'right' ? '6px 0 0 15px !important' : '6px 15px 0 0 !important',
       float: `${config.position.x} !important`,
       borderRadius: '100%',
+      pointerEvents: 'initial',
+      cursor: 'pointer'
     },
     'toast-message': {
       maxWidth: 'calc(100% - 100px) !important',
@@ -87,6 +89,6 @@ export default (config: Config) => {
       }
     },
   }
-  
+
   return jss.createStyleSheet(styles).attach().classes
 }

@@ -5,6 +5,7 @@ export interface View {
     open: boolean
     opened: boolean // Has to be set to true for the iframe to render
     loading: boolean
+    modalOpen: boolean
   }
   config: any | Config
 }

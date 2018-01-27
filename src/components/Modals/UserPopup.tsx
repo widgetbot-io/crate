@@ -1,0 +1,103 @@
+import * as React from 'react'
+import jss from '../../jss/Modals/UserPopup'
+import { Config } from '../../definitions/config'
+import { Modal } from '../../definitions/modal'
+const color = require('color')
+
+interface Props {
+  config: Config
+  user: Modal.user
+}
+
+export class UserPopup extends React.Component<Props, {}> {
+  classes: any
+
+  componentWillMount() {
+    let { config } = this.props
+    this.classes = jss(config)
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps && JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
+      this.classes = jss(nextProps.config)
+      this.forceUpdate()
+    }
+  }
+
+  render() {
+    let { config, user } = this.props
+    let { classes } = this
+    return (
+      user ? (
+        <div>
+          <div className={`${classes.profile}`}>
+            <div className={`${classes.avatar}`} onClick={() => window.open(user.avatar ? `${user.avatar.split('?')[0]}?size=2048` : 'https://beta.widgetbot.io/embed/299881420891881473/336898706869583872/0002/default.webp')}>
+              <img
+                className={`${classes['avatar-img']}`}
+                src={user.avatar} />
+              <div className={`${classes['view-avatar-circle']}`}>
+                <span className={`${classes['view-avatar']}`}>View avatar</span>
+              </div>
+            </div>
+            <div className={`${classes.name}`}>
+              {user.name}
+              {this.parseTags(user)}
+            </div>
+          </div>
+          {user.roles && user.roles.length && <div className={`${classes.description}`}>
+            <Roles classes={classes} roles={user.roles} />
+          </div>}
+        </div>
+      ) : (
+          <div />
+        )
+    )
+  }
+
+  parseTags(user: Modal.user) {
+    let { classes } = this
+    return (
+      <span>
+        {/^294916911194570754|111783814740594688$/.test(user.id) ? (
+          <a href={user.id == '111783814740594688' ? 'https://voakie.com' : 'https://samdd.me/?devtag'} target='blank_' className={classes.link}>
+            <span className={`${classes.bot}`}>DEV</span>
+          </a>
+        ) : /^300908951665508353|356856478495408129|293731150239891456$/.test(user.id) ? (
+          <span className={`${classes.bot}`}>WIDGETBOT</span>
+        ) : user.bot ? (
+          <span className={`${classes.bot}`}>BOT</span>
+        ) : null}
+      </span>
+    )
+  }
+}
+
+interface Roles {
+  classes: any
+  roles: Modal.roles
+}
+
+class Roles extends React.Component<any> {
+  render() {
+    let { classes, roles } = this.props
+    return (
+      <div className={`${classes.userRoles}`}>
+        <div className={`${classes.title}`}>{`Role${roles.length > 2 ? 's' : ''}`}</div>
+        <div className={`${classes.roles}`}>
+          {roles.map((role, index) => {
+            if (role.name === '@everyone' || '') return null
+            const roleColor = role.color.match(/^#000|#000000|#fff|#ffffff$/) ? color('#b9bbbe') : color(role.color)
+            return (
+              <div className={`${classes.role}`} style={{ color: roleColor.rgb().string(), borderColor: roleColor.fade(0.6).rgb().string() }} key={index}>
+                <div className={`${classes['role-color']}`} />
+                <div className={`${classes['role-name']}`}>
+                  {role.name}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+}
