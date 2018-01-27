@@ -89,6 +89,7 @@ export default (config: Config) => {
       borderRadius: '3px',
       marginLeft: 'auto',
       cursor: 'pointer',
+      boxSizing: 'initial',
       opacity: '.5',
       padding: '4px',
       MozTransition: 'opacity 0.1s ease-in-out',
