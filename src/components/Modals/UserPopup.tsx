@@ -88,7 +88,7 @@ class Roles extends React.Component<any> {
 
   render() {
     const { classes } = this.props
-    const roles = this.props.user.roles.sort(this.compare)
+    const roles = this.props.roles.sort(this.compare)
 
     return (
       <div className={`crate-modal-roles ${classes.userRoles}`}>
