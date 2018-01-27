@@ -1,5 +1,4 @@
 declare var window: any
-const JSON5 = require('json5')
 import * as ReactDOM from "react-dom"
 import * as React from "react"
 
@@ -98,6 +97,7 @@ class StateHandler {
   node: any
 
   constructor(config) {
+    if (!window.crate) window.crate = this
     ParseConfig(this.state, config).then((config) => {
       this.setState({
         classes: jss(config),
@@ -242,17 +242,8 @@ window.Crate = Crate;
 // Load crate from inside script tag
 (() => {
   let config = document.currentScript && document.currentScript.innerHTML
-  if (config && config.indexOf('{') >= 0) {
-    // Regex to extract config object as string
-    if (config.indexOf('new Crate') >= 0) config = config.match(/\{([\s\S]*)+\}/)[0]
-    try {
-      // Parse the config object
-      config = JSON5.parse(config)
-    } catch (error) {
-      return log('error', 'Failed to parse configuration!', error)
-    }
-    // Create a new global crate object
-    window.crate = new Crate(config)
+  if (config) {
+    eval(config)
   }
 })();
 

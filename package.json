@@ -19,7 +19,6 @@
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "color": "^2.0.1",
-    "json5": "^0.5.1",
     "jss": "^9.5.1",
     "jss-camel-case": "^6.0.0",
     "jss-nested": "^6.0.1",
