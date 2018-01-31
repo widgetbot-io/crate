@@ -45,7 +45,7 @@ export default (config: Config) => {
           '0 2px 8px rgba(0,0,0,0.09)',
           '0 4px 40px rgba(0,0,0,0.24)'
         ],
-        background: `${color(config.colors.toggle).lighten(0.3)} !important`,
+        background: config.style === 'material' ? `${color(config.colors.toggle).lighten(0.25)} !important` : '',
       },
     },
     'toggle-pinged': {
