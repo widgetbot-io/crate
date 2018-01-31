@@ -12,6 +12,7 @@ export interface Config {
     primary   ?: string
     secondary ?: string
   }
+  username: string                 // Use a specific username for the guest chatter
 
   /**
    * Aesthetic options

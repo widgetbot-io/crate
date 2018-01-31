@@ -46,6 +46,7 @@ export default (state: any, config: Config, relaxed?: boolean) => {
             config.query.c = `${config.colors.background.replace('#', '')}-${config.colors.button.replace('#', '')}`
           }
         }
+        if (config.username) config.query.username = config.username
 
         if (config.buttons) {
           // Fallback
