@@ -16,11 +16,20 @@ export default (config: Config) => {
       position: 'fixed !important',
       [config.position.y]: '20px !important',
       [config.position.x]: '20px !important',
-      width: '60px !important',
-      height: '60px !important',
+      width: `${config.style === 'material' ? '56px' : '60px'} !important`,
+      height: `${config.style === 'material' ? '56px' : '60px'} !important`,
       borderRadius: '50% !important',
-      transition: 'box-shadow .2s ease-in-out, background 0.1s ease, filter .2s ease-in-out, transform .7s ease !important',
-      boxShadow: [
+      transition: [
+        'box-shadow .2s ease-in-out',
+        `background ${config.style === 'material' ? '250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms' : '0.1s ease'}`,
+        'filter .2s ease-in-out',
+        'transform .7s ease !important',
+      ],
+      boxShadow: config.style === 'material' ? [
+        '0px 3px 5px -1px rgba(0, 0, 0, 0.2)',
+        '0px 6px 10px 0px rgba(0, 0, 0, 0.14)',
+        '0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
+      ] : [
         '0 1px 6px rgba(0,0,0,0.06)',
         '0 2px 32px rgba(0,0,0,0.16)'
       ],
@@ -28,8 +37,16 @@ export default (config: Config) => {
       cursor: 'pointer !important',
       animationTimingFunction: 'ease-in-out !important',
       '&:hover': {
-        boxShadow: '0 2px 8px rgba(0,0,0,0.09), 0 4px 40px rgba(0,0,0,0.24)'
-      }
+        boxShadow: config.style === 'material' ? [
+          '0px 3px 5px -1px rgba(0, 0, 0, 0.2)',
+          '0px 6px 10px 0px rgba(0, 0, 0, 0.14)',
+          '0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
+        ] : [
+          '0 2px 8px rgba(0,0,0,0.09)',
+          '0 4px 40px rgba(0,0,0,0.24)'
+        ],
+        background: `${color(config.colors.toggle).lighten(0.3)} !important`,
+      },
     },
     'toggle-pinged': {
       boxShadow: [
