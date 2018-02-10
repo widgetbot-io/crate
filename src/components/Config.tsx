@@ -14,6 +14,20 @@ export default (state: any, config: Config, relaxed?: boolean) => {
     if (typeof config === 'object') {
       if ((config.server && config.channel) || relaxed) {
         config = DeepMerge(state.config, config)
+
+        if (!config.query) config.query = {
+          session: state.session,
+        }
+
+        if (config.colors) {
+          if (config.colors.toggle) {
+            if (!/^#/.test(config.colors.toggle)) config.colors.toggle = `#${config.colors.toggle}`
+          }
+          if (config.colors.background && config.colors.button) {
+            config.query.c = `${config.colors.background.replace(/#/gm, '')}-${config.colors.button.replace(/#/gm, '')}`
+          }
+        }
+
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
 
         config.options = config.options.toString()
@@ -37,15 +51,6 @@ export default (state: any, config: Config, relaxed?: boolean) => {
         if (config.logo.url === 'intercom') config.logo.url = Icons(config.colors.toggle, 'intercom')
         config.logo = logo
 
-        if (!config.query) config.query = {
-          session: state.session,
-        }
-
-        if (config.colors) {
-          if (config.colors.background && config.colors.button) {
-            config.query.c = `${config.colors.background.replace('#', '')}-${config.colors.button.replace('#', '')}`
-          }
-        }
         if (config.username) config.query.username = config.username
 
         if (config.buttons) {
