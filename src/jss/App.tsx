@@ -14,7 +14,8 @@ export default (config: Config) => {
     crate: {
       '& *': {
         WebkitTapHighlightColor: 'transparent',
-        userSelect: 'none'
+        userSelect: 'none',
+        direction: 'ltr'
       },
       '& img': {
         WebkitUserDrag: 'none',
