@@ -36,11 +36,26 @@ export default (config: Config) => {
       transition: 'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, margin 0.3s ease',
       cursor: 'pointer',
       textDecoration: 'none',
-      backgroundColor: '#7289DA',
+      backgroundColor: config.colors.toggle,
       '&:hover': {
-        transform: 'scale(0.95)',
-        color: 'rgba(255, 255, 255, 1)'
+        '&:after': {
+          transform: 'rotate(35deg) translate(150%, -50px)',
+        }
       },
+      '&:after': {
+        background: '#fff',
+        content: '""',
+        height: '150px',
+        opacity: '.2',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        transform: 'rotate(35deg) translate(-90px, -50px)',
+        transition: 'transform 0.5s ease',
+        width: '50px',
+        zIndex: '-10',
+        pointerEvents: 'none'
+      }
     },
     'show': {
       opacity: 1,
