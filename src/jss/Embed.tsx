@@ -46,6 +46,7 @@ export default (config: Config) => {
     },
     'iframe': {
       position: 'absolute !important',
+      borderRadius: '15px !important',
       top: '0 !important',
       left: '0 !important',
       width: '100% !important',
@@ -61,6 +62,6 @@ export default (config: Config) => {
       transform: 'translate(-50%, -50%) scale(0.6) !important',
     },
   }
-  
+
   return jss.createStyleSheet(styles).attach().classes
 }
