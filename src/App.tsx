@@ -16,7 +16,7 @@ let global = window.globalCrate = {
   sessions: 0,
   ReactGA: require('react-ga')
 }
-global.insertionPoint.setAttribute('github', 'https://github.com/widgetbot-io/crate')
+global.insertionPoint.setAttribute('documentation', 'https://docs.widgetbot.io')
 global.insertionPoint.classList.add('crate')
 // Wait for the DOM to load before inserting
 if (document.body) {
