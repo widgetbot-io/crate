@@ -20,14 +20,25 @@ export class Branding extends React.Component<View, {}> {
     }
   }
 
+  open() {
+    let { ReactGA } = window.globalCrate
+    window.open(`https://widgetbot.io/?ref=crate&referrer=${encodeURIComponent(window.location.origin)}`)
+    ReactGA.event({
+      category: 'Branding-click',
+      action: window.location.href
+    })
+  }
+
   render() {
     let { view, config } = this.props
     let { classes } = this
     return (
-      <a className={`${classes.message} ${view.open ? classes.show : ''}`} href="https://widgetbot.io/?ref=crate-branding">
+      <div
+        className={`${classes.message} ${view.open ? classes.show : ''}`}
+        onClick={this.open.bind(this)}>
         <div className={`${classes['powered-by']}`}>Discord widgets by</div>
         <div className={`${classes['widgetbot']}`}>WidgetBot</div>
-      </a>
+      </div>
     )
   }
 }
