@@ -1,81 +1,87 @@
+<head>
+  <meta content="#2b363b" name="theme-color">
+</head>
+
 <body style="background: #000">
-<script src="./crate.min.js" async defer>
+  <script src="./crate.min.js" async defer>
     new Crate({
+      server: '299881420891881473',
+      channel: '336898706869583872',
+      beta: true,
+      options: '0002',
+      delay: true,
+      colors: {
+        toggle: '#0ebcff'
+      },
+      style: 'material',
+      logo: 'discord',
+      position: {
+        x: 'left',
+        y: 'top'
+      },
+      notifications: {
+        toasts: {
+          visibilityTime: 0,
+          maxMessages: 5,
+        }
+      }
+    })
+  </script>
+  <script>
+    addEventListener('crate', ({
+      Crate
+    }) => {
+      new Crate({
         server: '299881420891881473',
         channel: '336898706869583872',
         beta: true,
-        options: '0002',
+        options: '0012',
         delay: true,
         colors: {
-            toggle: '#0ebcff'
+          "toggle": "#2e3136",
+          "background": "#ffff00",
+          "button": "#0000ff"
         },
-        style: 'material',
+        delay: true,
         logo: 'discord',
         position: {
-            x: 'left',
-            y: 'top'
+          x: 'right',
+          y: 'top'
         },
         notifications: {
-            toasts: {
-                visibilityTime: 0,
-                maxMessages: 5,
-            }
+          toasts: {
+            visibilityTime: 5,
+            maxMessages: 5,
+          }
         }
+      })
+      new Crate({
+        server: '299881420891881473',
+        channel: '336898706869583872',
+        beta: true,
+        options: '0012',
+        delay: true,
+        colors: {
+          "toggle": "#2e3136",
+          "background": "#ffff00",
+          "button": "#0000ff"
+        },
+        delay: true,
+        logo: {
+          url: 'http://palabrasenjapones.com/wp-content/uploads/2009/02/0030-koala-en-japones-150x105.jpg',
+          size: '100% 100%',
+        },
+        position: {
+          x: 'left',
+          y: 'bottom'
+        },
+        notifications: {
+          toasts: {
+            visibilityTime: 5,
+            maxMessages: 5,
+          }
+        }
+      })
     })
-</script>
-<script>
-    addEventListener('crate', ({ Crate }) => {
-        new Crate({
-            server: '299881420891881473',
-            channel: '336898706869583872',
-            beta: true,
-            options: '0012',
-            delay: true,
-            colors: {
-                "toggle": "#2e3136",
-                "background": "#ffff00",
-                "button": "#0000ff"
-            },
-            delay: true,
-            logo: 'discord',
-            position: {
-                x: 'right',
-                y: 'top'
-            },
-            notifications: {
-                toasts: {
-                    visibilityTime: 5,
-                    maxMessages: 5,
-                }
-            }
-        })
-        new Crate({
-            server: '299881420891881473',
-            channel: '336898706869583872',
-            beta: true,
-            options: '0012',
-            delay: true,
-            colors: {
-                "toggle": "#2e3136",
-                "background": "#ffff00",
-                "button": "#0000ff"
-            },
-            delay: true,
-            logo: {
-                url: 'http://palabrasenjapones.com/wp-content/uploads/2009/02/0030-koala-en-japones-150x105.jpg',
-                size: '100% 100%',
-            },
-            position: {
-                x: 'left',
-                y: 'bottom'
-            },
-            notifications: {
-                toasts: {
-                    visibilityTime: 5,
-                    maxMessages: 5,
-                }
-            }
-        })
-    })
-</script>
+  </script>
 </body>

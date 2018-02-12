@@ -206,7 +206,7 @@ class Crate extends StateHandler {
     (() => {
       let meta: HTMLMetaElement = document.querySelector('meta[name=theme-color]')
       if (meta) {
-        if (typeof meta.getAttribute('default') === 'undefined') {
+        if (meta.getAttribute('default') === null) {
           meta.setAttribute('default', meta.content || '')
         }
       } else {
