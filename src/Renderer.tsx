@@ -10,6 +10,7 @@ import { Embed } from './components/Embed'
 import { Modal } from './components/Modal'
 import { Toggle } from './components/Toggle'
 import { Toasts } from './components/Toasts'
+import { Branding } from './components/Branding'
 
 export class Renderer extends React.Component {
   // @ts-ignore custom state handler
@@ -51,6 +52,10 @@ export class Renderer extends React.Component {
             modal={this.state.modal}
             config={this.state.config}
             toggle={api.modal.bind(this)} />
+
+          <Branding
+            view={this.state.view}
+            config={this.state.config} />
         </div>
       ) : (
           <div />

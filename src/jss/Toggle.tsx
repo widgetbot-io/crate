@@ -16,8 +16,8 @@ export default (config: Config) => {
       position: 'fixed !important',
       [config.position.y]: '20px !important',
       [config.position.x]: '20px !important',
-      width: `${config.style === 'material' ? '56px' : '60px'} !important`,
-      height: `${config.style === 'material' ? '56px' : '60px'} !important`,
+      width: `${config.style === 'material' ? 56 : 60}px !important`,
+      height: `${config.style === 'material' ? 56 : 60}px !important`,
       borderRadius: '50% !important',
       transition: [
         'box-shadow .2s ease-in-out',
