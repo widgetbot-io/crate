@@ -25,7 +25,7 @@ export class Branding extends React.Component<View, {}> {
     window.open(`https://widgetbot.io/?ref=crate&referrer=${encodeURIComponent(window.location.origin)}`)
     ReactGA.event({
       category: 'Branding-click',
-      action: window.location.href
+      action: window.location.origin
     })
   }
 
