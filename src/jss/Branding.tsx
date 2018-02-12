@@ -26,6 +26,11 @@ export default (config: Config) => {
       color: 'rgba(255, 255, 255, 0.8)',
       textAlign: config.position.x,
       boxSizing: 'border-box',
+      boxShadow: [
+        '0px 3px 5px -1px rgba(0, 0, 0, 0.1)',
+        '0px 6px 10px 0px rgba(0, 0, 0, 0.04)',
+        '0px 1px 18px 0px rgba(0, 0, 0, 0.2)'
+      ],
       borderRadius: '5px',
       overflow: 'hidden',
       transition: 'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, margin 0.3s ease',
@@ -34,7 +39,6 @@ export default (config: Config) => {
       backgroundColor: '#7289DA',
       '&:hover': {
         transform: 'scale(0.95)',
-        backgroundColor: 'rgba(149, 166, 228, 0.28)',
         color: 'rgba(255, 255, 255, 1)'
       },
     },
