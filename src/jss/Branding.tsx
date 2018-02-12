@@ -35,6 +35,7 @@ export default (config: Config) => {
       overflow: 'hidden',
       transition: 'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, margin 0.3s ease',
       cursor: 'pointer',
+      pointerEvents: 'none',
       textDecoration: 'none',
       backgroundColor: config.colors.toggle,
       '&:hover': {
@@ -60,6 +61,7 @@ export default (config: Config) => {
     'show': {
       opacity: 1,
       [`margin-${config.position.x}`]: 0,
+      pointerEvents: 'initial'
     },
     'powered-by': {
       lineHeight: `${(height - 10) * 0.3}px`,
@@ -71,7 +73,7 @@ export default (config: Config) => {
       fontWeight: 600,
       fontSize: `17px`
     },
-    '@media screen and (max-width: 250px)': {
+    '@media screen and (max-width: 500px)': {
       'message': {
         display: 'none'
       }

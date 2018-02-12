@@ -35,6 +35,22 @@ export default (config: Config) => {
       userSelect: 'none !important',
       display: 'none !important'
     },
+    '@media screen and (max-width: 500px)': {
+      'popup': {
+        top: '0 !important',
+        bottom: '0 !important',
+        left: '0 !important',
+        right: '0 !important',
+        height: 'initial !important',
+        maxHeight: 'initial !important',
+        width: '100vw !important',
+        maxWidth: 'initial !important',
+        borderRadius: '0 !important'
+      },
+      'iframe': {
+        borderRadius: '0 !important'
+      }
+    },
     'popup-block': {
       display: 'block !important'
     },
