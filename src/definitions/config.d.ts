@@ -10,7 +10,7 @@ export interface Config {
   beta?: boolean                // Whether to use the beta domain or not
   buttons?: {                   // Change text of buttons
     primary?: string
-    secondar?: string
+    secondary?: string
   }
   username: string              // Use a specific username for the guest chatter
 
