@@ -1,4 +1,5 @@
 declare var window: any
+import { Config } from './definitions/config'
 import * as ReactDOM from "react-dom"
 import * as React from "react"
 
@@ -76,6 +77,11 @@ class StateHandler {
           maxMessages: 5,
           maxHeight: 'calc(70% - 100px)'
         }
+      },
+
+      mobile: {
+        maxWidth: 500,
+        maxHeight: 500
       },
 
       position: {
@@ -168,11 +174,12 @@ class StateHandler {
  * Group APIs under this class
  */
 class Crate extends StateHandler {
-  toggle() {
+  toggle(open?: boolean) {
+    open = typeof open === 'boolean' ? open : !this.state.view.open
     this.setState({
       view: {
         ...this.state.view,
-        open: !this.state.view.open,
+        open: open,
         opened: true
       },
       notifications: {
@@ -181,6 +188,41 @@ class Crate extends StateHandler {
         messages: []
       }
     })
+
+    /**
+     * Stop the body from scrolling
+     */
+    if (window.innerWidth <= this.state.config.mobile.maxWidth || window.innerHeight <= this.state.config.mobile.maxHeight) {
+      if (open) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = ''
+      }
+    }
+
+    /**
+     * Add the meta tag, for chrome header color
+     */
+    (() => {
+      let meta: HTMLMetaElement = document.querySelector('meta[name=theme-color]')
+      if (meta) {
+        if (typeof meta.getAttribute('default') === 'undefined') {
+          meta.setAttribute('default', meta.content || '')
+        }
+      } else {
+        meta = document.createElement('meta')
+        meta.setAttribute('name', 'theme-color')
+        meta.setAttribute('default', '')
+        document.head.appendChild(meta)
+      }
+      if (open) {
+        let color = this.state.config.colors['background'] || this.state.config['scheme'] === 'light' ? '#ffffff' : '#36393E'
+        meta.setAttribute('content', color)
+      } else {
+        meta.setAttribute('content', meta.getAttribute('default'))
+      }
+    })()
+
     let { ReactGA } = global
     ReactGA.event({
       category: 'Toggle',

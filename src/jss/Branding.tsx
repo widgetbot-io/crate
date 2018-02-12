@@ -11,6 +11,11 @@ jss.use(camelCase(), nested())
 
 export default (config: Config) => {
   const height = config.style === 'material' ? 56 : 60
+  const mobileStyle = {
+    'message': {
+      display: 'none'
+    }
+  }
   const styles = {
     'message': {
       display: 'flex',
@@ -73,11 +78,12 @@ export default (config: Config) => {
       fontWeight: 600,
       fontSize: `17px`
     },
-    '@media screen and (max-width: 500px)': {
-      'message': {
-        display: 'none'
-      }
-    }
+    [`@media screen and (max-width: ${config.mobile.maxWidth}px)`]: {
+      ...mobileStyle
+    },
+    [`@media screen and (max-height: ${config.mobile.maxHeight}px)`]: {
+      ...mobileStyle
+    },
   }
 
   return jss.createStyleSheet(styles).attach().classes

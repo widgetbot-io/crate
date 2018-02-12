@@ -10,6 +10,22 @@ import nested from 'jss-nested'
 jss.use(camelCase(), nested())
 
 export default (config: Config) => {
+  const mobileStyle = {
+    'popup': {
+      top: '0 !important',
+      bottom: '0 !important',
+      left: '0 !important',
+      right: '0 !important',
+      height: 'initial !important',
+      maxHeight: 'initial !important',
+      width: '100vw !important',
+      maxWidth: 'initial !important',
+      borderRadius: '0 !important'
+    },
+    'iframe': {
+      borderRadius: '0 !important'
+    }
+  }
   const styles = {
     'popup': {
       zIndex: '2147483000 !important',
@@ -35,21 +51,11 @@ export default (config: Config) => {
       userSelect: 'none !important',
       display: 'none !important'
     },
-    '@media screen and (max-width: 500px)': {
-      'popup': {
-        top: '0 !important',
-        bottom: '0 !important',
-        left: '0 !important',
-        right: '0 !important',
-        height: 'initial !important',
-        maxHeight: 'initial !important',
-        width: '100vw !important',
-        maxWidth: 'initial !important',
-        borderRadius: '0 !important'
-      },
-      'iframe': {
-        borderRadius: '0 !important'
-      }
+    [`@media screen and (max-width: ${config.mobile.maxWidth}px)`]: {
+      ...mobileStyle
+    },
+    [`@media screen and (max-height: ${config.mobile.maxHeight}px)`]: {
+      ...mobileStyle
     },
     'popup-block': {
       display: 'block !important'

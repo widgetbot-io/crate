@@ -33,6 +33,10 @@ export interface Config {
     y: 'top' | 'bottom'
   }
   contained: boolean            // Display modals in iframe or in the window
+  mobile?: {
+    maxWidth?: number           // The screen resolution at which the mobile version should be used
+    maxHeight?: number          // The screen resolution at which the mobile version should be used
+  }
 
   /**
    * Notifications
