@@ -215,12 +215,17 @@ class Crate extends StateHandler {
         meta.setAttribute('default', '')
         document.head.appendChild(meta)
       }
-      if (open) {
-        let color = this.state.config.colors['background'] || this.state.config['scheme'] === 'light' ? '#ffffff' : '#36393E'
-        meta.setAttribute('content', color)
-      } else {
-        meta.setAttribute('content', meta.getAttribute('default'))
-      }
+      /**
+       * Timeout so the transition fades with the chrome header
+       */
+      setTimeout(() => {
+        if (open) {
+          let color = this.state.config.colors['background'] || this.state.config['scheme'] === 'light' ? '#ffffff' : '#36393E'
+          meta.setAttribute('content', color)
+        } else {
+          meta.setAttribute('content', meta.getAttribute('default'))
+        }
+      }, 100)
     })()
 
     let { ReactGA } = global
