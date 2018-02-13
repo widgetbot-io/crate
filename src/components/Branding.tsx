@@ -13,12 +13,16 @@ const GetCSS = (el) => {
   el.matches = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector
       || el.msMatchesSelector || el.oMatchesSelector;
   for (let i in sheets) {
-      let rules = sheets[i]['rules'] || sheets[i]['cssRules']
-      for (let r in rules) {
-          if (el.matches(rules[r].selectorText)) {
-              if (typeof rules[r].parentStyleSheet.ownerNode.attributes['data-jss'] === 'undefined') break
-              ret.push(rules[r].style.cssText.toString())
-          }
+      try {
+        let rules = sheets[i]['rules'] || sheets[i]['cssRules']
+        for (let r in rules) {
+            if (el.matches(rules[r].selectorText)) {
+                if (typeof rules[r].parentStyleSheet.ownerNode.attributes['data-jss'] === 'undefined') break
+                ret.push(rules[r].style.cssText.toString())
+            }
+        }
+      } catch(e) {
+
       }
   }
   return ret.join('').replace(/\!important/gm, '').replace(/;/gm, ' !important;')
