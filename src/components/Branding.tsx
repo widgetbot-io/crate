@@ -16,7 +16,7 @@ const GetCSS = (el) => {
       let rules = sheets[i]['rules'] || sheets[i]['cssRules']
       for (let r in rules) {
           if (el.matches(rules[r].selectorText)) {
-              if (typeof rules[r].parentStyleSheet.ownerNode.attributes['data-jss'] === 'undefined') return
+              if (typeof rules[r].parentStyleSheet.ownerNode.attributes['data-jss'] === 'undefined') break
               ret.push(rules[r].style.cssText.toString())
           }
       }
