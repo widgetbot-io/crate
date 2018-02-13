@@ -4,15 +4,21 @@ import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Branding'
 
-const ElementToCSS = (el, css = el.ownerDocument.styleSheets) => {
+/**
+ * Make an elements styles inline, and with !important
+ * @param node The node that shall'nt be fucked with
+ */
+const DontFuckWithMe = (node) => {
+  if (!node) return
+  let css = node.ownerDocument.styleSheets
   let styles = [].concat(...[...css].map(s => [...s.cssRules||[]]))
-  .filter(r => el.matches(r.selectorText))
+  .filter(r => node.matches(r.selectorText))
   let style = ''
   for (let i = 0; i < styles.length; i++) {
     style += styles[i].style.cssText
   }
-  style = style.replace(/\!important/gm, '')
-  return style.replace(/;/gm, ' !important;')
+  style = style.replace(/\!important/gm, '').replace(/;/gm, ' !important;')
+  node.setAttribute('style', style)
 }
 
 export class Branding extends React.Component<View, {}> {
@@ -52,11 +58,11 @@ export class Branding extends React.Component<View, {}> {
       <div
         className={`${classes.message} ${view.open ? classes.show : ''}`}
         onClick={this.open.bind(this)}
-        ref={(node: any) => {if (node) {node.setAttribute('style', ElementToCSS(node))}}}>
-        <div className={`${classes['powered-by']}`} ref={(node: any) => {if (node) {node.setAttribute('style', ElementToCSS(node))}}}>
+        ref={DontFuckWithMe.bind(this)}>
+        <div className={`${classes['powered-by']}`} ref={DontFuckWithMe.bind(this)}>
           Discord widgets by
         </div>
-        <div className={`${classes['widgetbot']}`} ref={(node: any) => {if (node) {node.setAttribute('style', ElementToCSS(node))}}}>
+        <div className={`${classes['widgetbot']}`} ref={DontFuckWithMe.bind(this)}>
           WidgetBot
         </div>
       </div>
