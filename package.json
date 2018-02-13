@@ -23,6 +23,7 @@
     "jss-camel-case": "^6.0.0",
     "jss-nested": "^6.0.1",
     "jss-preset-default": "^4.0.1",
+    "raven-js": "^3.22.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
