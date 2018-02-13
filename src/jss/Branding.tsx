@@ -13,6 +13,7 @@ export default (config: Config) => {
   const height = config.style === 'material' ? 56 : 60
   const styles = {
     'message': {
+      visibility: 'visible',
       display: window.innerWidth <= config.mobile.maxWidth || window.innerHeight <= config.mobile.maxHeight ? 'none' : 'flex',
       flexDirection: 'column',
       padding: '5px 10px',
@@ -66,12 +67,18 @@ export default (config: Config) => {
     'powered-by': {
       lineHeight: `${(height - 10) * 0.3}px`,
       fontSize: `10px`,
-      color: 'rgba(255, 255, 255, 0.5)'
+      color: 'rgba(255, 255, 255, 0.5)',
+      visibility: 'visible',
+      display: 'block',
+      opacity: 1
     },
     'widgetbot': {
       lineHeight: `${(height - 10) * 0.7}px`,
       fontWeight: 600,
-      fontSize: `17px`
+      fontSize: `17px`,
+      visibility: 'visible',
+      display: 'block',
+      opacity: 1
     },
   }
 
