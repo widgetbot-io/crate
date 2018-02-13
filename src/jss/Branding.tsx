@@ -11,14 +11,9 @@ jss.use(camelCase(), nested())
 
 export default (config: Config) => {
   const height = config.style === 'material' ? 56 : 60
-  const mobileStyle = {
-    'message': {
-      display: 'none'
-    }
-  }
   const styles = {
     'message': {
-      display: 'flex',
+      display: window.innerWidth <= config.mobile.maxWidth || window.innerHeight <= config.mobile.maxHeight ? 'none' : 'flex',
       flexDirection: 'column',
       padding: '5px 10px',
       opacity: 0,
@@ -77,12 +72,6 @@ export default (config: Config) => {
       lineHeight: `${(height - 10) * 0.7}px`,
       fontWeight: 600,
       fontSize: `17px`
-    },
-    [`@media screen and (max-width: ${config.mobile.maxWidth}px)`]: {
-      ...mobileStyle
-    },
-    [`@media screen and (max-height: ${config.mobile.maxHeight}px)`]: {
-      ...mobileStyle
     },
   }
 

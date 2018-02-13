@@ -16,6 +16,7 @@ const GetCSS = (el) => {
       let rules = sheets[i]['rules'] || sheets[i]['cssRules']
       for (let r in rules) {
           if (el.matches(rules[r].selectorText)) {
+              if (typeof rules[r].parentStyleSheet.ownerNode.attributes['data-jss'] === 'undefined') return
               ret.push(rules[r].style.cssText.toString())
           }
       }
@@ -33,11 +34,8 @@ const DontFuckWithMe = (node) => {
   let style = GetCSS(node)
   node.setAttribute('identifier', identifier)
   node.setAttribute('style', style)
-  let length = node.style.length
   window[identifier] = setInterval(() => {
-    if (node.style.length !== length) {
-      node.setAttribute('style', style)
-    }
+    node.setAttribute('style', style)
   }, 1000)
   // } catch(e) {
   //   return
