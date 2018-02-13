@@ -27,7 +27,6 @@ export class Renderer extends React.Component {
     let config: Config = this.state.config
     // @ts-ignore custom state handler
     let { api } = this.props
-
     return (
       classes ? (
         <div className={`crate ${classes.crate}`}>
@@ -53,9 +52,9 @@ export class Renderer extends React.Component {
             config={this.state.config}
             toggle={api.modal.bind(this)} />
 
-          <Branding
+          {this.state.l === 0 && <Branding
             view={this.state.view}
-            config={this.state.config} />
+            config={this.state.config} />}
         </div>
       ) : (
           <div />
@@ -137,7 +136,9 @@ export class Renderer extends React.Component {
           view: {
             ...this.state.view,
             loading: false
-          }
+          },
+          // Patreon level
+          l: data[2]
         })
       }
     }

@@ -105,6 +105,8 @@ Raven.context(() => {
         pinged: false,
         messages: []
       },
+      // Patreon level
+      l: null,
       classes: {},
       session: (Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date()).toString()
     }
