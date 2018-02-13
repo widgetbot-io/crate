@@ -8,6 +8,21 @@ import jss from '../jss/Branding'
  * Make an elements styles inline, and with !important
  * @param node The node that shall'nt be fucked with
  */
+const GetCSS = (el) => {
+  let sheets = document.styleSheets, ret = [];
+  el.matches = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector
+      || el.msMatchesSelector || el.oMatchesSelector;
+  for (let i in sheets) {
+      let rules = sheets[i]['rules'] || sheets[i]['cssRules']
+      for (let r in rules) {
+          if (el.matches(rules[r].selectorText)) {
+              ret.push(rules[r].style.cssText.toString())
+          }
+      }
+  }
+  return ret.join('').replace(/\!important/gm, '').replace(/;/gm, ' !important;')
+}
+
 const DontFuckWithMe = (node) => {
   if (!node) return
   let identifier = (Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date()).toString()
@@ -15,19 +30,10 @@ const DontFuckWithMe = (node) => {
     clearInterval(window[node.getAttribute('identifier')])
     delete window[node.getAttribute('identifier')]
   }
-  // try {
-  node.setAttribute('how-to-remove', 'To remove the branding, you can become a patreon - http://patreon.com/widgetbot')
-  let css = node.ownerDocument.styleSheets
-  let styles = [].concat(...[...css].map(s => [...s.cssRules||[]]))
-  .filter(r => node.matches(r.selectorText))
-  let style = ''
-  for (let i = 0; i < styles.length; i++) {
-    style += styles[i].style.cssText
-  }
-  style = style.replace(/\!important/gm, '').replace(/;/gm, ' !important;')
+  let style = GetCSS(node)
   node.setAttribute('identifier', identifier)
   node.setAttribute('style', style)
-  let lenght = node.style.length
+  let length = node.style.length
   window[identifier] = setInterval(() => {
     if (node.style.length !== length) {
       node.setAttribute('style', style)
