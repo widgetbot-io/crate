@@ -10,19 +10,32 @@ import jss from '../jss/Branding'
  */
 const DontFuckWithMe = (node) => {
   if (!node) return
-  try {
-    let css = node.ownerDocument.styleSheets
-    let styles = [].concat(...[...css].map(s => [...s.cssRules||[]]))
-    .filter(r => node.matches(r.selectorText))
-    let style = ''
-    for (let i = 0; i < styles.length; i++) {
-      style += styles[i].style.cssText
-    }
-    style = style.replace(/\!important/gm, '').replace(/;/gm, ' !important;')
-    node.setAttribute('style', style)
-  } catch(e) {
-    return
+  let identifier = (Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date()).toString()
+  if (node.getAttribute('identifier')) {
+    clearInterval(window[node.getAttribute('identifier')])
+    delete window[node.getAttribute('identifier')]
   }
+  // try {
+  node.setAttribute('how-to-remove', 'To remove the branding, you can become a patreon - http://patreon.com/widgetbot')
+  let css = node.ownerDocument.styleSheets
+  let styles = [].concat(...[...css].map(s => [...s.cssRules||[]]))
+  .filter(r => node.matches(r.selectorText))
+  let style = ''
+  for (let i = 0; i < styles.length; i++) {
+    style += styles[i].style.cssText
+  }
+  style = style.replace(/\!important/gm, '').replace(/;/gm, ' !important;')
+  node.setAttribute('identifier', identifier)
+  node.setAttribute('style', style)
+  let lenght = node.style.length
+  window[identifier] = setInterval(() => {
+    if (node.style.length !== length) {
+      node.setAttribute('style', style)
+    }
+  }, 1000)
+  // } catch(e) {
+  //   return
+  // }
 }
 
 export class Branding extends React.Component<View, {}> {
