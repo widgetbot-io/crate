@@ -8,7 +8,7 @@
   "author": "WidgetBot",
   "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --colors --port 3000 --open",
+    "start": "webpack-dev-server --hot --inline --colors --port 3100 --open",
     "build": "webpack --config webpack.config.js --define process.env.NODE_ENV=\"'production'\"",
     "pull": "git stash && git pull && yarn && yarn build"
   },

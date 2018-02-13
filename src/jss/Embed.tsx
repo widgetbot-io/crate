@@ -18,7 +18,7 @@ export default (config: Config) => {
       right: '0 !important',
       height: 'initial !important',
       maxHeight: 'initial !important',
-      width: '100vw !important',
+      width: '100% !important',
       maxWidth: 'initial !important',
       borderRadius: '0 !important'
     },
