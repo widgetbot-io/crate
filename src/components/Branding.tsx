@@ -10,15 +10,19 @@ import jss from '../jss/Branding'
  */
 const DontFuckWithMe = (node) => {
   if (!node) return
-  let css = node.ownerDocument.styleSheets
-  let styles = [].concat(...[...css].map(s => [...s.cssRules||[]]))
-  .filter(r => node.matches(r.selectorText))
-  let style = ''
-  for (let i = 0; i < styles.length; i++) {
-    style += styles[i].style.cssText
+  try {
+    let css = node.ownerDocument.styleSheets
+    let styles = [].concat(...[...css].map(s => [...s.cssRules||[]]))
+    .filter(r => node.matches(r.selectorText))
+    let style = ''
+    for (let i = 0; i < styles.length; i++) {
+      style += styles[i].style.cssText
+    }
+    style = style.replace(/\!important/gm, '').replace(/;/gm, ' !important;')
+    node.setAttribute('style', style)
+  } catch(e) {
+    return
   }
-  style = style.replace(/\!important/gm, '').replace(/;/gm, ' !important;')
-  node.setAttribute('style', style)
 }
 
 export class Branding extends React.Component<View, {}> {
