@@ -39,7 +39,8 @@ export default (config: Config) => {
       },
       '&-entered': {
         opacity: 1,
-        transform: 'initial'
+        transform: 'initial',
+        backdropFilter: 'blur(30px)',
       },
     },
     'card': {
@@ -47,7 +48,7 @@ export default (config: Config) => {
       display: 'flex',
       flexDirection: 'column',
       zIndex: '2',
-      backgroundColor: '#202225',
+      backgroundColor: 'rgba(50, 53, 58, 0.5)',
       borderRadius: '6px',
       width: '480px',
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
