@@ -48,7 +48,7 @@ export default (config: Config) => {
       display: 'flex',
       flexDirection: 'column',
       zIndex: '2',
-      backgroundColor: 'rgba(50, 53, 58, 0.7)',
+      backgroundColor: config.scheme === 'dark' ? 'rgba(50, 53, 58, 0.7)' : 'rgba(255, 255, 255, 0.82)',
       borderRadius: '6px',
       width: '480px',
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',

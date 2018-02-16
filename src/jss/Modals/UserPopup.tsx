@@ -36,7 +36,7 @@ export default (config: Config) => {
       overflow: 'hidden',
     },
     'name': {
-      color: '#f6f6f7',
+      color: config.scheme === 'dark' ? '#f6f6f7' : '#333333',
       letterSpacing: 0.3,
       textTransform: 'uppercase',
       fontWeight: '600',
@@ -45,6 +45,7 @@ export default (config: Config) => {
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'bot': {
+      lineHeight: '19px',
       flexShrink: '0',
       borderRadius: '3px',
       textTransform: 'uppercase',
@@ -52,9 +53,8 @@ export default (config: Config) => {
       marginLeft: '6px',
       fontSize: '10px',
       fontWeight: '500',
-      background: '#fff',
-      color: '#7289da !important',
-      lineHeight: '22px',
+      background: `${config.scheme === 'dark' ? '#fff' : '#7289da'}`,
+      color: `${config.scheme === 'dark' ? '#7289da' : '#fff'} !important`,
       padding: '0 3px',
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
@@ -101,13 +101,12 @@ export default (config: Config) => {
 
     'description': {
       display: 'block',
-      backgroundColor: 'rgba(86, 88, 90, 0.3)',
-      color: 'rgba(255,255,255,0.8)',
+      backgroundColor: config.scheme === 'dark' ? 'rgba(86, 88, 90, 0.3)' : 'rgba(255, 255, 255, 0.23)',
       padding: '12px 10px 10px',
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'title': {
-      color: '#72767d',
+      color: config.scheme === 'dark' ? '#72767d' : '#515356',
       textTransform: 'uppercase',
       marginBottom: '8px',
       fontWeight: '700',
@@ -149,7 +148,7 @@ export default (config: Config) => {
       fontWeight: '500',
       textOverflow: 'ellipsis',
       marginRight: '4px',
-      color: 'rgba(255,255,255,0.8)',
+      color: config.scheme === 'dark' ? 'rgba(255,255,255,0.8)' : 'rgba(23, 23, 23, 0.8)',
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     }
   }
