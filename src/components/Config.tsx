@@ -21,6 +21,14 @@ export default (state: any, config: Config, relaxed?: boolean) => {
           return reject(`config.options should be 4 numbers long, but it's "${config.options.length}" characters long! with the value of "${config.options}"`)
         }
 
+        if (!config.scheme) {
+          if (config.options.charAt(2) === '1') {
+            config.scheme = 'light'
+          } else {
+            config.scheme = 'dark'
+          }
+        }
+
         if (!(config.position.x == 'left' || config.position.x == 'right')) {
           return reject(`config.position.x equals "${config.position.x}" but it can only equal "left" or "right"! you likely mixed up your axes`)
         }

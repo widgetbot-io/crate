@@ -31,11 +31,11 @@ export default (config: Config) => {
       '&-entering': {
         display: 'flex',
         opacity: 0,
-        transform: 'scale(1.1)'
+        transform: 'scale(1.1)',
       },
       '&-exiting': {
         opacity: 0,
-        transform: 'scale(1.1)'
+        transform: 'scale(1.1)',
       },
       '&-entered': {
         opacity: 1,

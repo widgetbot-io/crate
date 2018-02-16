@@ -57,11 +57,11 @@ export default (config: Config) => {
     },
     'toast-message': {
       maxWidth: 'calc(100% - 100px) !important',
-      backgroundColor: `${config.options.split('')[2] === '1' ? '#FFFFFF' : '#36393E'} !important`,
+      backgroundColor: `${config.scheme === 'dark' ? '#36393E' : '#FFFFFF'} !important`,
       fontFamily: `'Roboto', sans-serif !important`,
       display: 'inline-block !important',
       fontSize: '15px !important',
-      color: `${config.options.split('')[2] === '1' ? '#6e7a89' : 'rgba(255,255,255,0.7)'} !important`,
+      color: `${config.scheme === 'dark' ? 'rgba(255,255,255,0.7)' : '#6e7a89'} !important`,
       marginTop: '6px !important',
       overflowWrap: 'break-word !important',
       MsWordBreak: 'break-all !important',
@@ -85,7 +85,7 @@ export default (config: Config) => {
         [config.position.x]: '-10px !important',
         borderWidth: config.position.x === 'right' ? '10px 10px 0 0 !important' : '10px 0 0 10px !important',
         borderStyle: 'solid !important',
-        borderColor: `${config.options.split('')[2] === '1' ? '#FFFFFF' : '#36393E'} transparent !important`,
+        borderColor: `${config.scheme === 'dark' ?  '#36393E' : '#FFFFFF'} transparent !important`,
         display: 'block !important',
         width: '0 !important',
       }

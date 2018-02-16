@@ -35,7 +35,7 @@ export default (config: Config) => {
       [config.position.x]: '20px !important',
       height: 'calc(100% - 20px - 75px - 20px) !important',
       [config.position.y]: 'calc(20px + 75px) !important',
-      backgroundColor: `${config.options.split('')[2] === '1' ? '#FFFFFF' : '#36393E'} !important`,
+      backgroundColor: `${config.scheme === 'dark' ? '#36393E' : '#FFFFFF'} !important`,
       width: '370px !important',
       minHeight: '250px !important',
       maxHeight: '590px !important',
