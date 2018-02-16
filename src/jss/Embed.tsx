@@ -5,9 +5,11 @@ const color = require('color')
 import camelCase from 'jss-camel-case'
 // @ts-ignore
 import nested from 'jss-nested'
+// @ts-ignore
+import increaseSpecificity from 'jss-increase-specificity'
 
 // @ts-ignore
-jss.use(camelCase(), nested())
+jss.use(camelCase(), nested(), increaseSpecificity())
 
 export default (config: Config) => {
   const mobileStyle = {
@@ -51,12 +53,6 @@ export default (config: Config) => {
       userSelect: 'none !important',
       display: 'none !important'
     },
-    [`@media screen and (max-width: ${config.mobile.maxWidth}px)`]: {
-      ...mobileStyle
-    },
-    [`@media screen and (max-height: ${config.mobile.maxHeight}px)`]: {
-      ...mobileStyle
-    },
     'popup-block': {
       display: 'block !important'
     },
@@ -68,7 +64,7 @@ export default (config: Config) => {
     },
     'iframe': {
       position: 'absolute !important',
-      borderRadius: '15px !important',
+      borderRadius: '8px !important',
       top: '0 !important',
       left: '0 !important',
       width: '100% !important',
@@ -82,6 +78,12 @@ export default (config: Config) => {
       top: '50% !important',
       left: '50% !important',
       transform: 'translate(-50%, -50%) scale(0.6) !important',
+    },
+    [`@media screen and (max-width: ${config.mobile.maxWidth}px)`]: {
+      ...mobileStyle
+    },
+    [`@media screen and (max-height: ${config.mobile.maxHeight}px)`]: {
+      ...mobileStyle
     },
   }
 

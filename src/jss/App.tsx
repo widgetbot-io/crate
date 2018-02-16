@@ -13,6 +13,7 @@ export default (config: Config) => {
   const styles = {
     crate: {
       '& *': {
+        all: 'unset',
         WebkitTapHighlightColor: 'transparent',
         userSelect: 'none',
         direction: 'ltr',
@@ -51,8 +52,8 @@ export default (config: Config) => {
         fontWeight: '700',
         src: 'url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff) format("woff")'
       }
-    ],
+    ]
   }
-
-  return jss.createStyleSheet(styles).attach().classes
+  // @ts-ignore
+  return jss.createStyleSheet(styles, {increaseSpecificity: false}).attach().classes
 }

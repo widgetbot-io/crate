@@ -35,7 +35,7 @@ const DontFuckWithMe = (node) => {
     clearInterval(window[node.getAttribute('identifier')])
     delete window[node.getAttribute('identifier')]
   }
-  let style = GetCSS(node)
+  let style = `all:unset!important;${GetCSS(node)}`
   node.setAttribute('identifier', identifier)
   node.setAttribute('style', style)
   window[identifier] = setInterval(() => {

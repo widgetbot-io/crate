@@ -5,9 +5,11 @@ const color = require('color')
 import camelCase from 'jss-camel-case'
 // @ts-ignore
 import nested from 'jss-nested'
+// @ts-ignore
+import increaseSpecificity from 'jss-increase-specificity'
 
 // @ts-ignore
-jss.use(camelCase(), nested())
+jss.use(camelCase(), nested(), increaseSpecificity())
 
 export default (config: Config) => {
   const styles = {
