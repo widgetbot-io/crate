@@ -20,7 +20,7 @@ export default (config: Config) => {
       left: '0',
       right: '0',
       bottom: '0',
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: '2147483001 !important',
@@ -72,7 +72,7 @@ export default (config: Config) => {
       WebkitTransition: 'opacity 0.1s ease-in-out',
       transition: 'opacity 0.1s ease-in-out',
       '&:hover': {
-        backgroundColor: 'rgba(221,222,223,0.05)',
+        backgroundColor: config.scheme === 'dark' ? 'rgba(221,222,223,0.05)' : 'rgba(25, 25, 25, 0.05)',
         opacity: '1'
       },
       '&-image': {
@@ -81,7 +81,7 @@ export default (config: Config) => {
       }
     },
     'svg': {
-      fill: '#dcddde'
+      fill: config.scheme === 'dark' ? '#dcddde' : '#1b1b1b'
     }
   }
 
