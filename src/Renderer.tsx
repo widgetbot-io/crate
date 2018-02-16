@@ -12,11 +12,11 @@ import { Toggle } from './components/Toggle'
 import { Toasts } from './components/Toasts'
 import { Branding } from './components/Branding'
 
-export class Renderer extends React.Component {
-  // @ts-ignore custom state handler
+export class Renderer extends React.Component<{api: any}> {
   state = this.props.api.state
-  // @ts-ignore custom state handler
   classes = this.props.api.state.classes
+  postMessage = this.props.api.postMessage
+  transition = this.props.api.transition
 
   componentDidMount() {
     window.addEventListener('message', ({ data }) => this.listener(data), false)
@@ -32,7 +32,8 @@ export class Renderer extends React.Component {
         <div className={`crate ${classes.crate}`}>
           <Embed
             view={this.state.view}
-            config={this.state.config} />
+            config={this.state.config}
+            setIframe={(iframe) => this.state.iframe = iframe} />
 
           <Toggle
             view={this.state.view}

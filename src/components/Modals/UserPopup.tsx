@@ -34,7 +34,8 @@ export class UserPopup extends React.Component<Props, {}> {
             <div className={`crate-modal-avatar ${classes.avatar}`} onClick={() => window.open(user.avatar ? `${user.avatar.split('?')[0]}?size=2048` : 'https://beta.widgetbot.io/embed/299881420891881473/336898706869583872/0002/default.webp')}>
               <img
                 className={`${classes['avatar-img']}`}
-                src={user.avatar || 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'} />
+                src={user.avatar || 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'}
+                onError={(e: any) => { if (e.target.src !== 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp') e.target.src = 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp' }}/>
               <div className={`${classes['view-avatar-circle']}`}>
                 <span className={`${classes['view-avatar']}`}>View avatar</span>
               </div>

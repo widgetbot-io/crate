@@ -108,10 +108,12 @@ Raven.context(() => {
       // Patreon level
       l: null,
       classes: {},
-      session: (Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date()).toString()
+      session: (Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date()).toString(),
+      iframe: null
     }
     react: any
     node: any
+    transition: any
 
     constructor(config) {
       if (!window.crate) window.crate = this
@@ -199,6 +201,10 @@ Raven.context(() => {
           messages: []
         }
       })
+      clearTimeout(this.transition)
+      this.transition = setTimeout(() => {
+        this.postMessage('transition', open ? 'fade-in' : 'fade-out')
+      }, 100)
 
       /**
        * Stop the body from scrolling
@@ -292,6 +298,17 @@ Raven.context(() => {
     remove() {
       ReactDOM.unmountComponentAtNode(this.node)
       global.insertionPoint.removeChild(this.node)
+    }
+
+    postMessage(event: string, action?: any) {
+      if (this.state.iframe) {
+        this.state.iframe.contentWindow.postMessage({
+          src: 'crate',
+          session: this.state.session,
+          event: event,
+          action: action,
+        }, '*')
+      }
     }
   }
 
