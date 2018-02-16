@@ -12,7 +12,7 @@ jss.use(camelCase(), nested())
 export default (config: Config) => {
   const styles = {
     crate: {
-      '& *': {
+      '& div': {
         all: 'unset',
         WebkitTapHighlightColor: 'transparent',
         userSelect: 'none',

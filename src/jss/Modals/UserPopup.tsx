@@ -100,6 +100,7 @@ export default (config: Config) => {
     },
 
     'description': {
+      display: 'block',
       backgroundColor: '#2f3136',
       color: 'rgba(255,255,255,0.8)',
       padding: '12px 10px 10px',
