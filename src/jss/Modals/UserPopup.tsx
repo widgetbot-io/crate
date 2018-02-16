@@ -101,7 +101,7 @@ export default (config: Config) => {
 
     'description': {
       display: 'block',
-      backgroundColor: 'rgba(47, 49, 54, 0.4)',
+      backgroundColor: 'rgba(86, 88, 90, 0.3)',
       color: 'rgba(255,255,255,0.8)',
       padding: '12px 10px 10px',
       fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
