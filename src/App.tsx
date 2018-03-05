@@ -286,41 +286,11 @@ Raven.context(() => {
     }
 
     show() {
-      this.setState({
-        view: {
-          ...this.state.view,
-          open: true,
-          opened: true
-        },
-        notifications: {
-          unread: 0,
-          pinged: false,
-          messages: []
-        }
-      })
-    }
-
-    hide() {
-      this.setState({
-        view: {
-          ...this.state.view,
-          open: false,
-          opened: true
-        },
-        notifications: {
-          unread: 0,
-          pinged: false,
-          messages: []
-        }
-      })
-    }
-
-    attach() {
       if (!global.insertionPoint.contains(this.node))
         global.insertionPoint.appendChild(this.node)
     }
 
-    detach() {
+    hide() {
       if (global.insertionPoint.contains(this.node))
         global.insertionPoint.removeChild(this.node)
     }
