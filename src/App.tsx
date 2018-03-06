@@ -34,6 +34,7 @@ Raven.context(() => {
     track: (data: Object) => {
       global.matomo.track({
         url: window.location.href,
+        urlref: window.location.href,
         rand: (
           Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) +
           +new Date()
