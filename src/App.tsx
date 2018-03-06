@@ -33,7 +33,7 @@ Raven.context(() => {
     },
     track: (data: Object) => {
       global.matomo.track({
-        url: window.location.href,
+        // url: window.location.href,
         urlref: window.location.href,
         rand: (
           Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) +
@@ -181,20 +181,6 @@ Raven.context(() => {
 
           // Analytics
 
-          let patreon = (() => {switch (this.state.l) {
-            case 2: {
-              return 'Ultimate'
-            }
-            case 1: {
-              return 'Supporter'
-            }
-            case 0: {
-              return 'Free'
-            }
-            case null: {
-              return 'Not set'
-            }
-          }})()
           let { track } = global
           track({
             _id: this.state.session,
@@ -202,7 +188,6 @@ Raven.context(() => {
             cvar: JSON.stringify({
               '1': ['Discord server', config.server],
               '2': ['Discord channel', config.channel],
-              '3': ['Patreon level', patreon]
             })
           })
 

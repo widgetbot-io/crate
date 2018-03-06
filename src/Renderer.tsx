@@ -148,6 +148,30 @@ export class Renderer extends React.Component<{api: any}> {
           // Patreon level
           l: data[2]
         })
+
+        // Analytics
+        let patreon = (() => {switch (this.state.l) {
+          case 2: {
+            return 'Ultimate'
+          }
+          case 1: {
+            return 'Supporter'
+          }
+          case 0: {
+            return 'Free'
+          }
+          case null: {
+            return 'Not set'
+          }
+        }})()
+
+        api.track({
+          _id: this.state.session,
+          action_name: 'Widget loaded',
+          cvar: JSON.stringify({
+            '1': ['Patreon level', patreon]
+          })
+        })
       }
     }
   }
