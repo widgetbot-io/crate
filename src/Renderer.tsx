@@ -71,6 +71,7 @@ export class Renderer extends React.Component<{api: any}> {
 
   listener(msg: any) {
     let { api } = this.props
+    let { track } = window.globalCrate
 
     if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.session) {
       let { event, type, data } = msg
@@ -165,7 +166,7 @@ export class Renderer extends React.Component<{api: any}> {
           }
         }})()
 
-        api.track({
+        track({
           _id: this.state.session,
           action_name: 'Widget loaded',
           cvar: JSON.stringify({
