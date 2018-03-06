@@ -9,8 +9,9 @@ Raven.config('https://60c8644853c540649cfdf0fe4a30bfe4@sentry.io/287303', {
 
 declare var window: any
 import { Config } from './definitions/config'
-import * as ReactDOM from "react-dom"
-import * as React from "react"
+import * as ReactDOM from 'react-dom'
+import * as React from 'react'
+const MatomoTracker = require('matomo-tracker')
 
 import { Renderer } from './Renderer'
 import DeepMerge from './components/DeepMerge'
@@ -21,12 +22,32 @@ import jss from './jss/App'
 
 Raven.context(() => {
   // Crate sandbox
-  let global = window.globalCrate = {
+  let global = (window.globalCrate = {
     insertionPoint: /* :smirk: */ document.createElement('div'),
     sessions: 0,
-    ReactGA: require('react-ga')
-  }
-  global.insertionPoint.setAttribute('documentation', 'https://docs.widgetbot.io')
+    event: (state: Object, data: { category: string; action: string }) => {
+      global.track({
+        e_c: data.category,
+        e_a: data.action
+      })
+    },
+    track: (data: Object) => {
+      global.matomo.track({
+        url: window.location.href,
+        rand: (
+          Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) +
+          +new Date()
+        ).toString(),
+        ...data
+      })
+    },
+    matomo: new MatomoTracker(2, 'https://analytics.widgetbot.io/piwik.php')
+    // ReactGA: require('react-ga')
+  })
+  global.insertionPoint.setAttribute(
+    'documentation',
+    'https://docs.widgetbot.io'
+  )
   global.insertionPoint.classList.add('crate')
   // Wait for the DOM to load before inserting
   if (document.body) {
@@ -38,7 +59,12 @@ Raven.context(() => {
   }
 
   // Crate console message
-  console.log(`%c+%chttps://crate.widgetbot.io\n%c\u2604\uFE0F Popup Discord chat widgets for your website.`, `font-size: 1px; margin-left: 40px; padding: 20px 20px; line-height: 50px;background: url("https://i.imgur.com/S7IIIbE.png"); background-repeat: no-repeat; background-size: 40px 40px; color: transparent;`, `padding-left: 2px; font-size: 14px; color: #7289DA; font-family: "Roboto", sans-serif`, `padding-left: 15px; font-size: 12px; font-family: "Roboto", sans-serif;`);
+  console.log(
+    `%c+%chttps://crate.widgetbot.io\n%c\u2604\uFE0F Popup Discord chat widgets for your website.`,
+    `font-size: 1px; margin-left: 40px; padding: 20px 20px; line-height: 50px;background: url("https://i.imgur.com/S7IIIbE.png"); background-repeat: no-repeat; background-size: 40px 40px; color: transparent;`,
+    `padding-left: 2px; font-size: 14px; color: #7289DA; font-family: "Roboto", sans-serif`,
+    `padding-left: 15px; font-size: 12px; font-family: "Roboto", sans-serif;`
+  )
 
   /**
    * Due to React trying enforcing a "strict" state handler,
@@ -55,9 +81,7 @@ Raven.context(() => {
         loading: true,
         modalOpen: false
       },
-      modal: {
-
-      },
+      modal: {},
       /**
        * Default configuration
        */
@@ -108,7 +132,10 @@ Raven.context(() => {
       // Patreon level
       l: null,
       classes: {},
-      session: (Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date()).toString(),
+      session: (
+        Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) +
+        +new Date()
+      ).toString(),
       iframe: null
     }
     react: any
@@ -117,51 +144,91 @@ Raven.context(() => {
 
     constructor(config) {
       if (!window.crate) window.crate = this
-      ParseConfig(this.state, config).then((config) => {
-        this.setState({
-          classes: jss(config),
-          config: config
-        })
+      ParseConfig(this.state, config)
+        .then((config) => {
+          this.setState({
+            classes: jss(config),
+            config: config
+          })
 
-        if (!config.delay) {
-          setTimeout(() => {
-            this.setState({
-              view: {
-                ...this.state.view,
-                opened: true
-              }
+          if (!config.delay) {
+            setTimeout(() => {
+              this.setState({
+                view: {
+                  ...this.state.view,
+                  opened: true
+                }
+              })
+            }, 3000)
+          }
+
+          // Mount DOM node
+          this.node = document.createElement('div')
+          this.node.classList.add(`crate-${global.sessions}`)
+          global.insertionPoint.appendChild(this.node)
+          global.sessions++
+          ReactDOM.render(
+            // @ts-ignore custom state handler
+            <Renderer
+              api={this}
+              ref={(renderer) => {
+                this.react = renderer
+              }}
+            />,
+            this.node
+          )
+
+          // Analytics
+
+          let patreon = (() => {switch (this.state.l) {
+            case 2: {
+              return 'Ultimate'
+            }
+            case 1: {
+              return 'Supporter'
+            }
+            case 0: {
+              return 'Free'
+            }
+            case null: {
+              return 'Not set'
+            }
+          }})()
+          let { track } = global
+          track({
+            _id: this.state.session,
+            action_name: 'Crate instance initialized',
+            cvar: JSON.stringify({
+              '1': ['Discord server', config.server],
+              '2': ['Discord channel', config.channel],
+              '3': ['Patreon level', patreon]
             })
-          }, 3000)
-        }
+          })
 
-        // Mount DOM node
-        this.node = document.createElement('div')
-        this.node.classList.add(`crate-${global.sessions}`)
-        global.insertionPoint.appendChild(this.node)
-        global.sessions++
-        ReactDOM.render(
-          // @ts-ignore custom state handler
-          <Renderer api={this} ref={renderer => { this.react = renderer }} />, this.node
-        )
-
-        // Analytics
-        let { ReactGA } = global
-        ReactGA.initialize('UA-107130316-3', { debug: config.debug })
-        ReactGA.pageview(window.location.origin)
-        ReactGA.set({
-          server: config.server,
-          channel: config.channel
+          // ReactGA.initialize('UA-107130316-3', { debug: config.debug })
+          // ReactGA.pageview(window.location.origin)
+          // ReactGA.set({
+          //   server: config.server,
+          //   channel: config.channel
+          // })
         })
-      }).catch((error) => {
-        log('error', `Invalid configuration!\n${error}\n\nrefer to https://docs.widgetbot.io`)
-      })
+        .catch((error) => {
+          log(
+            'error',
+            `Invalid configuration!\n${error}\n\nrefer to https://docs.widgetbot.io`
+          )
+        })
     }
 
     // Custom state handler
     setState(nextState: any) {
-      Object.keys(nextState).forEach(state => {
+      Object.keys(nextState).forEach((state) => {
         // Force JSS re-render
-        if (nextState && nextState.config && JSON.stringify(nextState.config) !== JSON.stringify(this.state.config)) {
+        if (
+          nextState &&
+          nextState.config &&
+          JSON.stringify(nextState.config) !== JSON.stringify(this.state.config)
+        ) {
           this.config(nextState.config)
         }
         this.state[state] = nextState[state]
@@ -172,14 +239,19 @@ Raven.context(() => {
 
     // Deep merges the new config with the current config
     config(config: any) {
-      ParseConfig(this.state, config, true).then((config) => {
-        this.setState({
-          classes: jss(config),
-          config: config
+      ParseConfig(this.state, config, true)
+        .then((config) => {
+          this.setState({
+            classes: jss(config),
+            config: config
+          })
         })
-      }).catch((error) => {
-        log('error', `Invalid configuration!\n${error}\n\nrefer to https://docs.widgetbot.io`)
-      })
+        .catch((error) => {
+          log(
+            'error',
+            `Invalid configuration!\n${error}\n\nrefer to https://docs.widgetbot.io`
+          )
+        })
     }
   }
 
@@ -209,7 +281,10 @@ Raven.context(() => {
       /**
        * Stop the body from scrolling
        */
-      if (window.innerWidth <= this.state.config.mobile.maxWidth || window.innerHeight <= this.state.config.mobile.maxHeight) {
+      if (
+        window.innerWidth <= this.state.config.mobile.maxWidth ||
+        window.innerHeight <= this.state.config.mobile.maxHeight
+      ) {
         if (open) {
           document.body.style.overflow = 'hidden'
         } else {
@@ -220,8 +295,10 @@ Raven.context(() => {
       /**
        * Add the meta tag, for chrome header color
        */
-      (() => {
-        let meta: HTMLMetaElement = document.querySelector('meta[name=theme-color]')
+      ;(() => {
+        let meta: HTMLMetaElement = document.querySelector(
+          'meta[name=theme-color]'
+        )
         if (meta) {
           if (meta.getAttribute('default') === null) {
             meta.setAttribute('default', meta.content || '')
@@ -237,7 +314,11 @@ Raven.context(() => {
          */
         setTimeout(() => {
           if (open) {
-            let color = this.state.config.colors['background'] || this.state.config['scheme'] === 'light' ? '#ffffff' : '#36393E'
+            let color =
+              this.state.config.colors['background'] ||
+              this.state.config['scheme'] === 'light'
+                ? '#ffffff'
+                : '#36393E'
             meta.setAttribute('content', color)
           } else {
             meta.setAttribute('content', meta.getAttribute('default'))
@@ -245,8 +326,7 @@ Raven.context(() => {
         }, 100)
       })()
 
-      let { ReactGA } = global
-      ReactGA.event({
+      this.event({
         category: 'Toggle',
         action: this.state.view.open ? 'Open' : 'Close'
       })
@@ -259,8 +339,8 @@ Raven.context(() => {
           modalOpen: open
         }
       })
-      let { ReactGA } = global
-      ReactGA.event({
+
+      this.event({
         category: 'Modal',
         action: this.state.view.modalOpen ? 'Open' : 'Close'
       })
@@ -278,8 +358,7 @@ Raven.context(() => {
         }
       })
 
-      let { ReactGA } = global
-      ReactGA.event({
+      this.event({
         category: 'UserPopup',
         action: 'Open'
       })
@@ -302,28 +381,36 @@ Raven.context(() => {
 
     postMessage(event: string, action?: any) {
       if (this.state.iframe) {
-        this.state.iframe.contentWindow.postMessage({
-          src: 'crate',
-          session: this.state.session,
-          event: event,
-          action: action,
-        }, '*')
+        this.state.iframe.contentWindow.postMessage(
+          {
+            src: 'crate',
+            session: this.state.session,
+            event: event,
+            action: action
+          },
+          '*'
+        )
       }
+    }
+
+    event(data) {
+      const { event } = global
+      event(this.state, data)
     }
   }
 
-  window.Crate = Crate;
+  window.Crate = Crate
 
   // Load crate from inside script tag
-  (() => {
+  ;(() => {
     let config = document.currentScript && document.currentScript.innerHTML
     if (config) {
       eval(config)
     }
-  })();
+  })()
 
   // Crate Event
-  (() => {
+  ;(() => {
     var event = document.createEvent('Event')
     // @ts-ignore
     event.Crate = Crate

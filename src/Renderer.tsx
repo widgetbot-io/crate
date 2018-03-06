@@ -25,36 +25,41 @@ export class Renderer extends React.Component<{api: any}> {
   render() {
     let { classes } = this.state
     let config: Config = this.state.config
-    // @ts-ignore custom state handler
     let { api } = this.props
+
     return (
       classes ? (
         <div className={`crate ${classes.crate}`}>
           <Embed
             view={this.state.view}
+            event={api.event.bind(this)}
             config={this.state.config}
             setIframe={(iframe) => this.state.iframe = iframe} />
 
           <Toggle
             view={this.state.view}
+            event={api.event.bind(this)}
             config={this.state.config}
             toggle={api.toggle.bind(this)}
             notifications={this.state.notifications} />
 
           {config.notifications.toasts.enable && !this.state.view.open && <Toasts
             view={this.state.view}
+            event={api.event.bind(this)}
             config={this.state.config}
             openUser={api.user.bind(this)}
             messages={this.state.notifications.messages} />}
 
           <Modal
             view={this.state.view}
+            event={api.event.bind(this)}
             modal={this.state.modal}
             config={this.state.config}
             toggle={api.modal.bind(this)} />
 
           {this.state.l === 0 && <Branding
             view={this.state.view}
+            event={api.event.bind(this)}
             config={this.state.config} />}
         </div>
       ) : (
@@ -64,7 +69,8 @@ export class Renderer extends React.Component<{api: any}> {
   }
 
   listener(msg: any) {
-    let { ReactGA } = window.globalCrate
+    let { api } = this.props
+
     if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.session) {
       let { event, type, data } = msg
       let { config } = this.state
@@ -88,7 +94,7 @@ export class Renderer extends React.Component<{api: any}> {
             message: message
           })
           messages = messages.slice(0, this.state.config.notifications.toasts.maxMessages)
-          ReactGA.event({
+          api.event({
             category: 'Toast',
             action: 'Show'
           })
@@ -117,13 +123,13 @@ export class Renderer extends React.Component<{api: any}> {
           }
         })
         if (type === 'user') {
-          ReactGA.event({
+          api.event({
             category: 'UserPopup',
             action: 'Open'
           })
         }
         if (type === 'image') {
-          ReactGA.event({
+          api.event({
             category: 'Image',
             action: 'Open'
           })
@@ -150,4 +156,6 @@ export class Renderer extends React.Component<{api: any}> {
     let { api } = this.props
     api.setState(state)
   }
+
+  event = this.props.api.event.bind(this)
 }

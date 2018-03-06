@@ -8,4 +8,5 @@ export interface View {
     modalOpen: boolean
   }
   config: any | Config
+  event(data: Object)
 }

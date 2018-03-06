@@ -63,9 +63,8 @@ export class Branding extends React.Component<View, {}> {
   }
 
   open() {
-    let { ReactGA } = window.globalCrate
     window.open(`https://widgetbot.io/?ref=crate&referrer=${encodeURIComponent(window.location.origin)}`)
-    ReactGA.event({
+    this.props.event({
       category: 'Branding-click',
       action: window.location.origin
     })

@@ -1,5 +1,6 @@
 declare var window: any
-import * as React from "react"
+import * as React from 'react'
+import { Config } from '../definitions/config'
 import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Toasts'
@@ -19,20 +20,40 @@ export class Toasts extends React.Component<Props, {}> {
 
   componentWillReceiveProps(nextProps: Props) {
     // Force JSS re-render
-    if (nextProps && JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
+    if (
+      nextProps &&
+      JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)
+    ) {
       this.classes = jss(nextProps.config)
       this.forceUpdate()
     }
   }
 
   render() {
-    let { messages, openUser } : { messages: { expiration: number, message: Notifications.message }[], openUser: Function } = this.props
+    let {
+      messages,
+      openUser
+    }: {
+      messages: { expiration: number; message: Notifications.message }[]
+      openUser: Function
+    } = this.props
     let { classes } = this
     return (
       <div className={`crate-toast-box ${classes['toast-box']}`}>
         {/* Reversing the message array and use column-reverse to prevent the need for scrolling */}
         {messages.map(({ expiration, message }, i: number) => {
-          return (<Toast message={message} expiration={expiration} key={message.id} classes={classes} last={i === 0} openUser={openUser.bind(this)} />)
+          return (
+            <Toast
+              message={message}
+              expiration={expiration}
+              key={message.id}
+              classes={classes}
+              last={i === 0}
+              openUser={openUser.bind(this)}
+              config={this.props.config}
+              event={this.props.event.bind(this)}
+            />
+          )
         })}
       </div>
     )
@@ -44,7 +65,9 @@ interface ToastProps {
   expiration: number
   classes: any
   last: boolean
+  config: Config
   openUser: Function
+  event: Function
 }
 
 class Toast extends React.Component<ToastProps, {}> {
@@ -70,7 +93,9 @@ class Toast extends React.Component<ToastProps, {}> {
     let { last, classes, expiration } = this.props
 
     if (last) {
-      setTimeout(() => { this.show() }, 10)
+      setTimeout(() => {
+        this.show()
+      }, 10)
       if (expiration) this.expirationChecker()
     }
   }
@@ -89,10 +114,9 @@ class Toast extends React.Component<ToastProps, {}> {
   hide() {
     if (this.mounted && this.toast) {
       let { classes } = this.props
-      let { ReactGA } = window.globalCrate
       this.toast.classList.remove(classes['toast-visible'])
       this.toast.classList.add(classes['toast-hidden'])
-      ReactGA.event({
+      this.props.event({
         category: 'Toast',
         action: 'Hide'
       })
@@ -117,20 +141,26 @@ class Toast extends React.Component<ToastProps, {}> {
 
   render() {
     let { message, classes, last, expiration, openUser } = this.props
-    return (
-      this.state.render ? (
-        <div className={`crate-toast ${classes.toast} ${last ? classes['toast-hidden'] : ''}`} ref={toast => this.toast = toast}>
-          <img
-            src={message.author.avatar || 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'}
-            className={`crate-toast-avatar ${classes['toast-avatar']}`}
-            onClick={() => openUser(message.author)} />
-          <div className={`crate-toast-message ${classes['toast-message']}`}>
-            {message.content}
-          </div>
+    return this.state.render ? (
+      <div
+        className={`crate-toast ${classes.toast} ${
+          last ? classes['toast-hidden'] : ''
+        }`}
+        ref={(toast) => (this.toast = toast)}>
+        <img
+          src={
+            message.author.avatar ||
+            'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'
+          }
+          className={`crate-toast-avatar ${classes['toast-avatar']}`}
+          onClick={() => openUser(message.author)}
+        />
+        <div className={`crate-toast-message ${classes['toast-message']}`}>
+          {message.content}
         </div>
-      ) : (
-          <div />
-        )
+      </div>
+    ) : (
+      <div />
     )
   }
 }
