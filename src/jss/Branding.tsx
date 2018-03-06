@@ -36,7 +36,7 @@ export default (config: Config) => {
       ],
       borderRadius: '5px',
       overflow: 'hidden',
-      transition: 'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, margin 0.3s ease',
+      transition: 'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.4s ease, margin 0.3s ease',
       cursor: 'pointer',
       pointerEvents: 'none',
       textDecoration: 'none',
@@ -81,6 +81,9 @@ export default (config: Config) => {
       visibility: 'visible',
       display: 'block',
       opacity: 1
+    },
+    'transparent': {
+      opacity: 0.5,
     },
   }
 

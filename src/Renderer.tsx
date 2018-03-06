@@ -57,9 +57,10 @@ export class Renderer extends React.Component<{api: any}> {
             config={this.state.config}
             toggle={api.modal.bind(this)} />
 
-          {this.state.l === 0 && <Branding
+          {this.state.l !== null && this.state.l !== 2 && <Branding
             view={this.state.view}
             event={api.event.bind(this)}
+            transparent={this.state.l === 1}
             config={this.state.config} />}
         </div>
       ) : (

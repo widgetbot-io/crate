@@ -4,6 +4,10 @@ import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Branding'
 
+interface Props extends View {
+  transparent: boolean
+}
+
 /**
  * Make an elements styles inline, and with !important
  * @param node The node that shall'nt be fucked with
@@ -46,7 +50,7 @@ const DontFuckWithMe = (node) => {
   // }
 }
 
-export class Branding extends React.Component<View, {}> {
+export class Branding extends React.Component<Props, {}> {
   classes: any
 
   componentWillMount() {
@@ -71,7 +75,7 @@ export class Branding extends React.Component<View, {}> {
   }
 
   render() {
-    let { view, config } = this.props
+    let { view, transparent, config } = this.props
     let { classes } = this
     const YouHaveToPay = `
       display: ${(window.innerWidth <= config.mobile.maxWidth || window.innerHeight <= config.mobile.maxHeight) ? 'none' : 'flex'} !important;
@@ -80,7 +84,7 @@ export class Branding extends React.Component<View, {}> {
     `
     return (
       <div
-        className={`${classes.message} ${view.open ? classes.show : ''}`}
+        className={`${classes.message} ${view.open ? classes.show : ''} ${view.open && transparent ? classes.transparent : ''}`}
         onClick={this.open.bind(this)}
         ref={DontFuckWithMe.bind(this)}>
         <div className={`${classes['powered-by']}`} ref={DontFuckWithMe.bind(this)}>
