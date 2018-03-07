@@ -47,7 +47,7 @@ export default (config: Config) => {
           '0px 6px 10px 0px rgba(0, 0, 0, 0.14)',
           '0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
         ],
-        background: config.style === 'discord' ? '' : `${color(config.colors.toggle).lighten(0.25)} !important`,
+        background: config.style === 'discord' ? '' : `${color(config.colors.toggle).lighten(0.1)} !important`,
       },
     },
     'toggle-pinged': {

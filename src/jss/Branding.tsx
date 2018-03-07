@@ -95,7 +95,8 @@ export default (config: Config) => {
       opacity: 0.9
     },
     transparent: {
-      opacity: 0.4
+      opacity: 0.4,
+      animationName: 'branding-fade-patreon',
     },
     '@keyframes branding-fade': {
       from: {
@@ -103,6 +104,14 @@ export default (config: Config) => {
       },
       to: {
         opacity: 1
+      }
+    },
+    '@keyframes branding-fade-patreon': {
+      from: {
+        opacity: 0
+      },
+      to: {
+        opacity: 0.4
       }
     }
   }
