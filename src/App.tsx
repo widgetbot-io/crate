@@ -112,7 +112,7 @@ Raven.context(() => {
         logo: {
           url: Icons()
         },
-        theme: 'default',
+        theme: 'material',
         colors: {
           toggle: '#7289DA'
         },

@@ -18,7 +18,7 @@ export default (config: Config) => {
       padding: '20px 10px',
       alignItems: 'center',
       justifyContent: 'center',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'avatar': {
       position: 'relative',
@@ -42,7 +42,7 @@ export default (config: Config) => {
       fontWeight: '600',
       fontSize: '16px',
       padding: '0px 10px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'bot': {
       lineHeight: '19px',
@@ -56,7 +56,7 @@ export default (config: Config) => {
       background: `${config.scheme === 'dark' ? '#fff' : '#7289da'}`,
       color: `${config.scheme === 'dark' ? '#7289da' : '#fff'} !important`,
       padding: '0 3px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'link': {
       textDecoration: 'none',
@@ -96,14 +96,14 @@ export default (config: Config) => {
       fontWeight: '700',
       lineHeight: '12px',
       fontSize: '10px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
 
     'description': {
       display: 'block',
       backgroundColor: config.scheme === 'dark' ? 'rgba(86, 88, 90, 0.3)' : 'rgba(255, 255, 255, 0.23)',
       padding: '12px 10px 10px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'title': {
       color: config.scheme === 'dark' ? '#72767d' : '#515356',
@@ -111,14 +111,14 @@ export default (config: Config) => {
       marginBottom: '8px',
       fontWeight: '700',
       fontSize: '12px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'roles': {
       display: 'flex',
       flexWrap: 'wrap',
       marginTop: '12px',
       marginBottom: '20px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'role': {
       padding: '5px 6px',
@@ -129,7 +129,7 @@ export default (config: Config) => {
       display: 'flex',
       lineHeight: '19px',
       overflow: 'hidden',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     },
     'role-color': {
       float: 'left',
@@ -138,18 +138,18 @@ export default (config: Config) => {
       height: '12px',
       width: '12px',
       marginRight: '4px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
       color: 'inherit'
     },
     'role-name': {
       display: 'inline-block',
-      lineHeight: '12px',
-      fontSize: '12px',
+      lineHeight: config.style === 'material' ? '11px' : '12px',
+      fontSize: config.style === 'material' ? '11px' : '12px',
       fontWeight: '500',
       textOverflow: 'ellipsis',
       marginRight: '4px',
       color: config.scheme === 'dark' ? 'rgba(255,255,255,0.8)' : 'rgba(23, 23, 23, 0.8)',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
     }
   }
 

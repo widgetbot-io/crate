@@ -22,7 +22,7 @@ export interface Config {
     size?: string
   }
   scheme?: 'dark' | 'light'     // Whether to show dark or light toasts
-  style?: 'default' | 'intercom'// Toggle button style
+  style?: 'material' | 'discord'// Toggle button style
   colors?: {
     toggle?: string             // Crate toggle button color
     background?: string         // WidgetBot widget background

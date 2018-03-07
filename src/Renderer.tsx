@@ -171,7 +171,7 @@ export class Renderer extends React.Component<{ api: any }> {
             loading: false
           },
           // Patreon level
-          l: data[2]
+          l: config.debug ? 0 : data[2]
         })
 
         // Analytics

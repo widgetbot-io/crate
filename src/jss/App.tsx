@@ -17,7 +17,7 @@ export default (config: Config) => {
         WebkitTapHighlightColor: 'transparent',
         userSelect: 'none',
         direction: 'ltr',
-        fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif'
+        fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif'
       },
       '& img': {
         WebkitUserDrag: 'none',
@@ -26,7 +26,7 @@ export default (config: Config) => {
         OUserDrag: 'none',
       }
     },
-    '@font-face': [
+    '@font-face': config.style !== 'material' && [
       {
         fontFamily: 'Whitney',
         fontWeight: 300,
@@ -52,7 +52,8 @@ export default (config: Config) => {
         fontWeight: '700',
         src: 'url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff) format("woff")'
       }
-    ]
+    ],
+    '@import': config.style === 'material' && `url('https://fonts.googleapis.com/css?family=Roboto:400,500')`
   }
   // @ts-ignore
   return jss.createStyleSheet(styles, {increaseSpecificity: false}).attach().classes

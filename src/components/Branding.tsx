@@ -77,20 +77,16 @@ export class Branding extends React.Component<Props, {}> {
   render() {
     let { view, transparent, config } = this.props
     let { classes } = this
-    const YouHaveToPay = `
-      display: ${(window.innerWidth <= config.mobile.maxWidth || window.innerHeight <= config.mobile.maxHeight) ? 'none' : 'flex'} !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-    `
+
     return (
       <div
         className={`${classes.message} ${view.open ? classes.show : ''} ${view.open && transparent ? classes.transparent : ''}`}
         onClick={this.open.bind(this)}
-        ref={DontFuckWithMe.bind(this)}>
-        <div className={`${classes['powered-by']}`} ref={DontFuckWithMe.bind(this)}>
+        ref={config.debug ? () => {} : DontFuckWithMe.bind(this)}>
+        <div className={`${classes['powered-by']}`} ref={config.debug ? () => {} : DontFuckWithMe.bind(this)}>
           Discord widgets by
         </div>
-        <div className={`${classes['widgetbot']}`} ref={DontFuckWithMe.bind(this)}>
+        <div className={`${classes['widgetbot']}`} ref={config.debug ? () => {} : DontFuckWithMe.bind(this)}>
           WidgetBot
         </div>
       </div>

@@ -51,7 +51,7 @@ export default (config: Config) => {
       backgroundColor: config.scheme === 'dark' ? 'rgba(50, 53, 58, 0.7)' : 'rgba(255, 255, 255, 0.82)',
       borderRadius: '6px',
       width: '480px',
-      fontFamily: 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
+      fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif',
       overflow: 'hidden',
       boxShadow: '0 0 0 1px rgba(32,34,37,0.6), 0 2px 10px 0 rgba(0,0,0,0.2)',
       transition: 'transform 0.1s,opacity 0.1s',

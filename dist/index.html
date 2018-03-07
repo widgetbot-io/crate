@@ -2,7 +2,7 @@
   <meta content="#2b363b" name="theme-color">
 </head>
 
-<body style="background: #000">
+<body style="background: #888">
   <script src="./crate.min.js" async defer>
     new Crate({
       server: '299881420891881473',
@@ -24,7 +24,8 @@
           visibilityTime: 0,
           maxMessages: 5,
         }
-      }
+      },
+      debug: true
     })
   </script>
   <script>
@@ -39,10 +40,9 @@
         delay: true,
         colors: {
           "toggle": "#2e3136",
-          "background": "#ffff00",
+          "background": "#000",
           "button": "#0000ff"
         },
-        style: 'material',
         delay: true,
         logo: 'discord',
         position: {
@@ -54,7 +54,8 @@
             visibilityTime: 5,
             maxMessages: 5,
           }
-        }
+        },
+        debug: true
       })
       window.three = new Crate({
         server: '299881420891881473',
@@ -64,10 +65,11 @@
         delay: true,
         colors: {
           "toggle": "#2e3136",
-          "background": "#ffff00",
+          "background": "#000",
           "button": "#0000ff"
         },
         delay: true,
+        debug: true,
         logo: {
           url: 'http://palabrasenjapones.com/wp-content/uploads/2009/02/0030-koala-en-japones-150x105.jpg',
           size: '100% 100%',
@@ -76,6 +78,7 @@
           x: 'left',
           y: 'bottom'
         },
+        style: 'discord',
         notifications: {
           toasts: {
             visibilityTime: 5,

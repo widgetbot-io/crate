@@ -18,16 +18,16 @@ export default (config: Config) => {
       position: 'fixed !important',
       [config.position.y]: '20px !important',
       [config.position.x]: '20px !important',
-      width: `${config.style === 'intercom' ? 60 : 56}px !important`,
-      height: `${config.style === 'intercom' ? 60 : 56}px !important`,
+      width: `${config.style === 'discord' ? 60 : 56}px !important`,
+      height: `${config.style === 'discord' ? 60 : 56}px !important`,
       borderRadius: '50% !important',
       transition: [
         'box-shadow .2s ease-in-out',
-        `background ${config.style === 'intercom' ? '0.1s ease' : '250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'}`,
+        `background ${config.style === 'discord' ? '0.1s ease' : '250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'}`,
         'filter .2s ease-in-out',
         'transform .7s ease !important',
       ],
-      boxShadow: config.style === 'intercom' ? [
+      boxShadow: config.style === 'discord' ? [
         '0 1px 6px rgba(0,0,0,0.06)',
         '0 2px 32px rgba(0,0,0,0.16)'
       ] : [
@@ -39,7 +39,7 @@ export default (config: Config) => {
       cursor: 'pointer !important',
       animationTimingFunction: 'ease-in-out !important',
       '&:hover': {
-        boxShadow: config.style === 'intercom' ? [
+        boxShadow: config.style === 'discord' ? [
           '0 2px 8px rgba(0,0,0,0.09)',
           '0 4px 40px rgba(0,0,0,0.24)'
         ] : [
@@ -47,7 +47,7 @@ export default (config: Config) => {
           '0px 6px 10px 0px rgba(0, 0, 0, 0.14)',
           '0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
         ],
-        background: config.style === 'intercom' ? '' : `${color(config.colors.toggle).lighten(0.25)} !important`,
+        background: config.style === 'discord' ? '' : `${color(config.colors.toggle).lighten(0.25)} !important`,
       },
     },
     'toggle-pinged': {

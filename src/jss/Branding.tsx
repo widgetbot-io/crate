@@ -12,11 +12,15 @@ import increaseSpecificity from 'jss-increase-specificity'
 jss.use(camelCase(), nested(), increaseSpecificity())
 
 export default (config: Config) => {
-  const height = config.style === 'intercom' ? 60 : 56
+  const height = config.style === 'discord' ? 60 : 46
   const styles = {
-    'message': {
+    message: {
       visibility: 'visible',
-      display: window.innerWidth <= config.mobile.maxWidth || window.innerHeight <= config.mobile.maxHeight ? 'none' : 'flex',
+      display:
+        window.innerWidth <= config.mobile.maxWidth ||
+        window.innerHeight <= config.mobile.maxHeight
+          ? 'none'
+          : 'flex',
       flexDirection: 'column',
       padding: '5px 10px',
       opacity: 0,
@@ -24,6 +28,7 @@ export default (config: Config) => {
       position: 'fixed !important',
       [config.position.y]: `20px`,
       [config.position.x]: `${height + 20 + 15}px`,
+      margin: config.style === 'material' ? '5px 0' : '',
       [`margin-${config.position.x}`]: '-30px',
       height: `${height}px`,
       color: 'rgba(255, 255, 255, 0.8)',
@@ -34,16 +39,21 @@ export default (config: Config) => {
         '0px 6px 10px 0px rgba(0, 0, 0, 0.04)',
         '0px 1px 18px 0px rgba(0, 0, 0, 0.2)'
       ],
-      borderRadius: '5px',
+      borderRadius: config.style === 'material' ? '8px' : '5px',
+      [`border-${config.position.y}-${config.position.x}-radius`]: config.style === 'material' ? 0 : '5px',
       overflow: 'hidden',
-      transition: 'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.4s ease, margin 0.3s ease',
+      transition:
+        'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.4s ease, margin 0.3s ease',
       cursor: 'pointer',
       pointerEvents: 'none',
+      animationName: 'branding-fade',
+      animationDuration: '0.3s',
+      animationTiming: 'ease',
       textDecoration: 'none',
       backgroundColor: config.colors.toggle,
       '&:hover': {
         '&:after': {
-          transform: 'rotate(35deg) translate(150%, -50px)',
+          transform: 'rotate(35deg) translate(150%, -50px)'
         }
       },
       '&:after': {
@@ -61,30 +71,40 @@ export default (config: Config) => {
         pointerEvents: 'none'
       }
     },
-    'show': {
+    show: {
       opacity: 1,
-      [`margin-${config.position.x}`]: 0,
+      [`margin-${config.position.x}`]: config.style === 'material' ? 5 : 0,
       pointerEvents: 'initial'
     },
     'powered-by': {
       lineHeight: `${(height - 10) * 0.3}px`,
-      fontSize: `10px`,
+      fontSize: config.style === 'material' ? '9px' : '10px',
       color: 'rgba(255, 255, 255, 0.5)',
       visibility: 'visible',
       display: 'block',
-      opacity: 1
+      opacity: 1,
+      textAlign: 'center'
     },
-    'widgetbot': {
+    widgetbot: {
       lineHeight: `${(height - 10) * 0.7}px`,
-      fontWeight: 600,
-      fontSize: `17px`,
+      fontWeight: config.style === 'material' ? 500 : 600,
+      fontSize: config.style === 'material' ? `16px` : `17px`,
       visibility: 'visible',
       display: 'block',
-      opacity: 1
+      textAlign: 'center',
+      opacity: 0.9
     },
-    'transparent': {
-      opacity: 0.5,
+    transparent: {
+      opacity: 0.5
     },
+    '@keyframes branding-fade': {
+      from: {
+        opacity: 0
+      },
+      to: {
+        opacity: 1
+      }
+    }
   }
 
   return jss.createStyleSheet(styles).attach().classes
