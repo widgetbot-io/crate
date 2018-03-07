@@ -258,13 +258,13 @@ Raven.context(() => {
           )
         })
 
-        if (!programmatic) {
-          const { event } = global
-          event(this.state, {
-            category: 'API',
-            action: 'Config update'
-          })
-        }
+      if (!programmatic) {
+        const { event } = global
+        event(this.state, {
+          category: 'API',
+          action: 'Config update'
+        })
+      }
     }
   }
 
@@ -346,6 +346,9 @@ Raven.context(() => {
     }
 
     modal(open: boolean = !this.state.view.modalOpen) {
+      // @ts-ignore Remove focus from iframe so key listeners will work
+      document.activeElement.blur()
+
       this.setState({
         view: {
           ...this.state.view,

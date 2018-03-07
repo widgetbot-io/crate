@@ -1,5 +1,5 @@
 declare var window: any
-import * as React from "react"
+import * as React from 'react'
 
 import { Config } from './definitions/config'
 import { View } from './definitions/view'
@@ -12,7 +12,7 @@ import { Toggle } from './components/Toggle'
 import { Toasts } from './components/Toasts'
 import { Branding } from './components/Branding'
 
-export class Renderer extends React.Component<{api: any}> {
+export class Renderer extends React.Component<{ api: any }> {
   state = this.props.api.state
   classes = this.props.api.state.classes
   postMessage = this.props.api.postMessage
@@ -27,45 +27,54 @@ export class Renderer extends React.Component<{api: any}> {
     let config: Config = this.state.config
     let { api } = this.props
 
-    return (
-      classes ? (
-        <div className={`crate ${classes.crate}`}>
-          <Embed
-            view={this.state.view}
-            event={api.event.bind(this)}
-            config={this.state.config}
-            setIframe={(iframe) => this.state.iframe = iframe} />
+    return classes ? (
+      <div className={`crate ${classes.crate}`}>
+        <Embed
+          view={this.state.view}
+          event={api.event.bind(this)}
+          config={this.state.config}
+          setIframe={(iframe) => (this.state.iframe = iframe)}
+        />
 
-          <Toggle
-            view={this.state.view}
-            event={api.event.bind(this)}
-            config={this.state.config}
-            toggle={api.toggle.bind(this)}
-            notifications={this.state.notifications} />
+        <Toggle
+          view={this.state.view}
+          event={api.event.bind(this)}
+          config={this.state.config}
+          toggle={api.toggle.bind(this)}
+          notifications={this.state.notifications}
+        />
 
-          {config.notifications.toasts.enable && !this.state.view.open && <Toasts
-            view={this.state.view}
-            event={api.event.bind(this)}
-            config={this.state.config}
-            openUser={api.user.bind(this)}
-            messages={this.state.notifications.messages} />}
+        {config.notifications.toasts.enable &&
+          !this.state.view.open && (
+            <Toasts
+              view={this.state.view}
+              event={api.event.bind(this)}
+              config={this.state.config}
+              openUser={api.user.bind(this)}
+              messages={this.state.notifications.messages}
+            />
+          )}
 
-          <Modal
-            view={this.state.view}
-            event={api.event.bind(this)}
-            modal={this.state.modal}
-            config={this.state.config}
-            toggle={api.modal.bind(this)} />
+        <Modal
+          view={this.state.view}
+          event={api.event.bind(this)}
+          modal={this.state.modal}
+          config={this.state.config}
+          toggle={api.modal.bind(this)}
+        />
 
-          {this.state.l !== null && this.state.l !== 2 && <Branding
-            view={this.state.view}
-            event={api.event.bind(this)}
-            transparent={this.state.l === 1}
-            config={this.state.config} />}
-        </div>
-      ) : (
-          <div />
-        )
+        {this.state.l !== null &&
+          this.state.l !== 2 && (
+            <Branding
+              view={this.state.view}
+              event={api.event.bind(this)}
+              transparent={this.state.l === 1}
+              config={this.state.config}
+            />
+          )}
+      </div>
+    ) : (
+      <div />
     )
   }
 
@@ -73,7 +82,11 @@ export class Renderer extends React.Component<{api: any}> {
     let { api } = this.props
     let { track } = window.globalCrate
 
-    if (typeof msg === 'object' && msg.src === 'WidgetBot' && msg.session === this.state.session) {
+    if (
+      typeof msg === 'object' &&
+      msg.src === 'WidgetBot' &&
+      msg.session === this.state.session
+    ) {
       let { event, type, data } = msg
       let { config } = this.state
       let { toasts, indicator } = this.state.config.notifications
@@ -92,10 +105,15 @@ export class Renderer extends React.Component<{api: any}> {
         if (toasts.enable) {
           // Push to start of array
           messages.unshift({
-            expiration: toasts.visibilityTime ? +new Date() + (1000 * toasts.visibilityTime) : false,
+            expiration: toasts.visibilityTime
+              ? +new Date() + 1000 * toasts.visibilityTime
+              : false,
             message: message
           })
-          messages = messages.slice(0, this.state.config.notifications.toasts.maxMessages)
+          messages = messages.slice(
+            0,
+            this.state.config.notifications.toasts.maxMessages
+          )
           api.event({
             category: 'Toast',
             action: 'Show'
@@ -114,6 +132,8 @@ export class Renderer extends React.Component<{api: any}> {
        * Modal event
        */
       if (event === 'modal') {
+        // @ts-ignore Remove focus from iframe so key listeners will work
+        document.activeElement.blur()
         this.setState({
           view: {
             ...this.state.view,
@@ -127,7 +147,7 @@ export class Renderer extends React.Component<{api: any}> {
         if (type === 'user') {
           api.event({
             category: 'User popup',
-            action: 'Open',
+            action: 'Open'
           })
         }
         if (type === 'image') {
@@ -155,20 +175,22 @@ export class Renderer extends React.Component<{api: any}> {
         })
 
         // Analytics
-        let patreon = (() => {switch (this.state.l) {
-          case 2: {
-            return 'Ultimate'
+        let patreon = (() => {
+          switch (this.state.l) {
+            case 2: {
+              return 'Ultimate'
+            }
+            case 1: {
+              return 'Supporter'
+            }
+            case 0: {
+              return 'Free'
+            }
+            case null: {
+              return 'Not set'
+            }
           }
-          case 1: {
-            return 'Supporter'
-          }
-          case 0: {
-            return 'Free'
-          }
-          case null: {
-            return 'Not set'
-          }
-        }})()
+        })()
 
         track({
           _id: this.state.session,
