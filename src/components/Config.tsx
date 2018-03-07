@@ -69,7 +69,8 @@ export default (state: any, config: Config, relaxed?: boolean) => {
 
         if (config.contained) config.query.contained = true
 
-        config.url = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/${queryString(config.query)}`
+        config.widgetURL = `${config.domain}/embed/${encodeURIComponent(config.server)}/${encodeURIComponent(config.channel)}/${config.options}/`
+        config.url = `${config.widgetURL}${queryString(config.query)}`
 
         resolve(config)
       } else {

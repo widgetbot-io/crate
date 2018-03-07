@@ -63,6 +63,7 @@ export interface Config {
    * Overrides
    */
   domain?: string               // Override the domain
-  url?: string                  // Override the Widget URL
+  widgetURL?: string            // Widget URL without any query strings
+  url?: string                  // Final Widget URL for the iframe
   query?: any                   // Override the query string
 }

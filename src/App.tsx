@@ -25,11 +25,28 @@ Raven.context(() => {
   let global = (window.globalCrate = {
     insertionPoint: /* :smirk: */ document.createElement('div'),
     sessions: 0,
-    event: (state: Object, data: { category: string; action: string }) => {
-      global.track({
+    event: (
+      state: Object,
+      data: {
+        category: string
+        action: string
+        name?: string
+        content?: {
+          name: string
+          path: string
+        }
+      }
+    ) => {
+      let req: any = {
         e_c: data.category,
         e_a: data.action
-      })
+      }
+      if (data.name) req.e_n = data.name
+      if (data.content) {
+        req.c_n = data.content.name
+        req.c_p = data.content.path
+      }
+      global.track(req)
     },
     track: (data: Object) => {
       global.matomo.track({
@@ -143,7 +160,9 @@ Raven.context(() => {
     transition: any
 
     constructor(config) {
-      if (!window.crate) window.crate = this
+      if (!window.crate) {
+        window.crate = this
+      }
       ParseConfig(this.state, config)
         .then((config) => {
           this.setState({
@@ -187,6 +206,7 @@ Raven.context(() => {
             cvar: JSON.stringify({
               '1': ['Discord server', config.server],
               '2': ['Discord channel', config.channel],
+              '3': ['Widget URL', config.widgetURL]
             })
           })
 
@@ -214,7 +234,7 @@ Raven.context(() => {
           nextState.config &&
           JSON.stringify(nextState.config) !== JSON.stringify(this.state.config)
         ) {
-          this.config(nextState.config)
+          this.config(nextState.config, true)
         }
         this.state[state] = nextState[state]
       })
@@ -223,7 +243,7 @@ Raven.context(() => {
     }
 
     // Deep merges the new config with the current config
-    config(config: any) {
+    config(config: any, programmatic?: boolean) {
       ParseConfig(this.state, config, true)
         .then((config) => {
           this.setState({
@@ -237,6 +257,14 @@ Raven.context(() => {
             `Invalid configuration!\n${error}\n\nrefer to https://docs.widgetbot.io`
           )
         })
+
+        if (!programmatic) {
+          const { event } = global
+          event(this.state, {
+            category: 'API',
+            action: 'Config update'
+          })
+        }
     }
   }
 
@@ -344,7 +372,7 @@ Raven.context(() => {
       })
 
       this.event({
-        category: 'UserPopup',
+        category: 'User popup',
         action: 'Open'
       })
     }
@@ -352,16 +380,34 @@ Raven.context(() => {
     show() {
       if (!global.insertionPoint.contains(this.node))
         global.insertionPoint.appendChild(this.node)
+
+      this.event({
+        category: 'API',
+        action: 'Visibility',
+        name: 'Show'
+      })
     }
 
     hide() {
       if (global.insertionPoint.contains(this.node))
         global.insertionPoint.removeChild(this.node)
+
+      this.event({
+        category: 'API',
+        action: 'Visibility',
+        name: 'Hide'
+      })
     }
 
     remove() {
       ReactDOM.unmountComponentAtNode(this.node)
       global.insertionPoint.removeChild(this.node)
+
+      this.event({
+        category: 'API',
+        action: 'Visibility',
+        name: 'Remove'
+      })
     }
 
     postMessage(event: string, action?: any) {

@@ -126,14 +126,18 @@ export class Renderer extends React.Component<{api: any}> {
         })
         if (type === 'user') {
           api.event({
-            category: 'UserPopup',
-            action: 'Open'
+            category: 'User popup',
+            action: 'Open',
           })
         }
         if (type === 'image') {
           api.event({
             category: 'Image',
-            action: 'Open'
+            action: 'Open',
+            content: {
+              name: 'modal-image',
+              path: data
+            }
           })
         }
       }
