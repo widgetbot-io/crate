@@ -98,7 +98,7 @@ export default (config: Config) => {
       animationName: 'branding-fade-patreon',
     },
     supporterShow: {
-      opacity: 0.4,
+      opacity: 0.7,
     },
     '@keyframes branding-fade': {
       from: {
@@ -113,7 +113,7 @@ export default (config: Config) => {
         opacity: 0
       },
       to: {
-        opacity: 0.4
+        opacity: 0.7
       }
     }
   }
