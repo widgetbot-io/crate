@@ -60,7 +60,7 @@ Raven.context(() => {
         ...data
       })
     },
-    matomo: new MatomoTracker(2, 'https://analytics.widgetbot.io/piwik.php')
+    matomo: new MatomoTracker(2, 'https://analytics.widgetbot.io/php')
     // ReactGA: require('react-ga')
   })
   global.insertionPoint.setAttribute(
