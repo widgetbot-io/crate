@@ -18,36 +18,36 @@ export default (config: Config) => {
       position: 'fixed !important',
       [config.position.y]: '20px !important',
       [config.position.x]: '20px !important',
-      width: `${config.style === 'material' ? 56 : 60}px !important`,
-      height: `${config.style === 'material' ? 56 : 60}px !important`,
+      width: `${config.style === 'intercom' ? 60 : 56}px !important`,
+      height: `${config.style === 'intercom' ? 60 : 56}px !important`,
       borderRadius: '50% !important',
       transition: [
         'box-shadow .2s ease-in-out',
-        `background ${config.style === 'material' ? '250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms' : '0.1s ease'}`,
+        `background ${config.style === 'intercom' ? '0.1s ease' : '250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'}`,
         'filter .2s ease-in-out',
         'transform .7s ease !important',
       ],
-      boxShadow: config.style === 'material' ? [
+      boxShadow: config.style === 'intercom' ? [
+        '0 1px 6px rgba(0,0,0,0.06)',
+        '0 2px 32px rgba(0,0,0,0.16)'
+      ] : [
         '0px 3px 5px -1px rgba(0, 0, 0, 0.2)',
         '0px 6px 10px 0px rgba(0, 0, 0, 0.14)',
         '0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
-      ] : [
-        '0 1px 6px rgba(0,0,0,0.06)',
-        '0 2px 32px rgba(0,0,0,0.16)'
       ],
       background: `${config.colors.toggle} !important`,
       cursor: 'pointer !important',
       animationTimingFunction: 'ease-in-out !important',
       '&:hover': {
-        boxShadow: config.style === 'material' ? [
+        boxShadow: config.style === 'intercom' ? [
+          '0 2px 8px rgba(0,0,0,0.09)',
+          '0 4px 40px rgba(0,0,0,0.24)'
+        ] : [
           '0px 3px 5px -1px rgba(0, 0, 0, 0.2)',
           '0px 6px 10px 0px rgba(0, 0, 0, 0.14)',
           '0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
-        ] : [
-          '0 2px 8px rgba(0,0,0,0.09)',
-          '0 4px 40px rgba(0,0,0,0.24)'
         ],
-        background: config.style === 'material' ? `${color(config.colors.toggle).lighten(0.25)} !important` : '',
+        background: config.style === 'intercom' ? '' : `${color(config.colors.toggle).lighten(0.25)} !important`,
       },
     },
     'toggle-pinged': {

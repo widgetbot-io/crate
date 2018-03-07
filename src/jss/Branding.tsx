@@ -12,7 +12,7 @@ import increaseSpecificity from 'jss-increase-specificity'
 jss.use(camelCase(), nested(), increaseSpecificity())
 
 export default (config: Config) => {
-  const height = config.style === 'material' ? 56 : 60
+  const height = config.style === 'intercom' ? 60 : 56
   const styles = {
     'message': {
       visibility: 'visible',

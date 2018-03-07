@@ -29,6 +29,8 @@ export default (state: any, config: Config, relaxed?: boolean) => {
           }
         }
 
+        if (!/^default|intercom$/.test(config.style)) config.style = 'default'
+
         if (!(config.position.x == 'left' || config.position.x == 'right')) {
           return reject(`config.position.x equals "${config.position.x}" but it can only equal "left" or "right"! you likely mixed up your axes`)
         }

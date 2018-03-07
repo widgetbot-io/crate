@@ -31,7 +31,7 @@
     addEventListener('crate', ({
       Crate
     }) => {
-      new Crate({
+      window.two = new Crate({
         server: '299881420891881473',
         channel: '336898706869583872',
         beta: true,
@@ -42,6 +42,7 @@
           "background": "#ffff00",
           "button": "#0000ff"
         },
+        style: 'material',
         delay: true,
         logo: 'discord',
         position: {
@@ -55,7 +56,7 @@
           }
         }
       })
-      new Crate({
+      window.three = new Crate({
         server: '299881420891881473',
         channel: '358600190032347137',
         beta: false,
