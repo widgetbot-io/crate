@@ -94,9 +94,11 @@ export default (config: Config) => {
       textAlign: 'center',
       opacity: 0.9
     },
-    transparent: {
-      opacity: 0.4,
+    supporter: {
       animationName: 'branding-fade-patreon',
+    },
+    supporterShow: {
+      opacity: 0.4,
     },
     '@keyframes branding-fade': {
       from: {

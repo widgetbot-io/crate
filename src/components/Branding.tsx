@@ -80,7 +80,7 @@ export class Branding extends React.Component<Props, {}> {
 
     return (
       <div
-        className={`${classes.message} ${view.open ? classes.show : ''} ${view.open && transparent ? classes.transparent : ''}`}
+        className={`${classes.message} ${view.open ? classes.show : ''} ${transparent ? classes.supporter : ''} ${view.open && transparent ? classes.supporterShow : ''}`}
         onClick={this.open.bind(this)}
         ref={config.noHijacking ? () => {} : DontFuckWithMe.bind(this)}>
         <div className={`${classes['powered-by']}`} ref={config.debug ? () => {} : DontFuckWithMe.bind(this)}>
