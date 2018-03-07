@@ -40,7 +40,7 @@ export default (config: Config) => {
         '0px 1px 18px 0px rgba(0, 0, 0, 0.2)'
       ],
       borderRadius: config.style === 'material' ? '8px' : '5px',
-      [`border-${config.position.y}-${config.position.x}-radius`]: config.style === 'material' ? 0 : '5px',
+      [`border-${config.position.y === 'top' ? 'bottom' : 'top'}-${config.position.x}-radius`]: config.style === 'material' ? 0 : '5px',
       overflow: 'hidden',
       transition:
         'transform 0.3s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.4s ease, margin 0.3s ease',
