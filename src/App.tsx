@@ -26,7 +26,7 @@ Raven.context(() => {
     insertionPoint: /* :smirk: */ document.createElement('div'),
     sessions: 0,
     event: (
-      state: Object,
+      state: any,
       data: {
         category: string
         action: string
@@ -37,16 +37,18 @@ Raven.context(() => {
         }
       }
     ) => {
-      let req: any = {
-        e_c: data.category,
-        e_a: data.action
+      if (state.config.analytics) {
+        let req: any = {
+          e_c: data.category,
+          e_a: data.action
+        }
+        if (data.name) req.e_n = data.name
+        if (data.content) {
+          req.c_n = data.content.name
+          req.c_p = data.content.path
+        }
+        global.track(req)
       }
-      if (data.name) req.e_n = data.name
-      if (data.content) {
-        req.c_n = data.content.name
-        req.c_p = data.content.path
-      }
-      global.track(req)
     },
     track: (data: Object) => {
       global.matomo.track({
@@ -108,6 +110,7 @@ Raven.context(() => {
         options: '0002',
         beta: false,
         debug: false,
+        analytics: true,
 
         logo: {
           url: Icons()
@@ -199,16 +202,18 @@ Raven.context(() => {
 
           // Analytics
 
-          let { track } = global
-          track({
-            _id: this.state.session,
-            action_name: 'Crate instance initialized',
-            cvar: JSON.stringify({
-              '1': ['Discord server', config.server],
-              '2': ['Discord channel', config.channel],
-              '3': ['Widget URL', config.widgetURL]
+          if (config.analytics) {
+            let { track } = global
+            track({
+              _id: this.state.session,
+              action_name: 'Crate instance initialized',
+              cvar: JSON.stringify({
+                '1': ['Discord server', config.server],
+                '2': ['Discord channel', config.channel],
+                '3': ['Widget URL', config.widgetURL]
+              })
             })
-          })
+          }
 
           // ReactGA.initialize('UA-107130316-3', { debug: config.debug })
           // ReactGA.pageview(window.location.origin)
