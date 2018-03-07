@@ -82,11 +82,11 @@ export class Branding extends React.Component<Props, {}> {
       <div
         className={`${classes.message} ${view.open ? classes.show : ''} ${view.open && transparent ? classes.transparent : ''}`}
         onClick={this.open.bind(this)}
-        ref={config.debug ? () => {} : DontFuckWithMe.bind(this)}>
+        ref={config.noHijacking ? () => {} : DontFuckWithMe.bind(this)}>
         <div className={`${classes['powered-by']}`} ref={config.debug ? () => {} : DontFuckWithMe.bind(this)}>
           Discord widgets by
         </div>
-        <div className={`${classes['widgetbot']}`} ref={config.debug ? () => {} : DontFuckWithMe.bind(this)}>
+        <div className={`${classes['widgetbot']}`} ref={config.noHijacking ? () => {} : DontFuckWithMe.bind(this)}>
           WidgetBot
         </div>
       </div>

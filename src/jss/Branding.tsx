@@ -73,7 +73,7 @@ export default (config: Config) => {
     },
     show: {
       opacity: 1,
-      [`margin-${config.position.x}`]: config.style === 'material' ? 5 : 0,
+      [`margin-${config.position.x}`]: config.style === 'material' ? '5px' : 0,
       pointerEvents: 'initial'
     },
     'powered-by': {
@@ -95,7 +95,7 @@ export default (config: Config) => {
       opacity: 0.9
     },
     transparent: {
-      opacity: 0.5
+      opacity: 0.4
     },
     '@keyframes branding-fade': {
       from: {
