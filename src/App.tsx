@@ -166,7 +166,7 @@ Raven.context(() => {
       if (!window.crate) {
         window.crate = this
       }
-      ParseConfig(this.state, config)
+      ParseConfig(this.state, config, true)
         .then((config) => {
           this.setState({
             classes: jss(config),
@@ -249,7 +249,7 @@ Raven.context(() => {
 
     // Deep merges the new config with the current config
     config(config: any, programmatic?: boolean) {
-      ParseConfig(this.state, config, true)
+      ParseConfig(this.state, config)
         .then((config) => {
           this.setState({
             classes: jss(config),

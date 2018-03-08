@@ -3,50 +3,46 @@ import DeepMerge from './DeepMerge'
 import { Icons } from './Icons'
 import rateLimitedSites from '../../data/rateLimitedSites'
 
-let warned = false
+function rateLimited(skipped: boolean) {
+  console.warn(
+    `--WIDGETBOT.IO DISCORD WIDGETS--
 
-function rateLimited() {
-  if (!warned) console.warn(
-`--WIDGETBOT.IO DISCORD WIDGETS--
+This request ${skipped ? `wasn't` : `was`} ratelimited.
 
 Hey there, we've noticed excessive amounts of traffic coming from the ${location.origin} domain
-
 In order to provide a balanced experience for all our users, we've:
  - Temporarily ratelimited requests to the widgets from this domain
  - Widgets won't auto-load until manually opened by the user
-
 For more information, join the support guild over at < https://discord.gg/25vFWfb >`)
-  warned = true
 }
 
 /**
  * Resolves a valid configuration object, inheriting properties
  * that are undefined from the default configuration
  */
-export default (state: any, config: Config, relaxed?: boolean) => {
+export default (state: any, config: Config, initialConfig?: boolean) => {
   return new Promise<Config>((resolve: Function, reject: Function) => {
     /**
      * Parse the configuration
      */
     if (typeof config === 'object') {
-      if ((config.server && config.channel) || relaxed) {
+      if ((config.server && config.channel) || initialConfig !== true) {
         config = DeepMerge(state.config, config)
         /**
          * Rate limiting
          */
-        rateLimitedSites.forEach(site => {
-          if (site instanceof RegExp) {
-            if (site.test(location.href)) {
-              config.delay = true
-              rateLimited()
+        if (initialConfig) {
+          rateLimitedSites.forEach((site: { query: RegExp | string, block: number }) => {
+            if ((site.query instanceof RegExp && site.query.test(location.href)) || (typeof site.query === 'string' && location.origin.includes(site.query))) {
+              if (site.block === 1 || Math.random() > site.block) {
+                config.delay = true
+                rateLimited(false)
+              } else {
+                rateLimited(true)
+              }
             }
-          } else {
-            if (location.origin.includes(site)) {
-              config.delay = true
-              rateLimited()
-            }
-          }
-        })
+          })
+        }
 
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
 
@@ -120,7 +116,7 @@ export default (state: any, config: Config, relaxed?: boolean) => {
 
 export function queryString(object: any) {
   let query = []
-  for(var p in object)
+  for (var p in object)
     if (object.hasOwnProperty(p)) {
       query.push(`${encodeURIComponent(p)}=${encodeURIComponent(object[p])}`)
     }
