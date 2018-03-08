@@ -19,6 +19,7 @@
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "color": "^2.0.1",
+    "discord-markdown": "^1.0.0",
     "jss": "^9.5.1",
     "jss-camel-case": "^6.0.0",
     "jss-increase-specificity": "^0.3.5",

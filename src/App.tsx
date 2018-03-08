@@ -456,10 +456,6 @@ Raven.context(() => {
         0,
         this.state.config.notifications.toasts.maxMessages
       )
-      this.event({
-        category: 'Toast',
-        action: 'Show'
-      })
 
       this.setState({
         notifications: {
@@ -467,6 +463,11 @@ Raven.context(() => {
           unread,
           messages
         }
+      })
+
+      this.event({
+        category: 'API',
+        action: 'Toast'
       })
     }
 

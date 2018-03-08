@@ -8,10 +8,13 @@ import nested from 'jss-nested'
 // @ts-ignore
 import increaseSpecificity from 'jss-increase-specificity'
 
+import CodeHighlighting from './CodeHighlighting'
+
 // @ts-ignore
 jss.use(camelCase(), nested(), increaseSpecificity())
 
 export default (config: Config) => {
+  const hljs = config.scheme === 'dark' ? CodeHighlighting.dark : CodeHighlighting.light
   const styles = {
     'toast-box': {
       zIndex: '2147483000 !important',
@@ -29,7 +32,6 @@ export default (config: Config) => {
       flexDirection: 'column-reverse !important',
       transition: 'opacity 0.4s ease,transform 0.2s cubic-bezier(0.47, 0, 0.75, 0.72)',
       transform: 'initial !important',
-      pointerEvents: 'none !important',
     },
 
     'toast': {
@@ -37,6 +39,34 @@ export default (config: Config) => {
       flex: '1 0 100% !important',
       textAlign: `${config.position.x} !important`,
       transition: 'all 0.5s cubic-bezier(0, 0.8, 0.25, 1.18) !important',
+      '& a': {
+        color: '#1296CF',
+        textDecoration: 'none',
+        '&:hover': {
+          textDecoration: 'underline'
+        }
+      },
+      '& code': {
+        backgroundColor: 'rgba(0, 0, 0, 0.2)'
+      },
+      '& pre': {
+        margin: '6px 0',
+        whiteSpace: 'pre-wrap',
+        wordWrap: 'break-word',
+      },
+      '& .hljs': {
+        border: '2px solid #282b30',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        fontFamily: 'Menlo, Consolas, Monaco, monospace',
+        fontSize: '14px',
+        lineHeight: '16px',
+        padding: '7px',
+        display: 'block',
+        borderRadius: '5px',
+        color: '#839496 !important',
+        fontWeight: '100 !important'
+      },
+      ...hljs
     },
     'toast-hidden': {
       opacity: '0 !important',
@@ -67,7 +97,7 @@ export default (config: Config) => {
       MsWordBreak: 'break-all !important',
       wordWrap: 'break-word !important',
       wordBreak: 'break-word !important',
-      lineHeight: '1.1em !important',
+      lineHeight: '1.3em !important',
       whiteSpace: 'pre-wrap !important',
       WebkitBoxShadow: '0 2px 8px 0 rgba(35,47,53,0.09) !important',
       boxShadow: '0 2px 8px 0 rgba(35,47,53,0.5) !important',

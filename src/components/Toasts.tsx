@@ -4,6 +4,7 @@ import { Config } from '../definitions/config'
 import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Toasts'
+const { toHTML: parse } = require('discord-markdown');
 
 interface Props extends View {
   messages: any
@@ -155,9 +156,9 @@ class Toast extends React.Component<ToastProps, {}> {
           className={`crate-toast-avatar ${classes['toast-avatar']}`}
           onClick={() => { if (!message.fake) openUser(message.author) }}
         />
-        <div className={`crate-toast-message ${classes['toast-message']}`}>
-          {message.content}
-        </div>
+        <div
+          className={`crate-toast-message ${classes['toast-message']}`}
+          dangerouslySetInnerHTML={{ __html: parse(message.content) }} />
       </div>
     ) : (
         <div />

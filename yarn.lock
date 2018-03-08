@@ -938,6 +938,13 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
+discord-markdown@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/discord-markdown/-/discord-markdown-1.0.0.tgz#324e59cd378e624c4c0918fe1af3ad4acbdf304d"
+  dependencies:
+    highlight.js "^9.12.0"
+    simple-markdown "^0.3.1"
+
 dns-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dns-equal/-/dns-equal-1.0.0.tgz#b39e7f1da6eb0a75ba9c17324b34753c47e0654d"
@@ -1632,6 +1639,10 @@ hawk@3.1.3, hawk@~3.1.3:
     cryptiles "2.x.x"
     hoek "2.x.x"
     sntp "1.x.x"
+
+highlight.js@^9.12.0:
+  version "9.12.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -3365,6 +3376,10 @@ shebang-regex@^1.0.0:
 signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-markdown@^0.3.1:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/simple-markdown/-/simple-markdown-0.3.2.tgz#eb3902dc3bcf74fdfc1883230286dcadea870dc0"
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
