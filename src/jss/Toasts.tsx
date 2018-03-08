@@ -37,7 +37,7 @@ export default (config: Config) => {
     'toast': {
       display: 'block !important',
       flex: '1 0 100% !important',
-      textAlign: `${config.position.x} !important`,
+      textAlign: `left !important`,
       transition: 'all 0.5s cubic-bezier(0, 0.8, 0.25, 1.18) !important',
       '& a': {
         color: '#1296CF',
