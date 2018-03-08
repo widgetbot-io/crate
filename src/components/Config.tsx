@@ -1,6 +1,23 @@
 import { Config } from '../definitions/config'
 import DeepMerge from './DeepMerge'
 import { Icons } from './Icons'
+import rateLimitedSites from '../../data/rateLimitedSites'
+
+let warned = false
+
+function rateLimited() {
+  if (!warned) console.warn(
+`--WIDGETBOT.IO DISCORD WIDGETS--
+
+Hey there, we've noticed excessive amounts of traffic coming from the ${location.origin} domain
+
+In order to provide a balanced experience for all our users, we've:
+ - Temporarily ratelimited requests to the widgets from this domain
+ - Widgets won't auto-load until manually opened by the user
+
+For more information, join the support guild over at < https://discord.gg/25vFWfb >`)
+  warned = true
+}
 
 /**
  * Resolves a valid configuration object, inheriting properties
@@ -14,6 +31,23 @@ export default (state: any, config: Config, relaxed?: boolean) => {
     if (typeof config === 'object') {
       if ((config.server && config.channel) || relaxed) {
         config = DeepMerge(state.config, config)
+        /**
+         * Rate limiting
+         */
+        rateLimitedSites.forEach(site => {
+          if (site instanceof RegExp) {
+            if (site.test(location.href)) {
+              config.delay = true
+              rateLimited()
+            }
+          } else {
+            if (location.origin.includes(site)) {
+              config.delay = true
+              rateLimited()
+            }
+          }
+        })
+
         if (!config.domain) config.domain = config.beta ? 'https://beta.widgetbot.io' : 'https://widgetbot.io'
 
         config.options = config.options.toString()
