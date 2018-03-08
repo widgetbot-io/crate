@@ -11,7 +11,7 @@
 export default [
   {
     query: 'ruedesjoueurs.com',
-    block: 0.7
+    block: 0.9
   },
   // {
   //   query: 'localhost',
