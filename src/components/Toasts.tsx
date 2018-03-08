@@ -34,9 +34,9 @@ export class Toasts extends React.Component<Props, {}> {
       messages,
       openUser
     }: {
-      messages: { expiration: number; message: Notifications.message }[]
-      openUser: Function
-    } = this.props
+        messages: { expiration: number; message: Notifications.message }[]
+        openUser: Function
+      } = this.props
     let { classes } = this
     return (
       <div className={`crate-toast-box ${classes['toast-box']}`}>
@@ -145,7 +145,7 @@ class Toast extends React.Component<ToastProps, {}> {
       <div
         className={`crate-toast ${classes.toast} ${
           last ? classes['toast-hidden'] : ''
-        }`}
+          }`}
         ref={(toast) => (this.toast = toast)}>
         <img
           src={
@@ -153,14 +153,14 @@ class Toast extends React.Component<ToastProps, {}> {
             'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'
           }
           className={`crate-toast-avatar ${classes['toast-avatar']}`}
-          onClick={() => openUser(message.author)}
+          onClick={() => { if (!message.fake) openUser(message.author) }}
         />
         <div className={`crate-toast-message ${classes['toast-message']}`}>
           {message.content}
         </div>
       </div>
     ) : (
-      <div />
-    )
+        <div />
+      )
   }
 }

@@ -313,7 +313,7 @@ Raven.context(() => {
       /**
        * Add the meta tag, for chrome header color
        */
-      ;(() => {
+      ; (() => {
         let meta: HTMLMetaElement = document.querySelector(
           'meta[name=theme-color]'
         )
@@ -334,7 +334,7 @@ Raven.context(() => {
           if (open) {
             let color =
               this.state.config.colors['background'] ||
-              this.state.config['scheme'] === 'light'
+                this.state.config['scheme'] === 'light'
                 ? '#ffffff'
                 : '#36393E'
             meta.setAttribute('content', color)
@@ -416,6 +416,60 @@ Raven.context(() => {
       })
     }
 
+    message(
+      message: string,
+      visibility: number,
+      avatar: string = 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp',
+    ) {
+      let { unread, pinged, messages } = this.state.notifications
+
+      let expiration
+      if (typeof visibility !== 'undefined') {
+        if (typeof visibility === 'number') {
+          expiration = +new Date() + visibility
+        } else if (typeof visibility === 'boolean') {
+          expiration = false
+        } else {
+          throw new Error('Expected parameter two to be of type number | boolean!')
+        }
+      } else {
+        let time = this.state.config.notifications.toasts.visibilityTime
+        if (time < 1) time = 15
+        expiration = +new Date() + 1000 * time
+      }
+
+      if (this.state.config.notifications.indicator.enable && !this.state.view.open) unread++
+
+      // Push to start of array
+      messages.unshift({
+        expiration,
+        message: {
+          author: {
+            avatar
+          },
+          id: Math.floor(Math.pow(10, 15) + Math.random() * 9 * Math.pow(10, 15)) + +new Date(),
+          content: message,
+          fake: true
+        }
+      })
+      messages = messages.slice(
+        0,
+        this.state.config.notifications.toasts.maxMessages
+      )
+      this.event({
+        category: 'Toast',
+        action: 'Show'
+      })
+
+      this.setState({
+        notifications: {
+          ...this.state.notifications,
+          unread,
+          messages
+        }
+      })
+    }
+
     remove() {
       ReactDOM.unmountComponentAtNode(this.node)
       global.insertionPoint.removeChild(this.node)
@@ -449,20 +503,20 @@ Raven.context(() => {
 
   window.Crate = Crate
 
-  // Load crate from inside script tag
-  ;(() => {
-    let config = document.currentScript && document.currentScript.innerHTML
-    if (config) {
-      eval(config)
-    }
-  })()
+    // Load crate from inside script tag
+    ; (() => {
+      let config = document.currentScript && document.currentScript.innerHTML
+      if (config) {
+        eval(config)
+      }
+    })()
 
-  // Crate Event
-  ;(() => {
-    var event = document.createEvent('Event')
-    // @ts-ignore
-    event.Crate = Crate
-    event.initEvent('crate', true, false)
-    window.dispatchEvent(event)
-  })()
+    // Crate Event
+    ; (() => {
+      var event = document.createEvent('Event')
+      // @ts-ignore
+      event.Crate = Crate
+      event.initEvent('crate', true, false)
+      window.dispatchEvent(event)
+    })()
 })

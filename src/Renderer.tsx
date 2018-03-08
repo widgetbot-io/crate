@@ -122,9 +122,9 @@ export class Renderer extends React.Component<{ api: any }> {
 
         this.setState({
           notifications: {
-            pinged: pinged,
-            unread: unread,
-            messages: messages
+            pinged,
+            unread,
+            messages
           }
         })
       }

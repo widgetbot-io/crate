@@ -3,6 +3,21 @@
 </head>
 
 <body style="background: #888">
+  <script>
+    function talkToMyself() {
+      crate.pulse(true)
+      crate.message('Hey there!', 4000, 'https://cdn.discordapp.com/avatars/111783814740594688/398b49bc6f1a573feb91de0b65f8f1c4.png')
+      setTimeout(function () {
+        crate.message('This is WidgetBot', 15000, 'https://cdn.discordapp.com/avatars/294916911194570754/692728cf72dfc89c16821789e8adfcf6.png')
+        setTimeout(function () {
+          crate.message('It allows you to put your Discord chat onto your website ✨', 20000, 'https://cdn.discordapp.com/avatars/111783814740594688/398b49bc6f1a573feb91de0b65f8f1c4.png')
+        }, 3000)
+      }, 2000)
+    }
+  </script>
+  <pre style="margin: 200px">
+    <button onclick="talkToMyself()">Talk to myself</button>
+  </pre>
   <script src="./crate.min.js" async defer>
     new Crate({
       server: '299881420891881473',
