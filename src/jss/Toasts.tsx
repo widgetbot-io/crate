@@ -47,9 +47,12 @@ export default (config: Config) => {
         }
       },
       '& code': {
+        all: 'unset',
         backgroundColor: 'rgba(0, 0, 0, 0.2)'
       },
       '& pre': {
+        all: 'unset',
+        display: 'block',
         margin: '6px 0',
         whiteSpace: 'pre-wrap',
         wordWrap: 'break-word',
