@@ -407,6 +407,15 @@ Raven.context(() => {
       })
     }
 
+    pulse(pulsing: boolean = !this.state.notifications.pinged) {
+      this.setState({
+        notifications: {
+          ...this.state.notifications,
+          pinged: pulsing,
+        }
+      })
+    }
+
     remove() {
       ReactDOM.unmountComponentAtNode(this.node)
       global.insertionPoint.removeChild(this.node)
