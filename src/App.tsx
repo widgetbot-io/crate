@@ -37,7 +37,7 @@ Raven.context(() => {
         }
       }
     ) => {
-      if (state.config.analytics) {
+      if (!state || state.config.analytics) {
         let req: any = {
           e_c: data.category,
           e_a: data.action

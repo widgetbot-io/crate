@@ -4,6 +4,11 @@ import { Icons } from './Icons'
 import rateLimitedSites from '../../data/rateLimitedSites'
 
 function rateLimited(skipped: boolean) {
+  const { event } = window['globalCrate']
+  event(null, {
+    category: 'Rate limit',
+    action: skipped ? 'Not limited' : 'Limited'
+  })
   console.warn(
     `--WIDGETBOT.IO DISCORD WIDGETS--
 
