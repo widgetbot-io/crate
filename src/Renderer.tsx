@@ -12,6 +12,16 @@ import { Toggle } from './components/Toggle'
 import { Toasts } from './components/Toasts'
 import { Branding } from './components/Branding'
 
+function contains(a, obj) {
+  var i = a.length;
+  while (i--) {
+     if (a[i] === obj) {
+         return true;
+     }
+  }
+  return false;
+}
+
 export class Renderer extends React.Component<{ api: any }> {
   state = this.props.api.state
   classes = this.props.api.state.classes
@@ -29,22 +39,22 @@ export class Renderer extends React.Component<{ api: any }> {
 
     return classes ? (
       <div className={`crate ${classes.crate}`}>
-        <Embed
+        {!contains(config.disable, 'embed') && <Embed
           view={this.state.view}
           event={api.event.bind(this)}
           config={this.state.config}
           setIframe={(iframe) => (this.state.iframe = iframe)}
-        />
+        />}
 
-        <Toggle
+        {!contains(config.disable, 'toggle') && <Toggle
           view={this.state.view}
           event={api.event.bind(this)}
           config={this.state.config}
           toggle={api.toggle.bind(this)}
           notifications={this.state.notifications}
-        />
+        />}
 
-        {config.notifications.toasts.enable &&
+        {!contains(config.disable, 'toasts') && config.notifications.toasts.enable &&
           !this.state.view.open && (
             <Toasts
               view={this.state.view}
@@ -55,15 +65,15 @@ export class Renderer extends React.Component<{ api: any }> {
             />
           )}
 
-        <Modal
+        {!contains(config.disable, 'modal') && <Modal
           view={this.state.view}
           event={api.event.bind(this)}
           modal={this.state.modal}
           config={this.state.config}
           toggle={api.modal.bind(this)}
-        />
+        />}
 
-        {this.state.l !== null &&
+        {!contains(config.disable, 'toggle') && this.state.l !== null &&
           this.state.l !== 2 && (
             <Branding
               view={this.state.view}

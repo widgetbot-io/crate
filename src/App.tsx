@@ -142,7 +142,8 @@ Raven.context(() => {
           y: 'bottom'
         },
 
-        delay: false
+        delay: false,
+        disable: []
       },
       notifications: {
         unread: 0,
