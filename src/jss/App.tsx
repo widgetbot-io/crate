@@ -12,11 +12,13 @@ jss.use(camelCase(), nested())
 export default (config: Config) => {
   const styles = {
     crate: {
+      transition: 'opacity 0.2s ease',
       '& div, img, span': {
         all: 'unset',
         WebkitTapHighlightColor: 'transparent',
         userSelect: 'none',
         direction: 'ltr',
+        boxSizing: 'border-box',
         fontFamily: config.style === 'material' ? `'Roboto', sans-serif` : 'Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif'
       },
       '& img': {
@@ -24,6 +26,13 @@ export default (config: Config) => {
         KhtmlUserDrag: 'none',
         MozUserDrag: 'none',
         OUserDrag: 'none',
+      },
+      '&.fade-out': {
+        opacity: 0,
+        pointerEvents: 'none'
+      },
+      '&.disable-input': {
+        display: 'none'
       }
     },
     '@font-face': config.style !== 'material' && [

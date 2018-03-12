@@ -61,6 +61,7 @@ export class Renderer extends React.Component<{ api: any }> {
               event={api.event.bind(this)}
               config={this.state.config}
               openUser={api.user.bind(this)}
+              expand={api.expandMessage.bind(this)}
               messages={this.state.notifications.messages}
             />
           )}

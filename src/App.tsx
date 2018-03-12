@@ -9,6 +9,7 @@ Raven.config('https://60c8644853c540649cfdf0fe4a30bfe4@sentry.io/287303', {
 
 declare var window: any
 import { Config } from './definitions/config'
+import { Notifications } from './definitions/notifications'
 import * as ReactDOM from 'react-dom'
 import * as React from 'react'
 const MatomoTracker = require('matomo-tracker')
@@ -162,6 +163,7 @@ Raven.context(() => {
     react: any
     node: any
     transition: any
+    visibilityTimer: any
 
     constructor(config) {
       if (!window.crate) {
@@ -278,6 +280,7 @@ Raven.context(() => {
    * Group APIs under this class
    */
   class Crate extends StateHandler {
+
     toggle(open?: boolean) {
       open = typeof open === 'boolean' ? open : !this.state.view.open
       this.setState({
@@ -386,9 +389,34 @@ Raven.context(() => {
       })
     }
 
+    expandMessage(message: Notifications.message) {
+      this.setState({
+        view: {
+          ...this.state.view,
+          modalOpen: true
+        },
+        modal: {
+          type: 'message',
+          data: message
+        }
+      })
+
+      this.event({
+        category: 'User popup',
+        action: 'Open'
+      })
+    }
+
+    jumpTo(id) {
+      console.log(`jumping to ${id}`)
+    }
+
     show() {
-      if (!global.insertionPoint.contains(this.node))
-        global.insertionPoint.appendChild(this.node)
+      clearTimeout(this.visibilityTimer)
+      this.node.firstChild.classList.remove('disable-input')
+      this.visibilityTimer = setTimeout(() => {
+        this.node.firstChild.classList.remove('fade-out')
+      }, 10)
 
       this.event({
         category: 'API',
@@ -398,8 +426,11 @@ Raven.context(() => {
     }
 
     hide() {
-      if (global.insertionPoint.contains(this.node))
-        global.insertionPoint.removeChild(this.node)
+      clearTimeout(this.visibilityTimer)
+      this.node.firstChild.classList.add('fade-out')
+      this.visibilityTimer = setTimeout(() => {
+        this.node.firstChild.classList.add('disable-input')
+      }, 200)
 
       this.event({
         category: 'API',

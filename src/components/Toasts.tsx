@@ -4,11 +4,12 @@ import { Config } from '../definitions/config'
 import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Toasts'
-const { toHTML: parse } = require('discord-markdown');
+const { toHTML: parse } = require('discord-markdown')
 
 interface Props extends View {
   messages: any
   openUser: any
+  expand: any
 }
 
 export class Toasts extends React.Component<Props, {}> {
@@ -33,11 +34,13 @@ export class Toasts extends React.Component<Props, {}> {
   render() {
     let {
       messages,
-      openUser
+      openUser,
+      expand
     }: {
-        messages: { expiration: number; message: Notifications.message }[]
-        openUser: Function
-      } = this.props
+      messages: { expiration: number; message: Notifications.message }[]
+      openUser: Function
+      expand: Function
+    } = this.props
     let { classes } = this
     return (
       <div className={`crate-toast-box ${classes['toast-box']}`}>
@@ -50,6 +53,7 @@ export class Toasts extends React.Component<Props, {}> {
               key={message.id}
               classes={classes}
               last={i === 0}
+              expand={expand.bind(this)}
               openUser={openUser.bind(this)}
               config={this.props.config}
               event={this.props.event.bind(this)}
@@ -68,6 +72,7 @@ interface ToastProps {
   last: boolean
   config: Config
   openUser: Function
+  expand: Function
   event: Function
 }
 
@@ -103,6 +108,13 @@ class Toast extends React.Component<ToastProps, {}> {
 
   componentWillUnmount() {
     this.mounted = false
+  }
+
+  handleexpand = (event, message: Notifications.message) => {
+    let { expand } = this.props
+    if (event.target === event.currentTarget) {
+      expand(message)
+    }
   }
 
   show() {
@@ -141,12 +153,12 @@ class Toast extends React.Component<ToastProps, {}> {
   }
 
   render() {
-    let { message, classes, last, expiration, openUser } = this.props
+    let { message, classes, config, last, expiration, openUser } = this.props
     return this.state.render ? (
       <div
         className={`crate-toast ${classes.toast} ${
           last ? classes['toast-hidden'] : ''
-          }`}
+        }`}
         ref={(toast) => (this.toast = toast)}>
         <img
           src={
@@ -154,14 +166,30 @@ class Toast extends React.Component<ToastProps, {}> {
             'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp'
           }
           className={`crate-toast-avatar ${classes['toast-avatar']}`}
-          onClick={() => { if (!message.fake) openUser(message.author) }}
+          onClick={() => {
+            if (!message.fake) openUser(message.author)
+          }}
         />
-        <div
-          className={`crate-toast-message ${classes['toast-message']}`}
-          dangerouslySetInnerHTML={{ __html: parse(message.content) }} />
+        <div className={`crate-toast-message ${classes['toast-message']}`}>
+          <div className={`crate-toast-actions ${classes['toast-actions']}`}>
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={e => this.handleexpand(e, message)}
+            >
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+          </div>
+          <div
+            className={`crate-toast-content ${classes['toast-content']}`}
+            dangerouslySetInnerHTML={{ __html: message.content ? parse(message.content) : '' }}
+          />
+        </div>
       </div>
     ) : (
-        <div />
-      )
+      <div />
+    )
   }
 }

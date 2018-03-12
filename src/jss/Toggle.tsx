@@ -25,7 +25,8 @@ export default (config: Config) => {
         'box-shadow .2s ease-in-out',
         `background ${config.style === 'discord' ? '0.1s ease' : '250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'}`,
         'filter .2s ease-in-out',
-        'transform .7s ease !important',
+        'opacity .1s ease',
+        'transform .2s ease !important',
       ],
       boxShadow: config.style === 'discord' ? [
         '0 1px 6px rgba(0,0,0,0.06)',
@@ -49,6 +50,14 @@ export default (config: Config) => {
         ],
         background: config.style === 'discord' ? '' : `${color(config.colors.toggle).lighten(0.1)} !important`,
       },
+      '&-entering': {
+        opacity: 0,
+        transform: 'scale(0.4)'
+      },
+      '&-entered': {
+        opacity: 1,
+        transform: 'initial'
+      }
     },
     'toggle-pinged': {
       boxShadow: [
@@ -57,9 +66,6 @@ export default (config: Config) => {
         `0 0 0 0 ${color(config.colors.toggle).alpha(0.7).rgb().toString()}`,
         '!important'
       ],
-      WebkitAnimation: 'pingedPulse 1.2s infinite cubic-bezier(0.18, 0.89, 0.6, 1.28) !important',
-      MozAnimation: 'pingedPulse 1.2s infinite cubic-bezier(0.18, 0.89, 0.6, 1.28) !important',
-      MsAnimation: 'pingedPulse 1.2s infinite cubic-bezier(0.18, 0.89, 0.6, 1.28) !important',
       animation: 'pingedPulse 1.2s infinite cubic-bezier(0.18, 0.89, 0.6, 1.28) !important',
     },
 
@@ -136,7 +142,7 @@ export default (config: Config) => {
           `0 0 0 20px ${color(config.colors.toggle).alpha(0).rgb().toString()}`
         ]
       }
-    }
+    },
   }
   return jss.createStyleSheet(styles).attach().classes
 }

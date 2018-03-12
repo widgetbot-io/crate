@@ -6,6 +6,7 @@ import Transition from 'react-transition-group/Transition'
 
 import { UserPopup } from './Modals/UserPopup'
 import { ImagePopup } from './Modals/ImagePopup'
+import { MessageExpand } from './Modals/MessageExpand'
 
 interface Props extends View {
   modal: any
@@ -47,7 +48,7 @@ export class Modal extends React.Component<Props, {}> {
     let { view, modal, config, toggle } = this.props
     let { classes } = this
     return (
-      <Transition in={view.modalOpen} timeout={300}>
+      <Transition in={view.modalOpen} timeout={200}>
         {(state) => (
           <div
             className={`crate-modal ${classes.modal} ${
@@ -76,16 +77,21 @@ export class Modal extends React.Component<Props, {}> {
                   d="M9.5 3.205L8.795 2.5 6 5.295 3.205 2.5l-.705.705L5.295 6 2.5 8.795l.705.705L6 6.705 8.795 9.5l.705-.705L6.705 6"
                 />
               </svg>
-              {modal.type === 'user' && (
+              {modal.type === 'user' ? (
                 <UserPopup user={modal.data} config={config} />
-              )}
-              {modal.type === 'image' && (
+              ) : modal.type === 'image' ? (
                 <ImagePopup
                   url={modal.data}
                   config={config}
                   toggle={toggle.bind(this)}
                 />
-              )}
+              ) : modal.type === 'message' ? (
+                <MessageExpand
+                  message={modal.data}
+                  config={config}
+                  toggle={toggle.bind(this)}
+                />
+              ) : null}
             </div>
           </div>
         )}
