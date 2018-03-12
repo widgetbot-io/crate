@@ -27,6 +27,8 @@ export class Renderer extends React.Component<{ api: any }> {
   classes = this.props.api.state.classes
   postMessage = this.props.api.postMessage
   transition = this.props.api.transition
+  eventListeners = this.props.api.eventListeners
+  allEventListeners = this.props.api.allEventListeners
 
   componentDidMount() {
     window.addEventListener('message', ({ data }) => this.listener(data), false)
@@ -63,6 +65,7 @@ export class Renderer extends React.Component<{ api: any }> {
               openUser={api.user.bind(this)}
               expand={api.expandMessage.bind(this)}
               messages={this.state.notifications.messages}
+              crateEvent={api.crateEvent.bind(this)}
             />
           )}
 
@@ -138,6 +141,8 @@ export class Renderer extends React.Component<{ api: any }> {
             messages
           }
         })
+
+        this.crateEvent('message', message)
       }
       /**
        * Modal event
@@ -185,6 +190,8 @@ export class Renderer extends React.Component<{ api: any }> {
           l: config.debug ? 0 : data[2]
         })
 
+        this.crateEvent('widget-loaded')
+
         // Analytics
         let patreon = (() => {
           switch (this.state.l) {
@@ -221,4 +228,5 @@ export class Renderer extends React.Component<{ api: any }> {
   }
 
   event = this.props.api.event.bind(this)
+  crateEvent = this.props.api.crateEvent.bind(this)
 }

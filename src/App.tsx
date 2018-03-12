@@ -164,6 +164,8 @@ Raven.context(() => {
     node: any
     transition: any
     visibilityTimer: any
+    eventListeners = {}
+    allEventListeners = []
 
     constructor(config) {
       if (!window.crate) {
@@ -352,6 +354,8 @@ Raven.context(() => {
         category: 'Toggle',
         action: this.state.view.open ? 'Open' : 'Close'
       })
+
+      this.crateEvent('toggle', open)
     }
 
     modal(open: boolean = !this.state.view.modalOpen) {
@@ -407,9 +411,9 @@ Raven.context(() => {
       })
     }
 
-    jumpTo(id) {
-      console.log(`jumping to ${id}`)
-    }
+    // jumpTo(id) {
+    //   console.log(`jumping to ${id}`)
+    // }
 
     show() {
       clearTimeout(this.visibilityTimer)
@@ -417,6 +421,8 @@ Raven.context(() => {
       this.visibilityTimer = setTimeout(() => {
         this.node.firstChild.classList.remove('fade-out')
       }, 10)
+
+      this.crateEvent('visibility', true)
 
       this.event({
         category: 'API',
@@ -432,6 +438,8 @@ Raven.context(() => {
         this.node.firstChild.classList.add('disable-input')
       }, 200)
 
+      this.crateEvent('visibility', false)
+
       this.event({
         category: 'API',
         action: 'Visibility',
@@ -446,13 +454,10 @@ Raven.context(() => {
           pinged: pulsing,
         }
       })
+      this.crateEvent('pulse', pulsing)
     }
 
-    message(
-      message: string,
-      visibility: number,
-      avatar: string = 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp',
-    ) {
+    message(message: string, visibility: number, avatar: string = 'https://beta.widgetbot.io/embed/335391242248519680/335391242248519680/0002/default.webp') {
       let { unread, pinged, messages } = this.state.notifications
 
       let expiration
@@ -531,6 +536,38 @@ Raven.context(() => {
     event(data) {
       const { event } = global
       event(this.state, data)
+    }
+
+    /**
+     * Crate listeners API
+     */
+
+    on(eventName: string, callback: Function) {
+      if (!this.eventListeners[eventName]) {
+        this.eventListeners[eventName] = []
+      }
+      this.eventListeners[eventName].push(callback)
+    }
+
+    onEvent(callback: Function) {
+      this.allEventListeners.push(callback)
+    }
+
+    crateEvent(name: string, data?: any) {
+      if (this.eventListeners[name]) {
+        for (let listener of this.eventListeners[name]) {
+          // Async to prevent blocking
+          setTimeout(() => {
+            listener(data)
+          })
+        }
+      }
+      for (let listener of this.allEventListeners) {
+        // Async to prevent blocking
+        setTimeout(() => {
+          listener(name, data)
+        })
+      }
     }
   }
 

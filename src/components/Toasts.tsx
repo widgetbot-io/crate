@@ -10,6 +10,7 @@ interface Props extends View {
   messages: any
   openUser: any
   expand: any
+  crateEvent: Function
 }
 
 export class Toasts extends React.Component<Props, {}> {
@@ -35,11 +36,13 @@ export class Toasts extends React.Component<Props, {}> {
     let {
       messages,
       openUser,
-      expand
+      expand,
+      crateEvent
     }: {
       messages: { expiration: number; message: Notifications.message }[]
       openUser: Function
       expand: Function
+      crateEvent: Function
     } = this.props
     let { classes } = this
     return (
@@ -56,6 +59,7 @@ export class Toasts extends React.Component<Props, {}> {
               expand={expand.bind(this)}
               openUser={openUser.bind(this)}
               config={this.props.config}
+              crateEvent={crateEvent.bind(this)}
               event={this.props.event.bind(this)}
             />
           )
@@ -74,6 +78,7 @@ interface ToastProps {
   openUser: Function
   expand: Function
   event: Function
+  crateEvent: Function
 }
 
 class Toast extends React.Component<ToastProps, {}> {
@@ -153,7 +158,7 @@ class Toast extends React.Component<ToastProps, {}> {
   }
 
   render() {
-    let { message, classes, config, last, expiration, openUser } = this.props
+    let { message, classes, config, crateEvent, last, expiration, openUser } = this.props
     return this.state.render ? (
       <div
         className={`crate-toast ${classes.toast} ${
@@ -185,6 +190,7 @@ class Toast extends React.Component<ToastProps, {}> {
           <div
             className={`crate-toast-content ${classes['toast-content']}`}
             dangerouslySetInnerHTML={{ __html: message.content ? parse(message.content) : '' }}
+            onClick={() => crateEvent('message-click', message)}
           />
         </div>
       </div>
