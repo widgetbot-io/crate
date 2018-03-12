@@ -148,7 +148,7 @@ export default (config: Config) => {
         pointerEvents: 'initial',
         width: '17px',
         height: '17px',
-        margin: '8px 4px',
+        margin: '5px 4px',
         fill: config.scheme === 'dark' ? 'rgba(255,255,255,0.7)' : '#6e7a89',
         padding: '3px',
         borderRadius: '50%',
