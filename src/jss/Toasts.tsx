@@ -152,6 +152,7 @@ export default (config: Config) => {
         fill: config.scheme === 'dark' ? 'rgba(255,255,255,0.7)' : '#6e7a89',
         padding: '3px',
         borderRadius: '50%',
+        boxSizing: 'content-box',
         transition: 'opacity 0.2s ease, background-color 0.2s ease',
         '&:hover': {
           opacity: 0.8,
