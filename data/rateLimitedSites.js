@@ -9,10 +9,10 @@
  *          1 meaning rate limit all
  */
 export default [
-  {
-    query: 'ruedesjoueurs.com',
-    block: 1
-  },
+  // {
+  //   query: 'ruedesjoueurs.com',
+  //   block: 1
+  // },
   // {
   //   query: 'localhost',
   //   block: 0.6
