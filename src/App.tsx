@@ -521,15 +521,22 @@ Raven.context(() => {
 
     postMessage(event: string, action?: any) {
       if (this.state.iframe) {
-        this.state.iframe.contentWindow.postMessage(
-          {
-            src: 'crate',
-            session: this.state.session,
-            event: event,
-            action: action
-          },
-          '*'
-        )
+        if (this.state.iframe && this.state.iframe.contentWindow) {
+          this.state.iframe.contentWindow.postMessage(
+            {
+              src: 'crate',
+              session: this.state.session,
+              event: event,
+              action: action
+            },
+            '*'
+          )
+        } else {
+          log(
+            'error',
+            `iFrame topology destroyed!`
+          )
+        }
       }
     }
 
