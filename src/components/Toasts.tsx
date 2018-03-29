@@ -5,6 +5,9 @@ import { View } from '../definitions/view'
 import { Notifications } from '../definitions/notifications'
 import jss from '../jss/Toasts'
 const { toHTML: parse } = require('discord-markdown')
+// @ts-ignore
+import ImageLoader from 'react-load-image'
+import Loading from './Loading'
 
 interface Props extends View {
   messages: any
@@ -158,7 +161,18 @@ class Toast extends React.Component<ToastProps, {}> {
   }
 
   render() {
-    let { message, classes, config, crateEvent, last, expiration, openUser } = this.props
+    let {
+      message,
+      classes,
+      config,
+      crateEvent,
+      last,
+      expiration,
+      openUser
+    } = this.props
+    const imageLarge =
+      !message.content && message.attachment && message.attachment.url
+
     return this.state.render ? (
       <div
         className={`crate-toast ${classes.toast} ${
@@ -175,23 +189,79 @@ class Toast extends React.Component<ToastProps, {}> {
             if (!message.fake) openUser(message.author)
           }}
         />
-        <div className={`crate-toast-message ${classes['toast-message']}`}>
+        <div
+          className={`crate-toast-message ${classes['toast-message']} ${
+            imageLarge ? classes['message-large'] : ''
+          }`}>
           <div className={`crate-toast-actions ${classes['toast-actions']}`}>
             <svg
               viewBox="0 0 24 24"
               width="24"
               xmlns="http://www.w3.org/2000/svg"
-              onClick={e => this.handleexpand(e, message)}
-            >
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+              onClick={(e) => this.handleexpand(e, message)}>
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
             </svg>
           </div>
           <div
-            className={`crate-toast-content ${classes['toast-content']}`}
-            dangerouslySetInnerHTML={{ __html: message.content ? parse(message.content) : '' }}
+            className={`crate-toast-content ${classes['toast-content']} ${
+              imageLarge ? classes.contentHidden : ''
+            }`}
+            dangerouslySetInnerHTML={{
+              __html: message.content ? parse(message.content) : ''
+            }}
             onClick={() => crateEvent('message-click', message)}
           />
+          {message.attachment && message.attachment.url
+            ? (() => {
+                const height =
+                  180 / message.attachment.width * message.attachment.height
+                const Classes = `${classes.image} ${
+                  imageLarge ? classes.imageLarge : ''
+                }`
+
+                return (
+                  <div
+                    style={{
+                      boxShadow: imageLarge
+                        ? 'inset 0 85px 55px -54px rgba(54, 57, 62, 0.9)'
+                        : '',
+                      cursor: imageLarge ? 'pointer' : ''
+                    }}
+                    onClick={() => {
+                      window.open(message.attachment.url)
+                    }}>
+                    <ImageLoader
+                      src={message.attachment.url}
+                      style={{ height }}>
+                      <img
+                        style={{
+                          height
+                        }}
+                        className={Classes}
+                      />
+                      <img
+                        src="https://canary.discordapp.com/assets/e0c782560fd96acd7f01fda1f8c6ff24.svg"
+                        style={{
+                          height,
+                          padding: '22px',
+                          backgroundColor: 'rgba(0, 0, 0, 0.1)'
+                        }}
+                        className={Classes}
+                      />
+                      <Loading
+                        // @ts-ignore
+                        style={{
+                          height,
+                          backgroundColor: 'rgba(0, 0, 0, 0.1)'
+                        }}
+                        className={Classes}
+                      />
+                    </ImageLoader>
+                  </div>
+                )
+              })()
+            : null}
         </div>
       </div>
     ) : (

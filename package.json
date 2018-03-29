@@ -30,6 +30,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
+    "react-load-image": "^0.1.6",
     "react-transition-group": "^2.2.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.1"

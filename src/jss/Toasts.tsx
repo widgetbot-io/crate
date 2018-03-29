@@ -128,14 +128,22 @@ export default (config: Config) => {
         width: '0',
       },
     },
+    'message-large': {
+      overflow: 'hidden',
+      borderRadius: '6px'
+    },
     'toast-content': {
       fontFamily: `'Roboto', sans-serif`,
       fontSize: '14px',
+      minHeight: '38px',
       padding: '10px 30px 10px 16px',
       userSelect: 'text',
       '& *': {
         userSelect: 'text',
       }
+    },
+    'contentHidden': {
+      display: 'none'
     },
     'toast-actions': {
       width: '100%',
@@ -159,6 +167,17 @@ export default (config: Config) => {
           backgroundColor: config.scheme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
         },
       }
+    },
+    'image': {
+      position: 'relative',
+      display: 'block',
+      width: '180px',
+      borderBottomLeftRadius: '6px',
+      borderBottomRightRadius: '6px'
+    },
+    'imageLarge': {
+      zIndex: -1,
+      borderRadius: 0
     }
   }
 
