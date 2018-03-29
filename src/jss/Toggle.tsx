@@ -93,7 +93,7 @@ export default (config: Config) => {
       transform: 'rotate(30deg) scale(0) !important',
     },
     'button-close': {
-      backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 50"><path d="M49 45.71l-3.55 3.571-20.6-20.713L3.54 49.997l-3.55-3.572L21.3 24.997-.01 3.57 3.54-.002l21.31 21.427L45.45.713 49 4.284 28.4 24.997" fill="#fff"/></svg>') !important`,
+      backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 50"><path d="M49 45.71l-3.55 3.571-20.6-20.713L3.54 49.997l-3.55-3.572L21.3 24.997-.01 3.57 3.54-.002l21.31 21.427L45.45.713 49 4.284 28.4 24.997" fill="%23fff"/></svg>') !important`,
       backgroundPosition: '50% !important',
       backgroundSize: '14px 14px !important',
       backgroundRepeat: 'no-repeat !important',
