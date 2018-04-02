@@ -1,11 +1,11 @@
 export namespace Modal {
-  export class roles {
+  export interface roles {
     color: string
     name: string
     position: number
   }
 
-  export class user {
+  export interface user {
     name: string
     id: string
     discriminator: string
