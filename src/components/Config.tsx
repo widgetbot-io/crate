@@ -92,6 +92,7 @@ export default (state: any, config: Config, initialConfig?: boolean) => {
           }
         }
         if (config.username) config.query.username = config.username
+        if (config.language) config.query.lang = config.language
 
         if (config.buttons) {
           // Fallback

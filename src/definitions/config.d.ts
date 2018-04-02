@@ -1,5 +1,8 @@
 import { Url } from "url"
 
+type Languages = 'en' | 'de' | 'fr' | 'es' | 'ar' | 'he' | 'it' | 'pl' | 'sk'
+type Components = 'toggle' | 'toasts' | 'embed' | 'modal'
+
 export interface Config {
   /**
    * WidgetBot widget options
@@ -13,6 +16,7 @@ export interface Config {
     secondary?: string
   }
   username: string              // Use a specific username for the guest chatter
+  language?: Languages
 
   /**
    * Aesthetic options
@@ -41,17 +45,7 @@ export interface Config {
   /**
    * Notifications
    */
-  notifications?: {
-    indicator?: {
-      enable: boolean
-    }
-    toasts?: {
-      enable: boolean           // Whether to enable toasts or not
-      visibilityTime?: number   // Max amount of time the toasts should be visible for (set to 0 to disable timeout)
-      maxMessages?: number      // Max amount of messages to display on screen
-      maxHeight?: string        // Max height of the toast container, CSS `calc()` can be used
-    }
-  }
+  notifications?: Notifications
 
   /**
    * General options
@@ -59,7 +53,7 @@ export interface Config {
   delay?: boolean               // Only load the widget once the button has been clicked
   debug?: boolean               // Debug crate
   analytics?: boolean           // Enable / disable analytics
-  disable?: ('toggle' | 'toasts' | 'embed' | 'modal')[] // Disable components
+  disable?: Components[] // Disable components
 
   /**
    * Overrides
@@ -68,4 +62,16 @@ export interface Config {
   widgetURL?: string            // Widget URL without any query strings
   url?: string                  // Final Widget URL for the iframe
   query?: any                   // Override the query string
+}
+
+interface Notifications {
+  indicator?: {
+    enable: boolean
+  }
+  toasts?: {
+    enable: boolean           // Whether to enable toasts or not
+    visibilityTime?: number   // Max amount of time the toasts should be visible for (set to 0 to disable timeout)
+    maxMessages?: number      // Max amount of messages to display on screen
+    maxHeight?: string        // Max height of the toast container, CSS `calc()` can be used
+  }
 }
