@@ -1,22 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "sourceMap": true,
-    "noImplicitAny": false,
-    "module": "es2015",
+    "outDir": "dist",
+    "module": "commonjs",
     "target": "es2015",
     "jsx": "react",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "react",
-      "react-dom",
-      "jss",
-      "node"
-    ]
-  },
-  "include": [
-    "./src/**/*"
-  ]
+    "experimentalDecorators": true,
+    "baseUrl": ""
+  }
 }
