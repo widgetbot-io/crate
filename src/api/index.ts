@@ -1,3 +1,4 @@
+import { API } from '@widgetbot/react-embed'
 import { createStore } from 'redux'
 
 import store from '../store'
@@ -7,15 +8,18 @@ import render, { root } from './renderer'
 
 class Crate {
   static root = root
+  node = root.createInstance()
 
+  /**
+   * The options to use for Crate. To update them, call setOptions
+   */
   options: Options = {
     server: '299881420891881473',
     channel: null,
     shard: 'https://widgetbot.io'
   }
 
-  node = root.createInstance()
-
+  api: API
   store = createStore(
     store,
     ((window as any).__REDUX_DEVTOOLS_EXTENSION__ || Function)()
@@ -27,6 +31,7 @@ class Crate {
    */
   constructor(options: Options) {
     this.setOptions(check.options(options))
+    console.log('constructor complete')
   }
 
   /**
@@ -45,11 +50,10 @@ class Crate {
    * Force updates the component
    */
   forceUpdate() {
-    render({
-      node: this.node,
-      options: this.options,
-      store: this.store
-    })
+    const { node, options, store } = this
+    const onAPI = api => (this.api = api)
+
+    render({ node, options, store, onAPI })
   }
 }
 

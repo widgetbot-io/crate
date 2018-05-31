@@ -1,3 +1,4 @@
+import { API } from '@widgetbot/react-embed'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
@@ -7,14 +8,16 @@ import Options from '../../types/options'
 import { Node } from './root'
 
 interface Props {
+  onAPI: (api: API) => void
   node: Node
   store: any
   options: Options
 }
-const render = ({ node, store, options }: Props) => {
+
+const render = ({ node, store, ...props }: Props) => {
   ReactDOM.render(
     <Provider store={store}>
-      <App options={options} />
+      <App {...props} />
     </Provider>,
     node
   )

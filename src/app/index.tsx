@@ -1,38 +1,58 @@
+import WidgetBot, { API } from '@widgetbot/react-embed'
 import * as React from 'react'
 import { connect } from 'react-redux'
+import ShadowDOM from 'react-shadow'
 import { Dispatch } from 'redux'
 
-import styled from '../controllers/emotion'
+import createStyled, { createEmotion, Provider } from '../controllers/emotion'
+import Options from '../types/options'
 import { State } from '../types/store'
+import App from './app'
 
-const A = styled('button')`
-  background-color: red;
-`
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'shadow-root': any
+      'shadow-styles': any
+    }
+  }
+}
 
 interface Props {
   dispatch: Dispatch
   state: State
+  onAPI: (api: API) => void
+  options: Options
 }
 
-class App extends React.Component<Props> {
+class Controller extends React.Component<Props> {
+  state = {
+    emotion: null
+  }
+
+  registerEmotion = (styleInjection: HTMLDivElement) => {
+    this.setState({
+      emotion: createEmotion(styleInjection)
+    })
+  }
+
   render() {
-    console.log(this.props)
-    // const { options } = this.props
+    const { onAPI, options } = this.props
 
     return (
-      <span>hi {this.props.state.test + ''}</span>
-      // <Context.Provider value={options}>
-      //   <ShadowDOM>
-      //     <div>
-      //       <span>works {options.server}</span>
-      //       <A onClick={console.log}>hi</A>
-      //     </div>
-      //   </ShadowDOM>
-      // </Context.Provider>
+      <ShadowDOM>
+        <shadow-root>
+          <shadow-styles ref={this.registerEmotion} />
+          {this.state.emotion && (
+            <Provider value={this.state.emotion}>
+              <App />
+            </Provider>
+          )}
+          <WidgetBot {...options} onAPI={onAPI} />
+        </shadow-root>
+      </ShadowDOM>
     )
   }
 }
 
-export default connect(state => ({
-  state
-}))(App)
+export default connect(state => ({ state }))(Controller)
