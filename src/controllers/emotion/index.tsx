@@ -18,15 +18,23 @@ export const { Provider, Consumer } = React.createContext(null)
 // to dynamically get the correct emotion instance
 // (and correct shadow DOM).
 function ShadowStyles<T>(component: (emotion: ShadowStyles) => T): T {
-  return (props => (
-    <Consumer>
-      {({ emotion, styled }) => {
-        const Component: any = component({ styled, ...emotion })
+  return class ShadowStyled extends React.PureComponent {
+    component
 
-        return <Component {...props} />
-      }}
-    </Consumer>
-  )) as any
+    render() {
+      return (
+        <Consumer>
+          {({ emotion, styled }) => {
+            if (!this.component) {
+              this.component = component({ styled, ...emotion })
+            }
+
+            return <this.component {...this.props} />
+          }}
+        </Consumer>
+      )
+    }
+  } as any
 }
 
 export default ShadowStyles

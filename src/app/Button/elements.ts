@@ -38,15 +38,15 @@ export const Root = ShadowStyles(
             background: none;
           `
         : css`
-            box-shadow: 0px 3px 5px -1px ${_color.fade(0.8)},
-              0px 6px 10px 0px ${_color.fade(0.86)},
-              0px 1px 18px 0px ${_color.fade(0.88)};
+            box-shadow: 0px 3px 5px -1px ${_color.fade(0.7).toString()},
+              0px 6px 10px 0px ${_color.fade(0.86).toString()},
+              0px 1px 18px 0px ${_color.fade(0.88).toString()};
             background-color: ${color};
           `
     }};
 
     transition: box-shadow 0.2s ease, background-color 0.2s ease,
-      opacity 0.1s ease, transform 0.2s ease;
+      opacity 0.2s ease, transform 0.2s ease;
 
     ${({ location }) => {
       const { x, y } = getCoords(location, padding)

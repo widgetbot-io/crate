@@ -16,10 +16,10 @@ interface StateProps {
 
 class Embed extends React.PureComponent<StateProps> {
   render() {
-    const { location, ...props } = this.props
+    const { open, location, ...props } = this.props
 
     return (
-      <Root location={location}>
+      <Root location={location} open={open}>
         <IFrame {...props} className="embed" />
       </Root>
     )
