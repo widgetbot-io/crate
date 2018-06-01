@@ -39,7 +39,6 @@ class Crate extends EmbedAPI {
     this.forceUpdate()
 
     if (!this.api) log('warn', Messages.EMBED_API_INVOCATION)
-    console.log('constructor complete')
   }
 
   /**
