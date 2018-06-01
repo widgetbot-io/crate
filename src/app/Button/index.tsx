@@ -28,11 +28,8 @@ class Button extends React.PureComponent<StateProps & DispatchProps> {
     return (
       <Root {...{ ...props, color, open }} className="button">
         <Icons.Root onClick={onClick}>
-          {open ? (
-            <Icons.Close className="close" />
-          ) : (
-            <Icons.Open className="open" color={accent} />
-          )}
+          <Icons.Close visible={open} className="close" />
+          <Icons.Open visible={!open} className="open" color={accent} />
         </Icons.Root>
       </Root>
     )

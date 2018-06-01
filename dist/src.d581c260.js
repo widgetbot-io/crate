@@ -7585,7 +7585,7 @@ exports.toggle = redux_actions_1.createAction(constants_1.TOGGLE);
 Object.defineProperty(exports, "__esModule", { value: true });
 var defaultState = function defaultState(options) {
     return {
-        open: true,
+        open: false,
         options: options
     };
 };
@@ -45574,13 +45574,14 @@ exports.default = Open;
 },{"react":35}],191:[function(require,module,exports) {
 "use strict";
 
-var _templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 2147483000;\n    cursor: pointer;\n    outline: none;\n\n    width: 56px;\n    height: 56px;\n\n    border-radius: 50%;\n    border: none;\n    padding: 0;\n\n    ", ";\n\n    transition: box-shadow 0.2s ease, background-color 0.2s ease,\n      opacity 0.2s ease, transform 0.2s ease;\n\n    ", ";\n  "], ["\n    position: fixed;\n    z-index: 2147483000;\n    cursor: pointer;\n    outline: none;\n\n    width: 56px;\n    height: 56px;\n\n    border-radius: 50%;\n    border: none;\n    padding: 0;\n\n    ", ";\n\n    transition: box-shadow 0.2s ease, background-color 0.2s ease,\n      opacity 0.2s ease, transform 0.2s ease;\n\n    ", ";\n  "]),
-    _templateObject2 = _taggedTemplateLiteral(["\n            background: none;\n          "], ["\n            background: none;\n          "]),
+var _templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 2147483000;\n    cursor: pointer;\n    outline: none;\n\n    width: 56px;\n    height: 56px;\n\n    border-radius: 50%;\n    border: none;\n    padding: 0;\n\n    ", ";\n\n    transition: box-shadow 0.2s ease, background-color 0.3s ease,\n      opacity 0.2s ease, transform 0.2s ease;\n\n    ", ";\n\n    @media (max-width: 500px) {\n      bottom: 0;\n      right: 0;\n      left: auto;\n      top: auto;\n      border-radius: 0;\n\n      ", ";\n    }\n  "], ["\n    position: fixed;\n    z-index: 2147483000;\n    cursor: pointer;\n    outline: none;\n\n    width: 56px;\n    height: 56px;\n\n    border-radius: 50%;\n    border: none;\n    padding: 0;\n\n    ", ";\n\n    transition: box-shadow 0.2s ease, background-color 0.3s ease,\n      opacity 0.2s ease, transform 0.2s ease;\n\n    ", ";\n\n    @media (max-width: 500px) {\n      bottom: 0;\n      right: 0;\n      left: auto;\n      top: auto;\n      border-radius: 0;\n\n      ", ";\n    }\n  "]),
+    _templateObject2 = _taggedTemplateLiteral(["\n            background-color: transparent;\n          "], ["\n            background-color: transparent;\n          "]),
     _templateObject3 = _taggedTemplateLiteral(["\n            box-shadow: 0px 3px 5px -1px ", ",\n              0px 6px 10px 0px ", ",\n              0px 1px 18px 0px ", ";\n            background-color: ", ";\n          "], ["\n            box-shadow: 0px 3px 5px -1px ", ",\n              0px 6px 10px 0px ", ",\n              0px 1px 18px 0px ", ";\n            background-color: ", ";\n          "]),
-    _templateObject4 = _taggedTemplateLiteral(["\n      width: 100%;\n      height: 100%;\n    "], ["\n      width: 100%;\n      height: 100%;\n    "]),
-    _templateObject5 = _taggedTemplateLiteral(["\n      width: 100%;\n      height: 100%;\n      padding: 12px;\n    "], ["\n      width: 100%;\n      height: 100%;\n      padding: 12px;\n    "]),
-    _templateObject6 = _taggedTemplateLiteral(["\n      width: 100%;\n      height: 100%;\n      padding: 19px;\n    "], ["\n      width: 100%;\n      height: 100%;\n      padding: 19px;\n    "]),
-    _templateObject7 = _taggedTemplateLiteral([""], [""]);
+    _templateObject4 = _taggedTemplateLiteral(["\n      width: 100%;\n      height: 100%;\n\n      & > * {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        transition: transform 0.16s linear, opacity 0.08s linear;\n      }\n    "], ["\n      width: 100%;\n      height: 100%;\n\n      & > * {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        transition: transform 0.16s linear, opacity 0.08s linear;\n      }\n    "]),
+    _templateObject5 = _taggedTemplateLiteral(["\n      padding: 12px;\n\n      ", ";\n    "], ["\n      padding: 12px;\n\n      ", ";\n    "]),
+    _templateObject6 = _taggedTemplateLiteral(["\n          opacity: 0;\n          transform: rotate(30deg) scale(0);\n        "], ["\n          opacity: 0;\n          transform: rotate(30deg) scale(0);\n        "]),
+    _templateObject7 = _taggedTemplateLiteral(["\n      padding: 19px;\n\n      ", ";\n    "], ["\n      padding: 19px;\n\n      ", ";\n    "]),
+    _templateObject8 = _taggedTemplateLiteral([""], [""]);
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -45615,26 +45616,42 @@ exports.Root = emotion_1.default(function (_ref) {
             y = _parse_1$getCoords.y;
 
         return css((_css = {}, _defineProperty(_css, x.axis, x.offset), _defineProperty(_css, y.axis, y.offset), _css));
+    }, function (_ref4) {
+        var location = _ref4.location;
+
+        var _parse_1$getCoords2 = parse_1.getCoords(location, exports.padding),
+            x = _parse_1$getCoords2.x,
+            y = _parse_1$getCoords2.y;
+
+        return css(_defineProperty({}, "border-" + (y.axis === 'top' ? 'bottom' : 'top') + "-" + (x.axis === 'left' ? 'right' : 'left') + "-radius", '50%'));
     });
 });
 var Icons;
 (function (Icons) {
-    Icons.Root = emotion_1.default(function (_ref4) {
-        var styled = _ref4.styled;
+    Icons.Root = emotion_1.default(function (_ref5) {
+        var styled = _ref5.styled;
         return styled('div')(_templateObject4);
     });
-    Icons.Open = emotion_1.default(function (_ref5) {
-        var styled = _ref5.styled;
-        return styled(open_1.default)(_templateObject5);
+    Icons.Open = emotion_1.default(function (_ref6) {
+        var styled = _ref6.styled,
+            css = _ref6.css;
+        return styled(open_1.default)(_templateObject5, function (_ref7) {
+            var visible = _ref7.visible;
+            return !visible && css(_templateObject6);
+        });
     });
-    Icons.Close = emotion_1.default(function (_ref6) {
-        var styled = _ref6.styled;
-        return styled(close_1.default)(_templateObject6);
+    Icons.Close = emotion_1.default(function (_ref8) {
+        var styled = _ref8.styled,
+            css = _ref8.css;
+        return styled(close_1.default)(_templateObject7, function (_ref9) {
+            var visible = _ref9.visible;
+            return !visible && css(_templateObject6);
+        });
     });
 })(Icons = exports.Icons || (exports.Icons = {}));
-exports.Indicator = emotion_1.default(function (_ref7) {
-    var styled = _ref7.styled;
-    return styled('span')(_templateObject7);
+exports.Indicator = emotion_1.default(function (_ref10) {
+    var styled = _ref10.styled;
+    return styled('span')(_templateObject8);
 });
 },{"color":220,"../../controllers/emotion":101,"../../util/parse":188,"./icons/close":231,"./icons/open":232}],122:[function(require,module,exports) {
 "use strict";
@@ -45688,7 +45705,7 @@ var Button = function (_React$PureComponent) {
                 color = _a.color,
                 props = __rest(_a, ["onClick", "open", "color"]);
             var accent = parse_1.getAccent(color);
-            return React.createElement(elements_1.Root, Object.assign({}, Object.assign({}, props, { color: color, open: open }), { className: "button" }), React.createElement(elements_1.Icons.Root, { onClick: onClick }, open ? React.createElement(elements_1.Icons.Close, { className: "close" }) : React.createElement(elements_1.Icons.Open, { className: "open", color: accent })));
+            return React.createElement(elements_1.Root, Object.assign({}, Object.assign({}, props, { color: color, open: open }), { className: "button" }), React.createElement(elements_1.Icons.Root, { onClick: onClick }, React.createElement(elements_1.Icons.Close, { visible: open, className: "close" }), React.createElement(elements_1.Icons.Open, { visible: !open, className: "open", color: accent })));
         }
     }]);
 
@@ -45998,10 +46015,10 @@ exports.API = embed_api_2.Client;
 },{"@widgetbot/embed-api":233,"react":35,"./elements":227,"./util":228}],256:[function(require,module,exports) {
 "use strict";
 
-var _templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    max-height: 600px;\n    width: 400px;\n    transition: opacity 0.4s ease, transform 0.3s ease;\n    transform-origin: 99% 99%;\n\n    ", ";\n\n    ", ";\n  "], ["\n    position: fixed;\n    max-height: 600px;\n    width: 400px;\n    transition: opacity 0.4s ease, transform 0.3s ease;\n    transform-origin: 99% 99%;\n\n    ", ";\n\n    ", ";\n  "]),
+var _templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    max-height: 600px;\n    width: 400px;\n    transition: opacity 0.4s ease,\n      transform 0.3s cubic-bezier(0.24, 0.6, 0.35, 0.96);\n\n    ", ";\n\n    @media (max-width: 500px) {\n      width: 100%;\n      height: 100%;\n      top: 0;\n      left: 0;\n      bottom: 0;\n      right: 0;\n\n      & > div {\n        border-radius: 0px !important;\n      }\n    }\n\n    ", ";\n  "], ["\n    position: fixed;\n    max-height: 600px;\n    width: 400px;\n    transition: opacity 0.4s ease,\n      transform 0.3s cubic-bezier(0.24, 0.6, 0.35, 0.96);\n\n    ", ";\n\n    @media (max-width: 500px) {\n      width: 100%;\n      height: 100%;\n      top: 0;\n      left: 0;\n      bottom: 0;\n      right: 0;\n\n      & > div {\n        border-radius: 0px !important;\n      }\n    }\n\n    ", ";\n  "]),
     _templateObject2 = _taggedTemplateLiteral([""], [""]),
-    _templateObject3 = _taggedTemplateLiteral(["\n            opacity: 0;\n            pointer-events: none;\n            transform: scale(0.1);\n\n            & > div {\n              border-radius: 100px !important;\n            }\n          "], ["\n            opacity: 0;\n            pointer-events: none;\n            transform: scale(0.1);\n\n            & > div {\n              border-radius: 100px !important;\n            }\n          "]),
-    _templateObject4 = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 100%;\n    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);\n    transition: border-radius 0.1s ease;\n\n    border-radius: 17px !important;\n    border-bottom-right-radius: 30px !important;\n  "], ["\n    height: 100%;\n    width: 100%;\n    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);\n    transition: border-radius 0.1s ease;\n\n    border-radius: 17px !important;\n    border-bottom-right-radius: 30px !important;\n  "]);
+    _templateObject3 = _taggedTemplateLiteral(["\n            opacity: 0;\n            pointer-events: none;\n            transform: scale(0.1);\n\n            & > div {\n              border-radius: 200px !important;\n            }\n          "], ["\n            opacity: 0;\n            pointer-events: none;\n            transform: scale(0.1);\n\n            & > div {\n              border-radius: 200px !important;\n            }\n          "]),
+    _templateObject4 = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 100%;\n    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);\n    transition: border-radius 0.2s ease;\n\n    border-radius: 17px !important;\n  "], ["\n    height: 100%;\n    width: 100%;\n    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);\n    transition: border-radius 0.2s ease;\n\n    border-radius: 17px !important;\n  "]);
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -46021,7 +46038,8 @@ exports.Root = emotion_1.default(function (_ref) {
     return styled('div')(_templateObject, function (_ref2) {
         var _css;
 
-        var location = _ref2.location;
+        var location = _ref2.location,
+            open = _ref2.open;
 
         var _parse_1$getCoords = parse_1.getCoords(location, elements_1.padding),
             x = _parse_1$getCoords.x,
@@ -46029,7 +46047,7 @@ exports.Root = emotion_1.default(function (_ref) {
 
         return css((_css = {
             height: "calc(100% - " + (y.offset + 20) + "px)"
-        }, _defineProperty(_css, x.axis, x.offset), _defineProperty(_css, y.axis, y.offset), _css));
+        }, _defineProperty(_css, x.axis, x.offset), _defineProperty(_css, y.axis, y.offset), _defineProperty(_css, "transformOrigin", (x.axis === 'right' ? 100 : 0) + "% " + (y.axis === 'bottom' ? 100 : 0) + "%"), _css));
     }, function (_ref3) {
         var open = _ref3.open;
         return open ? css(_templateObject2) : css(_templateObject3);
@@ -46452,7 +46470,7 @@ if (document && document.currentScript) {
     var script = document.currentScript;
     eval(script.innerHTML);
 }
-},{"./api":5}],255:[function(require,module,exports) {
+},{"./api":5}],257:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -46622,5 +46640,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[255,2], null)
+},{}]},{},[257,2], null)
 //# sourceMappingURL=/src.d581c260.map

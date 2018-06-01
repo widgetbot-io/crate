@@ -35,7 +35,7 @@ export const Root = ShadowStyles(
 
       return open
         ? css`
-            background: none;
+            background-color: transparent;
           `
         : css`
             box-shadow: 0px 3px 5px -1px ${_color.fade(0.7).toString()},
@@ -45,7 +45,7 @@ export const Root = ShadowStyles(
           `
     }};
 
-    transition: box-shadow 0.2s ease, background-color 0.2s ease,
+    transition: box-shadow 0.2s ease, background-color 0.3s ease,
       opacity 0.2s ease, transform 0.2s ease;
 
     ${({ location }) => {
@@ -56,6 +56,24 @@ export const Root = ShadowStyles(
         [y.axis]: y.offset
       })
     }};
+
+    @media (max-width: 500px) {
+      bottom: 0;
+      right: 0;
+      left: auto;
+      top: auto;
+      border-radius: 0;
+
+      ${({ location }) => {
+        const { x, y } = getCoords(location, padding)
+
+        return css({
+          [`border-${y.axis === 'top' ? 'bottom' : 'top'}-${
+            x.axis === 'left' ? 'right' : 'left'
+          }-radius`]: '50%'
+        })
+      }};
+    }
   `
 )
 
@@ -64,22 +82,45 @@ export namespace Icons {
     ({ styled }) => styled('div')`
       width: 100%;
       height: 100%;
+
+      & > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.16s linear, opacity 0.08s linear;
+      }
     `
   )
 
+  interface Props {
+    visible: boolean
+  }
+
   export const Open = ShadowStyles(
-    ({ styled }) => styled(OpenIcon)`
-      width: 100%;
-      height: 100%;
+    ({ styled, css }) => styled<Props, any>(OpenIcon)`
       padding: 12px;
+
+      ${({ visible }) =>
+        !visible &&
+        css`
+          opacity: 0;
+          transform: rotate(30deg) scale(0);
+        `};
     `
   )
 
   export const Close = ShadowStyles(
-    ({ styled }) => styled(CloseIcon)`
-      width: 100%;
-      height: 100%;
+    ({ styled, css }) => styled<Props, any>(CloseIcon)`
       padding: 19px;
+
+      ${({ visible }) =>
+        !visible &&
+        css`
+          opacity: 0;
+          transform: rotate(30deg) scale(0);
+        `};
     `
   )
 }
