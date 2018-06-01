@@ -1,23 +1,11 @@
 import Color from 'color'
 
 import ShadowStyles from '../../controllers/emotion'
-import Options from '../../types/options'
-import { getCoords } from '../../util/parse'
 import CloseIcon from './icons/close'
 import OpenIcon from './icons/open'
 
-interface IRoot {
-  location: Options['location']
-  color: string
-  glyph: [string, string]
-
-  open: boolean
-}
-
-export const padding = [25, 25]
-
 export const Root = ShadowStyles(
-  ({ styled, css }) => styled<IRoot, 'button'>('button')`
+  ({ styled, css }) => styled('button')`
     position: fixed;
     z-index: 2147483000;
     cursor: pointer;
@@ -30,26 +18,26 @@ export const Root = ShadowStyles(
     border: none;
     padding: 0;
 
-    ${({ open, color }) => {
-      const _color = Color(color)
+    ${({ theme }) => {
+      const color = Color(theme.options.color)
 
-      return open
+      return theme.open
         ? css`
             background-color: transparent;
           `
         : css`
-            box-shadow: 0px 3px 5px -1px ${_color.fade(0.7).toString()},
-              0px 6px 10px 0px ${_color.fade(0.86).toString()},
-              0px 1px 18px 0px ${_color.fade(0.88).toString()};
-            background-color: ${color};
+            box-shadow: 0px 3px 5px -1px ${color.fade(0.7).toString()},
+              0px 6px 10px 0px ${color.fade(0.86).toString()},
+              0px 1px 18px 0px ${color.fade(0.88).toString()};
+            background-color: ${theme.options.color};
           `
     }};
 
     transition: box-shadow 0.2s ease, background-color 0.3s ease,
       opacity 0.2s ease, transform 0.2s ease;
 
-    ${({ location }) => {
-      const { x, y } = getCoords(location, padding)
+    ${({ theme }) => {
+      const { x, y } = theme.coords
 
       return css({
         [x.axis]: x.offset,
@@ -64,8 +52,8 @@ export const Root = ShadowStyles(
       top: auto;
       border-radius: 0;
 
-      ${({ location }) => {
-        const { x, y } = getCoords(location, padding)
+      ${({ theme }) => {
+        const { x, y } = theme.coords
 
         return css({
           [`border-${y.axis === 'top' ? 'bottom' : 'top'}-${
@@ -89,21 +77,17 @@ export namespace Icons {
         left: 0;
         width: 100%;
         height: 100%;
-        transition: transform 0.16s linear, opacity 0.08s linear;
+        transition: transform 0.16s linear, opacity 0.2s ease;
       }
     `
   )
 
-  interface Props {
-    show: boolean
-  }
-
   export const Open = ShadowStyles(
-    ({ styled, css }) => styled<Props, any>(OpenIcon)`
+    ({ styled, css }) => styled(OpenIcon)`
       padding: 12px;
 
-      ${({ show }) =>
-        !show &&
+      ${({ theme }) =>
+        theme.open &&
         css`
           opacity: 0;
           transform: rotate(30deg) scale(0);
@@ -112,13 +96,18 @@ export namespace Icons {
   )
 
   export const Close = ShadowStyles(
-    ({ styled, css }) => styled<Props, any>(CloseIcon)`
+    ({ styled, css }) => styled(CloseIcon)`
       padding: 19px;
+      opacity: 0.6;
 
-      ${({ show }) =>
-        !show &&
+      &:hover {
+        opacity: 0.95;
+      }
+
+      ${({ theme }) =>
+        !theme.open &&
         css`
-          opacity: 0;
+          opacity: 0 !important;
           transform: rotate(30deg) scale(0);
         `};
     `

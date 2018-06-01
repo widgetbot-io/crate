@@ -18,6 +18,8 @@ interface OwnProps {
   onAPI: (api: API) => void
 }
 
+export const APIContext = React.createContext(null)
+
 class Controller extends React.Component<OwnProps> {
   state = {
     emotion: null
@@ -38,7 +40,9 @@ class Controller extends React.Component<OwnProps> {
           <shadow-styles ref={this.registerEmotion} />
           {this.state.emotion && (
             <Provider value={this.state.emotion}>
-              <App />
+              <APIContext.Provider value={onAPI}>
+                <App />
+              </APIContext.Provider>
             </Provider>
           )}
         </shadow-root>

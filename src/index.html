@@ -16,8 +16,8 @@
       shard: 'http://localhost:3000'
     })
 
-    crate.on('signIn', () => {
-      crate.emit('sendMessage', 'b')
+    crate.on('signIn', (user) => {
+      crate.emit('sendMessage', 'Goddamn. It works')
     })
   </script>
 

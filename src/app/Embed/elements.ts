@@ -1,25 +1,17 @@
 import WidgetBot from '@widgetbot/react-embed'
 
 import ShadowStyles from '../../controllers/emotion'
-import Options from '../../types/options'
-import { getCoords } from '../../util/parse'
-import { padding } from '../Button/elements'
-
-interface IRoot {
-  location: Options['location']
-  open: boolean
-}
 
 export const Root = ShadowStyles(
-  ({ styled, css }) => styled<IRoot, 'div'>('div')`
+  ({ styled, css }) => styled('div')`
     position: fixed;
     max-height: 600px;
     width: 400px;
     transition: opacity 0.4s ease,
       transform 0.3s cubic-bezier(0.24, 0.6, 0.35, 0.96);
 
-    ${({ location, open }) => {
-      const { x, y } = getCoords(location, padding)
+    ${({ theme }) => {
+      const { x, y } = theme.coords
 
       return css({
         height: `calc(100% - ${y.offset + 20}px)`,
@@ -44,8 +36,8 @@ export const Root = ShadowStyles(
       }
     }
 
-    ${({ open }) =>
-      open
+    ${({ theme }) =>
+      theme.open
         ? css``
         : css`
             opacity: 0;

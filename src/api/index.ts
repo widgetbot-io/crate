@@ -64,8 +64,8 @@ class Crate extends EmbedAPI {
     const { node, store } = this
     const onAPI = api => {
       this.api = api
-      this.emit = api.emit
-      this.on = api.on
+      this.emit = (...args) => api.emit(...args)
+      this.on = (...args) => api.on(...args)
     }
 
     render({ node, store, onAPI })

@@ -1,0 +1,57 @@
+import ShadowStyles from '../../../controllers/emotion'
+
+export const Root = ShadowStyles(({ styled, css }) => styled('div')``)
+
+export const Avatar = ShadowStyles(
+  ({ styled, css }) => styled('img')`
+    height: 35px;
+    width: 35px;
+    float: ${({ theme }) => theme.coords.x.axis};
+    border-radius: 100%;
+    cursor: pointer;
+  `
+)
+
+export const Content = ShadowStyles(
+  ({ styled, css }) => styled('p')`
+    padding: 10px 16px;
+    margin: 0;
+    float: ${({ theme }) => theme.coords.x.axis};
+
+    max-width: calc(100% - 100px);
+    transform: translate3d(0, 0, 0);
+    background-color: #36393e;
+    color: rgba(255, 255, 255, 0.7);
+    word-wrap: break-word;
+    word-break: break-word;
+    line-height: 18px;
+    white-space: pre-wrap;
+    box-shadow: 0 2px 8px 0 rgba(35, 47, 53, 0.5);
+    border-radius: 6px;
+
+    font-family: 'Roboto', sans-serif;
+
+    ${({ theme }) =>
+      css({
+        [`border-top-${theme.coords.x.axis}-radius`]: 0,
+        [`margin-${theme.coords.x.axis}`]: `10px`
+      })};
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      border-style: solid;
+      border-color: #36393e transparent;
+      display: block;
+      width: 0;
+
+      ${({ theme }) =>
+        css({
+          [theme.coords.x.axis]: `-10px`,
+          borderWidth:
+            theme.coords.x.axis === 'left' ? `10px 0 0 10px` : ` 10px 10px 0 0`
+        })};
+    }
+  `
+)

@@ -1,42 +1,41 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import Options from '../../types/options'
+import { APIContext } from '..'
 import { State } from '../../types/store'
 import { IFrame, Root } from './elements'
 
 interface StateProps {
   server: string
   channel: string
-  location: Options['location']
   shard: string
-
-  open: boolean
 }
 
 class Embed extends React.PureComponent<StateProps> {
   render() {
-    const { open, location, ...props } = this.props
+    const props = this.props
 
     return (
-      <Root location={location} open={open}>
-        <IFrame
-          {...props}
-          options={{
-            preset: 'crate'
-          }}
-          className="embed"
-        />
+      <Root className="embed">
+        <APIContext.Consumer>
+          {onAPI => (
+            <IFrame
+              {...props}
+              options={{
+                preset: 'crate'
+              }}
+              onAPI={onAPI}
+              className="react-embed"
+            />
+          )}
+        </APIContext.Consumer>
       </Root>
     )
   }
 }
 
-export default connect<StateProps, {}, {}, State>(({ options, open }) => ({
+export default connect<StateProps, {}, {}, State>(({ options }) => ({
   server: options.server,
   channel: options.channel,
-  shard: options.shard,
-  location: options.location,
-
-  open
+  shard: options.shard
 }))(Embed)

@@ -2,7 +2,7 @@ import Color from 'color'
 
 import Options from '../types/options'
 
-export const getCoords = ([y, x]: Options['location'], margin = [25, 25]) => ({
+export const getCoords = ([y, x]: Options['location'], margin = [20, 20]) => ({
   x: {
     axis: typeof x === 'string' ? x : x > -1 ? 'left' : 'right',
     offset: typeof x === 'string' ? margin[0] : Math.abs(x)
