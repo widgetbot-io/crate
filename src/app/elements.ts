@@ -4,6 +4,7 @@ export const Root = ShadowStyles(
   ({ styled }) => styled('div')`
     & * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
   `
 )

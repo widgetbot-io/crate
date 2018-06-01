@@ -45734,7 +45734,7 @@ exports.default = react_redux_1.connect(function (_ref) {
 },{"react":35,"react-redux":37,"../../store/actions":23,"../../util/parse":188,"./elements":191}],91:[function(require,module,exports) {
 "use strict";
 
-var _templateObject = _taggedTemplateLiteral(["\n    & * {\n      box-sizing: border-box;\n    }\n  "], ["\n    & * {\n      box-sizing: border-box;\n    }\n  "]);
+var _templateObject = _taggedTemplateLiteral(["\n    & * {\n      box-sizing: border-box;\n      -webkit-tap-highlight-color: transparent;\n    }\n  "], ["\n    & * {\n      box-sizing: border-box;\n      -webkit-tap-highlight-color: transparent;\n    }\n  "]);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
