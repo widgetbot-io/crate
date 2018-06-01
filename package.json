@@ -19,7 +19,7 @@
     "@types/react-redux": "^6.0.0",
     "@types/redux-actions": "^2.3.0",
     "@widgetbot/embed-api": "^1.1.0",
-    "@widgetbot/react-embed": "^1.1.0",
+    "@widgetbot/react-embed": "^1.1.1",
     "awesome-typescript-loader": "^3.4.1",
     "color": "^3.0.0",
     "create-emotion": "^9.1.3",

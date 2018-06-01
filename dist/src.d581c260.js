@@ -45550,8 +45550,9 @@ var __importStar = this && this.__importStar || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(require("react"));
-var Close = function Close(props) {
-    return React.createElement("svg", Object.assign({ viewBox: "0 0 49 50" }, props), React.createElement("path", { d: "M49 45.71l-3.55 3.571-20.6-20.713L3.54 49.997l-3.55-3.572L21.3 24.997-.01 3.57 3.54-.002l21.31 21.427L45.45.713 49 4.284 28.4 24.997", fill: "#fff" }));
+var Close = function Close(_ref) {
+    var className = _ref.className;
+    return React.createElement("svg", { viewBox: "0 0 49 50", className: className }, React.createElement("path", { d: "M49 45.71l-3.55 3.571-20.6-20.713L3.54 49.997l-3.55-3.572L21.3 24.997-.01 3.57 3.54-.002l21.31 21.427L45.45.713 49 4.284 28.4 24.997", fill: "#fff" }));
 };
 exports.default = Close;
 },{"react":35}],232:[function(require,module,exports) {
@@ -45567,8 +45568,10 @@ var __importStar = this && this.__importStar || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(require("react"));
-var Open = function Open(props) {
-    return React.createElement("svg", Object.assign({ viewBox: "-357 161 245 240" }, props), React.createElement("path", { fill: props.color, d: "M-145.3 217.1c-29.2-21.9-57-21.3-57-21.3l-2.8 3.2c34.5 10.5 50.5 25.8 50.5 25.8-21.1-11.6-41.8-17.2-61-19.5-14.6-1.6-28.6-1.2-41 .4-1.2 0-2.2.2-3.4.4-7.1.6-24.3 3.2-46 12.8-7.5 3.4-12 5.9-12 5.9s16.8-16 53.3-26.6l-2-2.4s-27.8-.6-57 21.3c0 0-29.2 52.9-29.2 118.2 0 0 17 29.4 61.8 30.8 0 0 7.5-9.1 13.6-16.8-25.8-7.7-35.5-23.9-35.5-23.9s2 1.4 5.7 3.4c.2.2.4.4.8.6.6.4 1.2.6 1.8 1 5.1 2.8 10.1 5.1 14.8 6.9 8.3 3.2 18.2 6.5 29.8 8.7 15.2 2.8 33.1 3.9 52.5.2 9.5-1.6 19.3-4.5 29.4-8.7 7.1-2.6 15-6.5 23.3-12 0 0-10.1 16.6-36.7 24.1 6.1 7.7 13.4 16.4 13.4 16.4 44.8-1.4 62-30.8 62-30.8.1-65.1-29.1-118.1-29.1-118.1zm-127.1 99.4c-11.4 0-20.7-10.1-20.7-22.5s9.1-22.5 20.7-22.5 20.9 10.1 20.7 22.5c0 12.3-9.2 22.5-20.7 22.5zm74 0c-11.4 0-20.7-10.1-20.7-22.5s9.1-22.5 20.7-22.5 20.7 10.1 20.7 22.5c0 12.3-9.2 22.5-20.7 22.5z" }));
+var Open = function Open(_ref) {
+    var className = _ref.className,
+        color = _ref.color;
+    return React.createElement("svg", { viewBox: "-357 161 245 240", className: className }, React.createElement("path", { fill: color, d: "M-145.3 217.1c-29.2-21.9-57-21.3-57-21.3l-2.8 3.2c34.5 10.5 50.5 25.8 50.5 25.8-21.1-11.6-41.8-17.2-61-19.5-14.6-1.6-28.6-1.2-41 .4-1.2 0-2.2.2-3.4.4-7.1.6-24.3 3.2-46 12.8-7.5 3.4-12 5.9-12 5.9s16.8-16 53.3-26.6l-2-2.4s-27.8-.6-57 21.3c0 0-29.2 52.9-29.2 118.2 0 0 17 29.4 61.8 30.8 0 0 7.5-9.1 13.6-16.8-25.8-7.7-35.5-23.9-35.5-23.9s2 1.4 5.7 3.4c.2.2.4.4.8.6.6.4 1.2.6 1.8 1 5.1 2.8 10.1 5.1 14.8 6.9 8.3 3.2 18.2 6.5 29.8 8.7 15.2 2.8 33.1 3.9 52.5.2 9.5-1.6 19.3-4.5 29.4-8.7 7.1-2.6 15-6.5 23.3-12 0 0-10.1 16.6-36.7 24.1 6.1 7.7 13.4 16.4 13.4 16.4 44.8-1.4 62-30.8 62-30.8.1-65.1-29.1-118.1-29.1-118.1zm-127.1 99.4c-11.4 0-20.7-10.1-20.7-22.5s9.1-22.5 20.7-22.5 20.9 10.1 20.7 22.5c0 12.3-9.2 22.5-20.7 22.5zm74 0c-11.4 0-20.7-10.1-20.7-22.5s9.1-22.5 20.7-22.5 20.7 10.1 20.7 22.5c0 12.3-9.2 22.5-20.7 22.5z" }));
 };
 exports.default = Open;
 },{"react":35}],191:[function(require,module,exports) {
@@ -45636,16 +45639,16 @@ var Icons;
         var styled = _ref6.styled,
             css = _ref6.css;
         return styled(open_1.default)(_templateObject5, function (_ref7) {
-            var visible = _ref7.visible;
-            return !visible && css(_templateObject6);
+            var show = _ref7.show;
+            return !show && css(_templateObject6);
         });
     });
     Icons.Close = emotion_1.default(function (_ref8) {
         var styled = _ref8.styled,
             css = _ref8.css;
         return styled(close_1.default)(_templateObject7, function (_ref9) {
-            var visible = _ref9.visible;
-            return !visible && css(_templateObject6);
+            var show = _ref9.show;
+            return !show && css(_templateObject6);
         });
     });
 })(Icons = exports.Icons || (exports.Icons = {}));
@@ -45705,7 +45708,7 @@ var Button = function (_React$PureComponent) {
                 color = _a.color,
                 props = __rest(_a, ["onClick", "open", "color"]);
             var accent = parse_1.getAccent(color);
-            return React.createElement(elements_1.Root, Object.assign({}, Object.assign({}, props, { color: color, open: open }), { className: "button" }), React.createElement(elements_1.Icons.Root, { onClick: onClick }, React.createElement(elements_1.Icons.Close, { visible: open, className: "close" }), React.createElement(elements_1.Icons.Open, { visible: !open, className: "open", color: accent })));
+            return React.createElement(elements_1.Root, Object.assign({}, Object.assign({}, props, { color: color, open: open }), { className: "button" }), React.createElement(elements_1.Icons.Root, { onClick: onClick }, React.createElement(elements_1.Icons.Close, { show: open, className: "close" }), React.createElement(elements_1.Icons.Open, { show: !open, className: "open", color: accent })));
         }
     }]);
 
@@ -45942,6 +45945,12 @@ function generateUUID() {
     });
 }
 exports.generateUUID = generateUUID;
+exports.searchParams = function (obj) {
+    if (obj === void 0) { obj = {}; }
+    return Object.keys(obj)
+        .map(function (k) { return encodeURIComponent(k) + "=" + encodeURIComponent(obj[k]); })
+        .join('&');
+};
 
 },{}],219:[function(require,module,exports) {
 "use strict";
@@ -45997,8 +46006,9 @@ var WidgetBot = /** @class */ (function (_super) {
             onAPI(this.api);
     };
     WidgetBot.prototype.getUrl = function () {
+        var options = this.props.options;
         var _a = this.state, shard = _a.shard, server = _a.server, channel = _a.channel;
-        return shard + "/channels/" + server + (channel ? "/" + channel : '') + "/?api=" + this.id;
+        return shard + "/channels/" + server + (channel ? "/" + channel : '') + "/?api=" + this.id + (options ? "&" + util_1.searchParams(options) : '');
     };
     WidgetBot.prototype.render = function () {
         var _a = this.props, className = _a.className, style = _a.style, height = _a.height, width = _a.width;
@@ -46054,8 +46064,7 @@ exports.Root = emotion_1.default(function (_ref) {
     });
 });
 exports.IFrame = emotion_1.default(function (_ref4) {
-    var styled = _ref4.styled,
-        css = _ref4.css;
+    var styled = _ref4.styled;
     return styled(react_embed_1.default)(_templateObject4);
 });
 },{"@widgetbot/react-embed":219,"../../controllers/emotion":101,"../../util/parse":188,"../Button/elements":191}],123:[function(require,module,exports) {
@@ -46106,7 +46115,9 @@ var Embed = function (_React$PureComponent) {
                 open = _a.open,
                 location = _a.location,
                 props = __rest(_a, ["open", "location"]);
-            return React.createElement(elements_1.Root, { location: location, open: open }, React.createElement(elements_1.IFrame, Object.assign({}, props, { className: "embed" })));
+            return React.createElement(elements_1.Root, { location: location, open: open }, React.createElement(elements_1.IFrame, Object.assign({}, props, { options: {
+                    preset: 'crate'
+                }, className: "embed" })));
         }
     }]);
 
@@ -46470,7 +46481,7 @@ if (document && document.currentScript) {
     var script = document.currentScript;
     eval(script.innerHTML);
 }
-},{"./api":5}],257:[function(require,module,exports) {
+},{"./api":5}],258:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -46640,5 +46651,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[257,2], null)
+},{}]},{},[258,2], null)
 //# sourceMappingURL=/src.d581c260.map

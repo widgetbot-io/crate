@@ -60,7 +60,7 @@ export const Root = ShadowStyles(
 )
 
 export const IFrame = ShadowStyles(
-  ({ styled, css }) => styled(WidgetBot)`
+  ({ styled }) => styled(WidgetBot)`
     height: 100%;
     width: 100%;
     box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);

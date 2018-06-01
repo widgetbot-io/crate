@@ -20,7 +20,13 @@ class Embed extends React.PureComponent<StateProps> {
 
     return (
       <Root location={location} open={open}>
-        <IFrame {...props} className="embed" />
+        <IFrame
+          {...props}
+          options={{
+            preset: 'crate'
+          }}
+          className="embed"
+        />
       </Root>
     )
   }

@@ -79,9 +79,9 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.1.1.tgz#828735114c1bb8cb0b23fe27978721dc5e610702"
 
-"@widgetbot/react-embed@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.1.0.tgz#1668e826439d78b3037c902a35279921c0ac1187"
+"@widgetbot/react-embed@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.1.1.tgz#300ba035500764ffebf0ac269db8f7c4d0bfc9d3"
   dependencies:
     "@widgetbot/embed-api" "^1.1.1"
 

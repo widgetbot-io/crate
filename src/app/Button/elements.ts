@@ -95,15 +95,15 @@ export namespace Icons {
   )
 
   interface Props {
-    visible: boolean
+    show: boolean
   }
 
   export const Open = ShadowStyles(
     ({ styled, css }) => styled<Props, any>(OpenIcon)`
       padding: 12px;
 
-      ${({ visible }) =>
-        !visible &&
+      ${({ show }) =>
+        !show &&
         css`
           opacity: 0;
           transform: rotate(30deg) scale(0);
@@ -115,8 +115,8 @@ export namespace Icons {
     ({ styled, css }) => styled<Props, any>(CloseIcon)`
       padding: 19px;
 
-      ${({ visible }) =>
-        !visible &&
+      ${({ show }) =>
+        !show &&
         css`
           opacity: 0;
           transform: rotate(30deg) scale(0);
