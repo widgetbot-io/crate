@@ -1,36 +1,44 @@
-import { API } from '@widgetbot/react-embed'
 import { createStore } from 'redux'
 
+import Messages from '../messages'
 import store from '../store'
+import * as actions from '../store/actions'
+import defaultState from '../store/defaultState'
 import Options from '../types/options'
-import { check, is, validate } from '../util/validate'
-import render, { root } from './renderer'
+import { is, validate } from '../util/validate'
+import EmbedAPI from './embedAPI'
+import render from './renderer'
+import { enhancer, log } from './util'
 
-class Crate {
-  static root = root
-  node = root.createInstance()
-
-  /**
-   * The options to use for Crate. To update them, call setOptions
-   */
+class Crate extends EmbedAPI {
   options: Options = {
     server: '299881420891881473',
     channel: null,
-    shard: 'https://widgetbot.io'
-  }
+    location: ['bottom', 'right'],
 
-  api: API
-  store = createStore(
-    store,
-    ((window as any).__REDUX_DEVTOOLS_EXTENSION__ || Function)()
-  )
+    color: '#7388D9',
+    glyph: ['', ''],
+    css: '',
+
+    notifications: true,
+    indicator: true,
+
+    shard: 'https://widgetbot.io',
+    defer: false
+  }
 
   /**
    * Instantiate a new Crate instant
    * @param options The options to use
    */
-  constructor(options: Options) {
-    this.setOptions(check.options(options))
+  constructor(userOptions: Options) {
+    super()
+    const options = this.setOptions(userOptions)
+    this.store = createStore(store, defaultState(options), enhancer)
+
+    this.forceUpdate()
+
+    if (!this.api) log('warn', Messages.EMBED_API_INVOCATION)
     console.log('constructor complete')
   }
 
@@ -41,7 +49,10 @@ class Crate {
   @validate
   setOptions(@is.options options: Options) {
     this.options = Object.freeze({ ...this.options, ...options })
-    this.forceUpdate()
+
+    if (this.store) {
+      this.store.dispatch(actions.updateOptions(options))
+    }
 
     return this.options
   }
@@ -50,10 +61,18 @@ class Crate {
    * Force updates the component
    */
   forceUpdate() {
-    const { node, options, store } = this
-    const onAPI = api => (this.api = api)
+    const { node, store } = this
+    const onAPI = api => {
+      this.api = api
+      this.emit = api.emit
+      this.on = api.on
+    }
 
-    render({ node, options, store, onAPI })
+    render({ node, store, onAPI })
+  }
+
+  toggle(open: boolean) {
+    this.store.dispatch(actions.toggle({ open }))
   }
 }
 

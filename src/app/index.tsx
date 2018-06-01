@@ -1,12 +1,8 @@
-import WidgetBot, { API } from '@widgetbot/react-embed'
+import { API } from '@widgetbot/react-embed'
 import * as React from 'react'
-import { connect } from 'react-redux'
 import ShadowDOM from 'react-shadow'
-import { Dispatch } from 'redux'
 
-import createStyled, { createEmotion, Provider } from '../controllers/emotion'
-import Options from '../types/options'
-import { State } from '../types/store'
+import { createEmotion, Provider } from '../controllers/emotion'
 import App from './app'
 
 declare global {
@@ -18,14 +14,11 @@ declare global {
   }
 }
 
-interface Props {
-  dispatch: Dispatch
-  state: State
+interface OwnProps {
   onAPI: (api: API) => void
-  options: Options
 }
 
-class Controller extends React.Component<Props> {
+class Controller extends React.Component<OwnProps> {
   state = {
     emotion: null
   }
@@ -37,7 +30,7 @@ class Controller extends React.Component<Props> {
   }
 
   render() {
-    const { onAPI, options } = this.props
+    const { onAPI } = this.props
 
     return (
       <ShadowDOM>
@@ -48,11 +41,10 @@ class Controller extends React.Component<Props> {
               <App />
             </Provider>
           )}
-          <WidgetBot {...options} onAPI={onAPI} />
         </shadow-root>
       </ShadowDOM>
     )
   }
 }
 
-export default connect(state => ({ state }))(Controller)
+export default Controller

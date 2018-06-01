@@ -1,5 +1,7 @@
-import { Action, createAction } from 'redux-actions'
+import { createAction } from 'redux-actions'
 
-import { TEST } from './constants'
+import Options from '../../types/options'
+import { TOGGLE, UPDATE_OPTIONS } from './constants'
 
-export const test = createAction(TEST, (text: Action<any>) => ({}))
+export const updateOptions = createAction<Options>(UPDATE_OPTIONS)
+export const toggle = createAction<{ open?: boolean }>(TOGGLE)

@@ -1,17 +1,27 @@
-import { handleActions } from 'redux-actions'
+import produce from 'immer'
+import { Action, handleActions } from 'redux-actions'
 
+import Options from '../types/options'
 import { State } from '../types/store'
-import { TEST } from './actions/constants'
-import defaultState from './defaultState'
+import { TOGGLE, UPDATE_OPTIONS } from './actions/constants'
 
-export default handleActions<State>(
+const store = handleActions<State, any>(
   {
-    [TEST]: (state, action): State => {
-      return {
-        ...state,
-        test: true
-      }
-    }
+    [TOGGLE]: (state, action: Action<{ open?: boolean }>) =>
+      produce(state, draft => {
+        const { open } = action.payload
+        draft.open = typeof open === 'boolean' ? open : !state.open
+      }),
+
+    [UPDATE_OPTIONS]: (state, action: Action<Options>) =>
+      produce(state, draft => {
+        const options = action.payload
+        Object.keys(options).forEach(
+          option => (draft.options[option] = options[option])
+        )
+      })
   },
-  defaultState
+  null
 )
+
+export default store

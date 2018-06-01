@@ -1,7 +1,6 @@
-export interface State {
-  test: boolean
-}
+import Options from './options'
 
-export interface Actions {
-  type: 'a'
+export interface State {
+  open: boolean
+  options: Options
 }

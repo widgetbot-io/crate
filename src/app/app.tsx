@@ -1,16 +1,17 @@
 import * as React from 'react'
 
-import ShadowStyles from '../controllers/emotion'
-
-const T = ShadowStyles(
-  ({ styled }) => styled<{ a: string }, 'div'>('div')`
-    color: ${({ a }) => a};
-  `
-)
+import Button from './Button'
+import { Root } from './elements'
+import Embed from './Embed'
 
 class App extends React.Component {
   render() {
-    return <T a="red">hi</T>
+    return (
+      <Root className="root">
+        <Embed />
+        <Button />
+      </Root>
+    )
   }
 }
 
