@@ -38,15 +38,39 @@ class Crate extends EmbedAPI {
    */
   constructor(userOptions: Options) {
     super()
-
     const options = this.setOptions(userOptions)
-
     this.store = createStore(store, defaultState(options.get()), enhancer)
+
     this.forceUpdate()
+    this.addEventListeners()
 
+    // Add default window.crate reference
+    if (window && !(window as any).crate) {
+      ;(window as any).crate = this
+    }
+  }
+
+  /**
+   * Force updates the React component
+   */
+  private forceUpdate() {
+    const { node, store } = this
+    const onAPI = api => {
+      this.api = api
+      this.emit = (...args) => api.emit(...args)
+      this.on = (...args) => api.on(...args)
+    }
+
+    render({ node, store, onAPI })
+  }
+
+  /**
+   * Adds the event listeners for the embed-api transport
+   */
+  private addEventListeners() {
     const { api } = this
-
     if (!api) throw new Error(Messages.EMBED_API_INVOCATION)
+
     api.on('message', ({ message }) => {
       this.notify({
         id: message.id,
@@ -65,6 +89,8 @@ class Crate extends EmbedAPI {
     })
   }
 
+  /*********   Public Methods   *********/
+
   /**
    * Updates the options by merging a new options object
    * @param options The new options object
@@ -81,20 +107,6 @@ class Crate extends EmbedAPI {
   }
 
   /**
-   * Force updates the React component
-   */
-  private forceUpdate() {
-    const { node, store } = this
-    const onAPI = api => {
-      this.api = api
-      this.emit = (...args) => api.emit(...args)
-      this.on = (...args) => api.on(...args)
-    }
-
-    render({ node, store, onAPI })
-  }
-
-  /**
    * Toggles the widget open / closed
    */
   toggle(open?: boolean) {
@@ -104,12 +116,16 @@ class Crate extends EmbedAPI {
   /**
    * Notifies a message to the user
    */
-  notify(props: Message & { timeout?: string | false; id?: string } | string) {
+  notify(
+    content: string | Message & { timeout?: string | false; id?: string }
+  ) {
+    const props = typeof content === 'string' ? { content } : content
+
     const data = {
       timeout: this.options.timeout,
       id: `${Math.random()}${+new Date()}`,
-      content: typeof props === 'string' ? props : props.content,
-      ...(typeof props !== 'string' && props)
+      content: props.content,
+      ...props
     }
 
     this.store.dispatch(actions.message(data))
@@ -121,7 +137,10 @@ class Crate extends EmbedAPI {
     if (data.timeout) setTimeout(hide, data.timeout)
 
     return {
-      hide
+      hide,
+      delete() {
+        hide({ animate: false })
+      }
     }
   }
 }
