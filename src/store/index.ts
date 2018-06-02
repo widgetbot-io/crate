@@ -2,8 +2,13 @@ import produce from 'immer'
 import { Action, handleActions } from 'redux-actions'
 
 import Options from '../types/options'
-import { State } from '../types/store'
-import { TOGGLE, UPDATE_OPTIONS } from './actions/constants'
+import { Notification, State } from '../types/store'
+import {
+  NOTIFICATION,
+  REMOVE_NOTIFICATION,
+  TOGGLE,
+  UPDATE_OPTIONS,
+} from './actions/constants'
 
 const store = handleActions<State, any>(
   {
@@ -13,12 +18,45 @@ const store = handleActions<State, any>(
         draft.open = typeof open === 'boolean' ? open : !state.open
       }),
 
-    [UPDATE_OPTIONS]: (state, action: Action<Options>) =>
+    [UPDATE_OPTIONS]: (state, action: Action<Options>) => ({
+      ...state,
+      options: {
+        ...state.options,
+        ...action.payload
+      }
+    }),
+
+    [NOTIFICATION]: (state, action: Action<Notification>) =>
       produce(state, draft => {
-        const options = action.payload
-        Object.keys(options).forEach(
-          option => (draft.options[option] = options[option])
+        draft.notifications.push({
+          visible: true,
+          ...action.payload
+        })
+      }),
+
+    [REMOVE_NOTIFICATION]: (
+      state,
+      action: Action<{ id: string; animate?: boolean }>
+    ) =>
+      produce(state, draft => {
+        const animate =
+          typeof action.payload.animate === 'boolean'
+            ? action.payload.animate
+            : true
+
+        const index = draft.notifications.findIndex(
+          message => message.id === action.payload.id
         )
+
+        if (index !== -1) {
+          if (animate) {
+            // Animate visibility
+            draft.notifications[index].visible = false
+          } else {
+            // Remove entirely
+            draft.notifications.splice(index, 1)
+          }
+        }
       })
   },
   null

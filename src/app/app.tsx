@@ -14,6 +14,7 @@ import Notifications from './Notifications'
 interface StateProps {
   options: Options
   open: boolean
+  location: any
 }
 
 class App extends React.Component<StateProps> {
@@ -24,11 +25,13 @@ class App extends React.Component<StateProps> {
   })
 
   render() {
+    const { open } = this.props
+    console.log(this.props.location)
     return (
       <ThemeProvider theme={this.getTheme()}>
         <Root className="root">
           <Embed />
-          <Notifications />
+          {!open && <Notifications />}
           <Button />
         </Root>
       </ThemeProvider>
@@ -38,5 +41,6 @@ class App extends React.Component<StateProps> {
 
 export default connect<StateProps, {}, {}, State>(({ options, open }) => ({
   options,
+  location: options.location,
   open
 }))(App)

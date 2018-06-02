@@ -5,8 +5,6 @@ import ShadowStyles from '../../controllers/emotion'
 export const Root = ShadowStyles(
   ({ styled, css }) => styled('div')`
     position: fixed;
-    max-height: 600px;
-    width: 400px;
     transition: opacity 0.4s ease,
       transform 0.3s cubic-bezier(0.24, 0.6, 0.35, 0.96);
 
@@ -22,6 +20,11 @@ export const Root = ShadowStyles(
         }%`
       })
     }};
+
+    @media (min-width: 501px) {
+      width: 400px;
+      max-height: 600px;
+    }
 
     @media (max-width: 500px) {
       width: 100%;

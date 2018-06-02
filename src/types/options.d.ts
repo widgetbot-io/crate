@@ -23,6 +23,8 @@ interface Options {
   notifications?: boolean
   // Unread message indicator
   indicator?: boolean
+  // Notification timeout
+  timeout?: number
 
   // Only load the widget once the user opens it
   defer?: boolean

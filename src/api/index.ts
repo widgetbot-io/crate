@@ -5,27 +5,32 @@ import store from '../store'
 import * as actions from '../store/actions'
 import defaultState from '../store/defaultState'
 import Options from '../types/options'
+import { Message } from '../types/store'
 import { is, validate } from '../util/validate'
 import EmbedAPI from './embedAPI'
 import render from './renderer'
-import { enhancer, log } from './util'
+import { enhancer, observeOptions } from './util'
 
 class Crate extends EmbedAPI {
-  options: Options = {
-    server: '299881420891881473',
-    channel: null,
-    location: ['bottom', 'right'],
+  options = observeOptions(
+    {
+      server: '299881420891881473',
+      channel: null,
+      location: ['bottom', 'right'],
 
-    color: '#7388D9',
-    glyph: ['', ''],
-    css: '',
+      color: '#7388D9',
+      glyph: ['', ''],
+      css: '',
 
-    notifications: true,
-    indicator: true,
+      notifications: true,
+      indicator: true,
+      timeout: 10000,
 
-    shard: 'https://widgetbot.io',
-    defer: false
-  }
+      shard: 'https://widgetbot.io',
+      defer: false
+    },
+    this.setOptions.bind(this)
+  )
 
   /**
    * Instantiate a new Crate instant
@@ -33,12 +38,31 @@ class Crate extends EmbedAPI {
    */
   constructor(userOptions: Options) {
     super()
-    const options = this.setOptions(userOptions)
-    this.store = createStore(store, defaultState(options), enhancer)
 
+    const options = this.setOptions(userOptions)
+
+    this.store = createStore(store, defaultState(options.get()), enhancer)
     this.forceUpdate()
 
-    if (!this.api) log('warn', Messages.EMBED_API_INVOCATION)
+    const { api } = this
+
+    if (!api) throw new Error(Messages.EMBED_API_INVOCATION)
+    api.on('message', ({ message }) => {
+      this.notify({
+        id: message.id,
+        content: message.content,
+        avatar: message.author.avatar
+      })
+    })
+
+    api.on('messageDelete', ({ id }) => {
+      this.store.dispatch(
+        actions.deleteMessage({
+          id,
+          animate: false
+        })
+      )
+    })
   }
 
   /**
@@ -47,7 +71,7 @@ class Crate extends EmbedAPI {
    */
   @validate
   setOptions(@is.options options: Options) {
-    this.options = Object.freeze({ ...this.options, ...options })
+    this.options.set({ ...this.options.get(), ...options })
 
     if (this.store) {
       this.store.dispatch(actions.updateOptions(options))
@@ -57,9 +81,9 @@ class Crate extends EmbedAPI {
   }
 
   /**
-   * Force updates the component
+   * Force updates the React component
    */
-  forceUpdate() {
+  private forceUpdate() {
     const { node, store } = this
     const onAPI = api => {
       this.api = api
@@ -70,8 +94,35 @@ class Crate extends EmbedAPI {
     render({ node, store, onAPI })
   }
 
-  toggle(open: boolean) {
+  /**
+   * Toggles the widget open / closed
+   */
+  toggle(open?: boolean) {
     this.store.dispatch(actions.toggle({ open }))
+  }
+
+  /**
+   * Notifies a message to the user
+   */
+  notify(props: Message & { timeout?: string | false; id?: string } | string) {
+    const data = {
+      timeout: this.options.timeout,
+      id: `${Math.random()}${+new Date()}`,
+      content: typeof props === 'string' ? props : props.content,
+      ...(typeof props !== 'string' && props)
+    }
+
+    this.store.dispatch(actions.message(data))
+
+    const hide = props =>
+      this.store.dispatch(actions.deleteMessage({ id: data.id, ...props }))
+
+    // Hide the message after timeout
+    if (data.timeout) setTimeout(hide, data.timeout)
+
+    return {
+      hide
+    }
   }
 }
 

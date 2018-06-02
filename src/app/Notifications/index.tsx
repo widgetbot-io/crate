@@ -1,20 +1,26 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { State } from '../../types/store'
+import { Notification, State } from '../../types/store'
 import { Root } from './elements'
-import Notification from './Notification'
+import Message from './Message'
 
-interface StateProps {}
+interface StateProps {
+  notifications: Notification[]
+}
 
 class Notifications extends React.PureComponent<StateProps> {
   render() {
+    const messages = [...this.props.notifications].reverse()
+
     return (
       <Root className="notifications">
-        <Notification content="hello" />
+        {messages.map(message => <Message key={message.id} {...message} />)}
       </Root>
     )
   }
 }
 
-export default connect<StateProps, {}, {}, State>(({}) => ({}))(Notifications)
+export default connect<StateProps, {}, {}, State>(({ notifications }) => ({
+  notifications
+}))(Notifications)
