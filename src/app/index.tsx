@@ -31,22 +31,29 @@ class Controller extends React.Component<OwnProps> {
     })
   }
 
+  shadowDOM(props) {
+    const children = <shadow-root>{props.children}</shadow-root>
+    const supported = !(
+      (document.head as any).createShadowRoot || document.head.attachShadow
+    )
+
+    return supported ? <ShadowDOM>{children}</ShadowDOM> : children
+  }
+
   render() {
     const { onAPI } = this.props
 
     return (
-      <ShadowDOM>
-        <shadow-root>
-          <shadow-styles ref={this.registerEmotion} />
-          {this.state.emotion && (
-            <Provider value={this.state.emotion}>
-              <APIContext.Provider value={onAPI}>
-                <App />
-              </APIContext.Provider>
-            </Provider>
-          )}
-        </shadow-root>
-      </ShadowDOM>
+      <this.shadowDOM>
+        <shadow-styles ref={this.registerEmotion} />
+        {this.state.emotion && (
+          <Provider value={this.state.emotion}>
+            <APIContext.Provider value={onAPI}>
+              <App />
+            </APIContext.Provider>
+          </Provider>
+        )}
+      </this.shadowDOM>
     )
   }
 }

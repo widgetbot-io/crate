@@ -1,5 +1,3 @@
-import 'webcomponents.js'
-
 import Crate from './api'
 
 if (window) {
