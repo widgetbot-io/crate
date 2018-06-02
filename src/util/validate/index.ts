@@ -55,12 +55,14 @@ export const is = Object.keys(validators).reduce(
 export const expectValue = options => (
   path: string,
   type: string,
-  isValid: Function,
+  isValid?: Function,
   acceptFalsy = true
 ) => {
   const resolved = `options${path}`
   const value = eval(resolved)
-  const valid = isValid(value) || (!value && acceptFalsy)
+  const valid =
+    (typeof isValid === 'function' ? isValid(value) : typeof value === type) ||
+    (!value && acceptFalsy)
 
   if (!valid) {
     console.error('Invalid options!', options)
