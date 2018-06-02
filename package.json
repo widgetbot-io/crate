@@ -1,9 +1,8 @@
 {
-  "name": "widgetbot-crate",
-  "version": "2.0.0",
+  "name": "@widgetbot/crate",
+  "version": "3.0.0",
   "description": "Clean & powerful popup Discord widgets for your website",
-  "main": "dist/crate.min.js",
-  "typings": "dist/crate.min.js",
+  "main": "dist/crate.js",
   "repository": "git@github.com:samdenty99/crate.git",
   "author": "WidgetBot",
   "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
@@ -33,7 +32,8 @@
     "redux": "^4.0.0",
     "redux-actions": "^2.4.0",
     "reflect-metadata": "^0.1.12",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "webcomponents.js": "^0.7.24"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

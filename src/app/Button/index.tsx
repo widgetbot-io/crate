@@ -21,8 +21,8 @@ class Button extends React.PureComponent<StateProps & DispatchProps> {
     const accent = getAccent(color)
 
     return (
-      <Root className="button">
-        <Icons.Root onClick={onClick} className="icons">
+      <Root onClick={onClick} className="button">
+        <Icons.Root className="icons">
           <Icons.Close className="close" />
           <Icons.Open className="open" color={accent} />
         </Icons.Root>
