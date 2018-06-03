@@ -5,6 +5,7 @@ import ShadowStyles from '../../controllers/emotion'
 export const Root = ShadowStyles(
   ({ styled, css }) => styled('div')`
     position: fixed;
+    z-index: 2147482999;
     transition: opacity 0.4s ease,
       transform 0.3s cubic-bezier(0.24, 0.6, 0.35, 0.96);
 
