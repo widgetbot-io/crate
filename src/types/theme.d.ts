@@ -3,6 +3,7 @@ import Options from './options'
 interface Theme {
   options: Options
   open: boolean
+  visible: boolean
   coords: {
     x: {
       axis: 'left' | 'right'

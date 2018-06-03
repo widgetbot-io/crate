@@ -83,7 +83,7 @@ class Crate extends EmbedAPI {
       this.store.dispatch(
         actions.deleteMessage({
           id,
-          animate: false
+          delete: true
         })
       )
     })
@@ -110,7 +110,7 @@ class Crate extends EmbedAPI {
    * Toggles the widget open / closed
    */
   toggle(open?: boolean) {
-    this.store.dispatch(actions.toggle({ open }))
+    this.store.dispatch(actions.toggle(open))
   }
 
   /**
@@ -139,9 +139,23 @@ class Crate extends EmbedAPI {
     return {
       hide,
       delete() {
-        hide({ animate: false })
+        hide({ delete: true })
       }
     }
+  }
+
+  /**
+   * Un-hides the crate button
+   */
+  show() {
+    this.store.dispatch(actions.toggleVisibility(true))
+  }
+
+  /**
+   * Hides the crate button
+   */
+  hide() {
+    this.store.dispatch(actions.toggleVisibility(false))
   }
 }
 

@@ -5,18 +5,39 @@ import CloseIcon from './icons/close'
 import OpenIcon from './icons/open'
 
 export const Root = ShadowStyles(
-  ({ styled, css }) => styled('button')`
+  ({ styled, keyframes, css }) => styled('button')`
     position: fixed;
     z-index: 2147483000;
     cursor: pointer;
     outline: none;
 
-    width: 56px;
     height: 56px;
 
-    border-radius: 50%;
+    border-radius: 56px;
     border: none;
     padding: 0;
+    transition: box-shadow 0.2s ease, background-color 0.3s ease,
+      opacity 0.2s ease, transform 0.2s ease;
+
+    animation: ${keyframes`
+      from {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+      to {
+        transform: initial;
+        opacity: 1;
+      }
+    `} 0.3s ease;
+
+    ${({ theme }) => {
+      const { x, y } = theme.coords
+
+      return css({
+        [x.axis]: x.offset,
+        [y.axis]: y.offset
+      })
+    }};
 
     ${({ theme }) => {
       const color = Color(theme.options.color)
@@ -31,18 +52,6 @@ export const Root = ShadowStyles(
               0px 1px 18px 0px ${color.fade(0.88).toString()};
             background-color: ${theme.options.color};
           `
-    }};
-
-    transition: box-shadow 0.2s ease, background-color 0.3s ease,
-      opacity 0.2s ease, transform 0.2s ease;
-
-    ${({ theme }) => {
-      const { x, y } = theme.coords
-
-      return css({
-        [x.axis]: x.offset,
-        [y.axis]: y.offset
-      })
     }};
 
     @media (max-width: 500px) {
@@ -65,10 +74,40 @@ export const Root = ShadowStyles(
   `
 )
 
+interface IIndicator {
+  value: number
+}
+
+export const Indicator = ShadowStyles(
+  ({ styled, css }) => styled<IIndicator, 'span'>('span')`
+    position: absolute;
+    top: 0;
+
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 50%;
+    text-align: center;
+    user-select: none;
+
+    font-family: Roboto, sans-serif;
+    font-size: ${({ value }) =>
+      value > 50 ? '0.5rem' : value > 9 ? `0.7rem` : `0.8rem`};
+
+    background: #ff2a2a;
+    color: #fff;
+    box-shadow: 0px 3px 5px -1px rgba(255, 42, 42, 0.38),
+      0px 4px 9px 0px rgba(255, 42, 42, 0.38),
+      0px 1px 12px 0px rgba(255, 42, 42, 0.22);
+
+    ${({ theme }) => css({ [theme.coords.x.axis]: 0 })};
+  `
+)
+
 export namespace Icons {
   export const Root = ShadowStyles(
     ({ styled }) => styled('div')`
-      width: 100%;
+      width: 56px;
       height: 100%;
 
       & > * {
@@ -113,5 +152,3 @@ export namespace Icons {
     `
   )
 }
-
-export const Indicator = ShadowStyles(({ styled }) => styled('span')``)

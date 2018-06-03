@@ -14,23 +14,25 @@ import Notifications from './Notifications'
 interface StateProps {
   options: Options
   open: boolean
+  visible: boolean
 }
 
 class App extends React.Component<StateProps> {
   getTheme = (): Theme => ({
     options: this.props.options,
     coords: getCoords(this.props.options.location),
-    open: this.props.open
+    open: this.props.open,
+    visible: this.props.visible
   })
 
   render() {
-    const { open } = this.props
+    const { options, open } = this.props
 
     return (
       <ThemeProvider theme={this.getTheme()}>
         <Root className="root">
           <Embed />
-          {!open && <Notifications />}
+          {options.notifications && !open && <Notifications />}
           <Button />
         </Root>
       </ThemeProvider>
@@ -38,7 +40,10 @@ class App extends React.Component<StateProps> {
   }
 }
 
-export default connect<StateProps, {}, {}, State>(({ options, open }) => ({
-  options,
-  open
-}))(App)
+export default connect<StateProps, {}, {}, State>(
+  ({ visible, options, open }) => ({
+    options,
+    visible,
+    open
+  })
+)(App)

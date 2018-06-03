@@ -7,16 +7,25 @@ import {
   NOTIFICATION,
   REMOVE_NOTIFICATION,
   TOGGLE,
+  TOGGLE_VISIBLITY,
   UPDATE_OPTIONS,
 } from './actions/constants'
 
 const store = handleActions<State, any>(
   {
-    [TOGGLE]: (state, action: Action<{ open?: boolean }>) =>
+    [TOGGLE]: (state, { payload }: Action<boolean>) =>
       produce(state, draft => {
-        const { open } = action.payload
-        draft.open = typeof open === 'boolean' ? open : !state.open
+        const open = typeof payload === 'boolean' ? payload : !state.open
+        draft.open = open
+
+        draft.notifications = []
+        draft.unread = 0
       }),
+
+    [TOGGLE_VISIBLITY]: (state, { payload }: Action<boolean>) => ({
+      ...state,
+      visible: payload
+    }),
 
     [UPDATE_OPTIONS]: (state, action: Action<Options>) => ({
       ...state,
@@ -28,6 +37,8 @@ const store = handleActions<State, any>(
 
     [NOTIFICATION]: (state, action: Action<Notification>) =>
       produce(state, draft => {
+        draft.unread++
+
         draft.notifications.push({
           visible: true,
           ...action.payload
@@ -36,25 +47,25 @@ const store = handleActions<State, any>(
 
     [REMOVE_NOTIFICATION]: (
       state,
-      action: Action<{ id: string; animate?: boolean }>
+      action: Action<{ id: string; delete?: boolean }>
     ) =>
       produce(state, draft => {
-        const animate =
-          typeof action.payload.animate === 'boolean'
-            ? action.payload.animate
-            : true
+        const remove =
+          typeof action.payload.delete === 'boolean'
+            ? action.payload.delete
+            : false
 
         const index = draft.notifications.findIndex(
           message => message.id === action.payload.id
         )
 
         if (index !== -1) {
-          if (animate) {
+          if (remove) {
+            draft.unread--
+            draft.notifications.splice(index, 1)
+          } else {
             // Animate visibility
             draft.notifications[index].visible = false
-          } else {
-            // Remove entirely
-            draft.notifications.splice(index, 1)
           }
         }
       })
