@@ -92,7 +92,7 @@ export const Indicator = ShadowStyles(
 
     font-family: Roboto, sans-serif;
     font-size: ${({ value }) =>
-      value > 50 ? '0.5rem' : value > 9 ? `0.7rem` : `0.8rem`};
+      value > 50 ? '7px' : value > 9 ? `9px` : `12px`};
 
     background: #ff2a2a;
     color: #fff;

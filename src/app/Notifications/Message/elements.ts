@@ -48,7 +48,7 @@ export const Content = ShadowStyles(
     word-wrap: break-word;
     word-break: break-word;
     line-height: 18px;
-    font-size: 0.9rem;
+    font-size: 15px;
     white-space: pre-wrap;
     box-shadow: 0 2px 8px 0 rgba(35, 47, 53, 0.5);
     border-radius: 6px;
