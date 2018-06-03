@@ -33,7 +33,7 @@ class Controller extends React.Component<OwnProps> {
 
   shadowDOM(props) {
     const children = <shadow-root>{props.children}</shadow-root>
-    const supported = !(
+    const supported = !!(
       (document.head as any).createShadowRoot || document.head.attachShadow
     )
 
