@@ -1,6 +1,6 @@
 {
   "name": "@widgetbot/crate",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Clean & powerful popup Discord widgets for your website",
   "main": "dist/crate.js",
   "repository": "git@github.com:samdenty99/crate.git",
@@ -9,6 +9,7 @@
   "scripts": {
     "start": "parcel serve ./src/index.html --open",
     "build": "parcel build ./src/index.ts -o crate.js",
+    "release": "yarn build && yarn publish",
     "pull": "git stash && git pull && yarn && yarn build && cfcli purge"
   },
   "dependencies": {
