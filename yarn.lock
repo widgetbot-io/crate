@@ -71,15 +71,15 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.1.0.tgz#d869db4245efb1d70dde9fdb78c2de0800574a46"
 
-"@widgetbot/embed-api@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.1.1.tgz#828735114c1bb8cb0b23fe27978721dc5e610702"
+"@widgetbot/embed-api@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.1.2.tgz#eb928b00de35f3c18e1856b5fccb3e90463ffa48"
 
-"@widgetbot/react-embed@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.1.1.tgz#300ba035500764ffebf0ac269db8f7c4d0bfc9d3"
+"@widgetbot/react-embed@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.1.2.tgz#fdc965b98693e169a480e1511c5b8ab11fa58e2e"
   dependencies:
-    "@widgetbot/embed-api" "^1.1.1"
+    "@widgetbot/embed-api" "^1.1.2"
 
 abbrev@1:
   version "1.1.1"

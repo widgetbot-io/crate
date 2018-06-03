@@ -71,7 +71,15 @@ class Crate extends EmbedAPI {
     const { api } = this
     if (!api) throw new Error(Messages.EMBED_API_INVOCATION)
 
+    let guestID: string
+
+    api.on('signIn', user => {
+      guestID = user.id
+    })
+
     api.on('message', ({ message }) => {
+      if (!message.content || message.author.id === guestID) return
+
       this.notify({
         id: message.id,
         content: message.content,

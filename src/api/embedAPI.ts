@@ -1,6 +1,5 @@
 import { Store } from 'redux'
 
-import store from '../store'
 import { State } from '../types/store'
 import { root } from './renderer'
 import { API } from './types'
