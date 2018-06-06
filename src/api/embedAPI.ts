@@ -4,7 +4,10 @@ import { State } from '../types/store'
 import { root } from './renderer'
 import { API } from './types'
 
+const { version } = require('../../package.json')
+
 class EmbedAPI {
+  static version = version
   // Redux
   store: Store<State>
 

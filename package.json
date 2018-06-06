@@ -9,7 +9,7 @@
   "scripts": {
     "start": "parcel serve ./src/index.html --open",
     "build": "parcel build ./src/index.ts -o crate.js",
-    "release": "yarn build && yarn publish",
+    "release": "yarn version && yarn build && yarn publish",
     "pull": "git stash && git pull && yarn && yarn build && cfcli purge"
   },
   "dependencies": {
