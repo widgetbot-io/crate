@@ -7,7 +7,7 @@ import {
   NOTIFICATION,
   REMOVE_NOTIFICATION,
   TOGGLE,
-  TOGGLE_VISIBLITY,
+  TOGGLE_VISIBILITY,
   UPDATE_OPTIONS,
 } from './actions/constants'
 
@@ -18,11 +18,15 @@ const store = handleActions<State, any>(
         const open = typeof payload === 'boolean' ? payload : !state.open
         draft.open = open
 
+        // Load the embed if necessary
+        if (open) draft.interactive = true
+
+        // Reset notifications + unread count
         draft.notifications = []
         draft.unread = 0
       }),
 
-    [TOGGLE_VISIBLITY]: (state, { payload }: Action<boolean>) => ({
+    [TOGGLE_VISIBILITY]: (state, { payload }: Action<boolean>) => ({
       ...state,
       visible: payload
     }),

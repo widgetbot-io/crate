@@ -6,24 +6,50 @@ import { State } from '../../types/store'
 import { IFrame, Root } from './elements'
 
 interface StateProps {
-  server: string
-  channel: string
-  shard: string
+  options: {
+    server: string
+    channel: string
+    shard: string
+  }
+  interactive: boolean
 }
 
 class Embed extends React.PureComponent<StateProps> {
+  state = {
+    deferred: true
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.interactive && !this.props.interactive) {
+      // User toggled open embed
+      this.setState({ deferred: false })
+    }
+  }
+
+  componentDidMount() {
+    const { interactive } = this.props
+
+    // Allow 5 seconds for the target page to load,
+    // before attempting to load the embed
+    if (interactive) {
+      setTimeout(() => this.setState({ deferred: false }), false)
+    }
+  }
+
   render() {
-    const props = this.props
+    const { options } = this.props
+    const { deferred } = this.state
 
     return (
       <Root className="embed">
         <APIContext.Consumer>
           {onAPI => (
             <IFrame
-              {...props}
+              {...options}
               options={{
                 preset: 'crate'
               }}
+              defer={deferred}
               onAPI={onAPI}
               className="react-embed"
             />
@@ -34,8 +60,13 @@ class Embed extends React.PureComponent<StateProps> {
   }
 }
 
-export default connect<StateProps, {}, {}, State>(({ options }) => ({
-  server: options.server,
-  channel: options.channel,
-  shard: options.shard
-}))(Embed)
+export default connect<StateProps, {}, {}, State>(
+  ({ interactive, options }) => ({
+    options: {
+      server: options.server,
+      channel: options.channel,
+      shard: options.shard
+    },
+    interactive
+  })
+)(Embed)

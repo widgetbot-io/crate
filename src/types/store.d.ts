@@ -14,8 +14,10 @@ export interface Notification extends Message {
 export interface State {
   options: Options
 
+  interactive: boolean
   visible: boolean
   open: boolean
+
   unread: number
   notifications: Notification[]
 }

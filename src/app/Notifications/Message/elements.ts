@@ -56,10 +56,10 @@ export const Content = ShadowStyles(
     font-family: 'Roboto', sans-serif;
 
     ${({ theme }) =>
-      css({
-        [`border-top-${theme.coords.x.axis}-radius`]: 0,
-        [`margin-${theme.coords.x.axis}`]: `13px`
-      })};
+      css`
+        border-top-${theme.coords.x.axis}-radius: 0;
+        margin-${theme.coords.x.axis}: 13px;
+      `};
 
     &::after {
       content: '';
@@ -71,11 +71,12 @@ export const Content = ShadowStyles(
       width: 0;
 
       ${({ theme }) =>
-        css({
-          [theme.coords.x.axis]: `-10px`,
-          borderWidth:
-            theme.coords.x.axis === 'left' ? `10px 0 0 10px` : ` 10px 10px 0 0`
-        })};
+        css`
+          ${theme.coords.x.axis}: -10px;
+          border-width: ${theme.coords.x.axis === 'left'
+            ? `10px 0 0 10px`
+            : ` 10px 10px 0 0`};
+        `};
     }
 
     p {
