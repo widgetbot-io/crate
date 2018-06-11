@@ -1,28 +1,29 @@
 import { API } from '@widgetbot/react-embed'
 import * as React from 'react'
+import { connect } from 'react-redux'
 import ShadowDOM from 'react-shadow'
 
+import { stylis } from '../api/embedAPI'
 import { createEmotion, Provider } from '../controllers/emotion'
+import { State } from '../types/store'
 import App from './app'
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'shadow-root': any
-      'shadow-styles': any
-    }
-  }
-}
+export const APIContext = React.createContext(null)
 
 interface OwnProps {
   onAPI: (api: API) => void
 }
 
-export const APIContext = React.createContext(null)
+interface StateProps {
+  css: string
+}
 
-class Controller extends React.Component<OwnProps> {
+class Controller extends React.Component<StateProps & OwnProps> {
   state = {
-    emotion: null
+    emotion: null,
+    id: `crate-${Math.random()
+      .toString(36)
+      .substr(2, 9)}`
   }
 
   registerEmotion = (styleInjection: HTMLDivElement) => {
@@ -41,21 +42,30 @@ class Controller extends React.Component<OwnProps> {
   }
 
   render() {
-    const { onAPI } = this.props
+    const { id } = this.state
+    const { css, onAPI } = this.props
+
+    const styles = stylis(`.${id}`, css)
 
     return (
       <this.shadowDOM>
-        <shadow-styles ref={this.registerEmotion} />
-        {this.state.emotion && (
-          <Provider value={this.state.emotion}>
-            <APIContext.Provider value={onAPI}>
-              <App />
-            </APIContext.Provider>
-          </Provider>
-        )}
+        <div className={id}>
+          <shadow-styles ref={this.registerEmotion}>
+            <style>{styles}</style>
+          </shadow-styles>
+          {this.state.emotion && (
+            <Provider value={this.state.emotion}>
+              <APIContext.Provider value={onAPI}>
+                <App />
+              </APIContext.Provider>
+            </Provider>
+          )}
+        </div>
       </this.shadowDOM>
     )
   }
 }
 
-export default Controller
+export default connect<StateProps, {}, {}, State>(({ options }) => ({
+  css: options.css
+}))(Controller)

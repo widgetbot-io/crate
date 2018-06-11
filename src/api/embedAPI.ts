@@ -1,3 +1,4 @@
+import Stylis from '@emotion/stylis'
 import { Store } from 'redux'
 
 import { State } from '../types/store'
@@ -6,7 +7,11 @@ import { API } from './types'
 
 const { version } = require('../../package.json')
 
+export const stylis = new Stylis()
+
 class EmbedAPI {
+  static stylis = stylis
+
   static version = version
   // Redux
   store: Store<State>
