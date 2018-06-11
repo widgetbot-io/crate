@@ -125,6 +125,23 @@ export namespace Icons {
     ({ styled, css }) => styled(OpenIcon)`
       padding: 12px;
 
+      ${({ theme }) => {
+        const [url, size] = theme.options.glyph
+
+        return (
+          url &&
+          size &&
+          css`
+            background: url(${url}) no-repeat center;
+            background-size: ${size};
+
+            * {
+              display: none;
+            }
+          `
+        )
+      }};
+
       ${({ theme }) =>
         theme.open &&
         css`
