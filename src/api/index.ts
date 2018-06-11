@@ -88,12 +88,7 @@ class Crate extends EmbedAPI {
     })
 
     api.on('messageDelete', ({ id }) => {
-      this.store.dispatch(
-        actions.deleteMessage({
-          id,
-          delete: true
-        })
-      )
+      this.store.dispatch(actions.deleteMessage({ id, decrement: true }))
     })
   }
 
@@ -138,18 +133,13 @@ class Crate extends EmbedAPI {
 
     this.store.dispatch(actions.message(data))
 
-    const hide = props =>
-      this.store.dispatch(actions.deleteMessage({ id: data.id, ...props }))
+    const hide = () =>
+      this.store.dispatch(actions.deleteMessage({ id: data.id }))
 
     // Hide the message after timeout
     if (data.timeout) setTimeout(hide, data.timeout)
 
-    return {
-      hide,
-      delete() {
-        hide({ delete: true })
-      }
-    }
+    return { hide }
   }
 
   /**

@@ -2,27 +2,21 @@ import ShadowStyles from '../../../controllers/emotion'
 
 const Markdown = require('react-markdown')
 
-interface IRoot {
-  visible: boolean
-}
-
 export const Root = ShadowStyles(
-  ({ styled, css }) => styled<IRoot, 'div'>('div')`
+  ({ styled, css }) => styled('div')`
     transition: all 0.5s cubic-bezier(0, 0.8, 0.25, 1.18);
     padding-bottom: 6px;
     overflow: auto;
     flex-shrink: 0;
 
-    ${({ theme, visible }) =>
-      visible
-        ? css``
-        : css`
-            pointer-events: none;
-            opacity: 0;
-            transform: translateX(
-              ${theme.coords.x.axis === 'right' ? 20 : -20}px
-            );
-          `};
+    &.exiting,
+    &.entering {
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(
+        ${({ theme }) => (theme.coords.x.axis === 'right' ? 20 : -20)}px
+      );
+    }
   `
 )
 
@@ -89,6 +83,10 @@ export const Content = ShadowStyles(
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    a {
+      pointer-events: initial;
     }
   `
 )
