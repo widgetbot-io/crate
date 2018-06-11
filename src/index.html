@@ -17,6 +17,14 @@
       server: '443199524824154122',
       channel: '443199524824154124',
       glyph: ['https://samdd.me/favicon.ico', '50%'],
+      css: `
+        &:not(.open) .button {
+          background: indianred;
+          &:hover {
+            background: red;
+          }
+        }
+      `
       // defer: true
     })
 

@@ -1,4 +1,3 @@
-import { cx } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -16,7 +15,6 @@ interface StateProps {
   options: Options
   open: boolean
   visible: boolean
-  interactive: boolean
 }
 
 class App extends React.Component<StateProps> {
@@ -28,16 +26,11 @@ class App extends React.Component<StateProps> {
   })
 
   render() {
-    const { options, open, interactive } = this.props
+    const { options, open } = this.props
 
     return (
       <ThemeProvider theme={this.getTheme()}>
-        <Root
-          className={cx('root', {
-            interactive,
-            open
-          })}
-        >
+        <Root className="root">
           <Embed />
           {options.notifications && !open && <Notifications />}
           <Button />
@@ -48,10 +41,9 @@ class App extends React.Component<StateProps> {
 }
 
 export default connect<StateProps, {}, {}, State>(
-  ({ visible, interactive, options, open }) => ({
+  ({ visible, options, open }) => ({
     options,
     visible,
-    interactive,
     open
   })
 )(App)

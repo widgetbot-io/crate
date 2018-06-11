@@ -1,4 +1,5 @@
 import { API } from '@widgetbot/react-embed'
+import { cx } from 'emotion'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import ShadowDOM from 'react-shadow'
@@ -16,6 +17,8 @@ interface OwnProps {
 
 interface StateProps {
   css: string
+  interactive: boolean
+  open: boolean
 }
 
 class Controller extends React.Component<StateProps & OwnProps> {
@@ -43,13 +46,18 @@ class Controller extends React.Component<StateProps & OwnProps> {
 
   render() {
     const { id } = this.state
-    const { css, onAPI } = this.props
+    const { css, onAPI, interactive, open } = this.props
 
     const styles = stylis(`.${id}`, css)
 
     return (
       <this.shadowDOM>
-        <div className={id}>
+        <div
+          className={cx(id, {
+            interactive,
+            open
+          })}
+        >
           <shadow-styles ref={this.registerEmotion}>
             <style>{styles}</style>
           </shadow-styles>
@@ -66,6 +74,10 @@ class Controller extends React.Component<StateProps & OwnProps> {
   }
 }
 
-export default connect<StateProps, {}, {}, State>(({ options }) => ({
-  css: options.css
-}))(Controller)
+export default connect<StateProps, {}, {}, State>(
+  ({ interactive, open, options }) => ({
+    css: options.css,
+    interactive,
+    open
+  })
+)(Controller)
