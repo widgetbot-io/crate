@@ -2,14 +2,19 @@ import Color from 'color'
 
 import Options from '../types/options'
 
-export const getCoords = ([y, x]: Options['location'], margin = [20, 20]) => ({
+export const getCoords = (
+  [y, x]: Options['location'],
+  [xMargin, yMargin] = [20, 20]
+) => ({
   x: {
     axis: typeof x === 'string' ? x : x > -1 ? 'left' : 'right',
-    offset: typeof x === 'string' ? margin[0] : Math.abs(x)
+    offset: typeof x === 'string' ? xMargin : Math.abs(x),
+    margin: typeof x === 'string' ? xMargin : 0
   },
   y: {
     axis: typeof y === 'string' ? y : y > -1 ? 'top' : 'bottom',
-    offset: typeof y === 'string' ? margin[1] : Math.abs(y)
+    offset: typeof y === 'string' ? yMargin : Math.abs(y),
+    margin: typeof y === 'string' ? yMargin : 0
   }
 })
 

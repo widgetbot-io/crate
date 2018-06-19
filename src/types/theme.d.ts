@@ -8,10 +8,12 @@ interface Theme {
     x: {
       axis: 'left' | 'right'
       offset: number
+      margin: number
     }
     y: {
       axis: 'top' | 'bottom'
       offset: number
+      margin: number
     }
   }
 }

@@ -54,23 +54,20 @@ export const Root = ShadowStyles(
           `
     }};
 
-    @media (max-width: 500px) {
-      bottom: 0;
-      right: 0;
-      left: auto;
-      top: auto;
-      border-radius: 0;
+    ${({ theme }) => {
+      const { x, y } = theme.coords
 
-      ${({ theme }) => {
-        const { x, y } = theme.coords
+      return y.margin && x.margin
+        ? css`
+            @media (max-width: 500px) {
+              border-${y.axis}-${x.axis}-radius: 50%;
 
-        return css({
-          [`border-${y.axis === 'top' ? 'bottom' : 'top'}-${
-            x.axis === 'left' ? 'right' : 'left'
-          }-radius`]: '50%'
-        })
-      }};
-    }
+              ${x.axis}: ${x.offset - x.margin + 2}px;
+              ${y.axis}: ${y.offset - y.margin + 2}px;
+            }
+          `
+        : null
+    }};
   `
 )
 
