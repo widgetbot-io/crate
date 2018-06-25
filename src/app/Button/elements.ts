@@ -106,6 +106,7 @@ export namespace Icons {
     ({ styled }) => styled('div')`
       width: 56px;
       height: 100%;
+      border-radius: inherit;
 
       & > * {
         position: absolute;
@@ -121,6 +122,7 @@ export namespace Icons {
   export const Open = ShadowStyles(
     ({ styled, css }) => styled(OpenIcon)`
       padding: 12px;
+      border-radius: inherit;
 
       ${({ theme }) => {
         const [url, size] = theme.options.glyph
@@ -152,6 +154,7 @@ export namespace Icons {
     ({ styled, css }) => styled(CloseIcon)`
       padding: 19px;
       opacity: 0.6;
+      border-radius: inherit;
 
       &:hover {
         opacity: 0.95;
