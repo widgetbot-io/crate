@@ -5,12 +5,12 @@ import Theme from '../../types/theme'
 import create from './emotion'
 import ShadowStyles, { ThemedReactEmotionInterface } from './types'
 
-export const createEmotion = (styleInjection: Element) => {
+export const createEmotion = (styleInjection: HTMLElement) => {
   const emotion = create(styleInjection)
-  const styled = createEmotionStyled(
+  const styled = (createEmotionStyled(
     emotion,
     React
-  ) as ThemedReactEmotionInterface<Theme>
+  ) as any) as ThemedReactEmotionInterface<Theme>
   return { emotion, styled }
 }
 

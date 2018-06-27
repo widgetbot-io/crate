@@ -1,7 +1,7 @@
 import createEmotion from 'create-emotion'
 
 const create = (
-  styleInjection: Element
+  styleInjection: HTMLElement
 ): {
   flush
   hydrate

@@ -5,7 +5,7 @@ import { Notification } from '../../../types/store'
 import { Avatar, Content, Root } from './elements'
 import { defaultAvatar } from './util'
 
-class Message extends React.PureComponent<Notification & { in: boolean }> {
+class Message extends React.PureComponent<Notification & { in?: boolean }> {
   render() {
     const { avatar, content } = this.props
 

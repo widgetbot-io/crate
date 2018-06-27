@@ -1,6 +1,6 @@
 import { createStore } from 'redux'
 
-import Messages from '../messages'
+import Messages from './messages'
 import store from '../store'
 import * as actions from '../store/actions'
 import defaultState from '../store/defaultState'

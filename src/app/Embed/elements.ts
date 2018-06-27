@@ -1,4 +1,4 @@
-import WidgetBot from '@widgetbot/react-embed'
+import WidgetBot, { IProps } from '@widgetbot/react-embed'
 
 import ShadowStyles from '../../controllers/emotion'
 
