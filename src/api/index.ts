@@ -1,6 +1,7 @@
+import '../util/compatibility'
+
 import { createStore } from 'redux'
 
-import Messages from './messages'
 import store from '../store'
 import * as actions from '../store/actions'
 import defaultState from '../store/defaultState'
@@ -8,6 +9,7 @@ import Options from '../types/options'
 import { Message } from '../types/store'
 import { is, validate } from '../util/validate'
 import EmbedAPI from './embedAPI'
+import Messages from './messages'
 import render from './renderer'
 import { enhancer, observeOptions } from './util'
 
