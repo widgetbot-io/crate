@@ -1,34 +1,30 @@
-import ShadowStyles from '../../../controllers/emotion'
+import styled, { ShadowStyles } from '../../../controllers/emotion'
 
 const Markdown = require('react-markdown')
 
-export const Root = ShadowStyles(
-  ({ styled, css }) => styled('div')`
-    transition: all 0.5s cubic-bezier(0, 0.8, 0.25, 1.18);
-    padding-bottom: 6px;
-    overflow: auto;
-    flex-shrink: 0;
+export const Root = styled('div')`
+  transition: all 0.5s cubic-bezier(0, 0.8, 0.25, 1.18);
+  padding-bottom: 6px;
+  overflow: auto;
+  flex-shrink: 0;
 
-    &.exiting,
-    &.entering {
-      pointer-events: none;
-      opacity: 0;
-      transform: translateX(
-        ${({ theme }) => (theme.coords.x.axis === 'right' ? 20 : -20)}px
-      );
-    }
-  `
-)
+  &.exiting,
+  &.entering {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(
+      ${({ theme }) => (theme.coords.x.axis === 'right' ? 20 : -20)}px
+    );
+  }
+`
 
-export const Avatar = ShadowStyles(
-  ({ styled, css }) => styled('img')`
-    height: 35px;
-    width: 35px;
-    float: ${({ theme }) => theme.coords.x.axis};
-    border-radius: 100%;
-    cursor: pointer;
-  `
-)
+export const Avatar = styled('img')`
+  height: 35px;
+  width: 35px;
+  float: ${({ theme }) => theme.coords.x.axis};
+  border-radius: 100%;
+  cursor: pointer;
+`
 
 export const Content = ShadowStyles(
   ({ styled, css }) => styled(Markdown)`

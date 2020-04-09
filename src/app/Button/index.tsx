@@ -25,7 +25,11 @@ class Button extends React.PureComponent<StateProps & DispatchProps> {
     const showIndicator = indicator && !open
 
     return (
-      <Root onClick={onClick} className="button">
+      <Root
+        onClick={onClick}
+        className="button"
+        aria-label="Discord chat embed"
+      >
         <Icons.Root className="icons">
           <Icons.Close className="close" />
           <Icons.Open className="open" color={accent} />

@@ -7,12 +7,12 @@ console.log(
   `padding-left: 15px; font-size: 11px; font-family: "Roboto", sans-serif; `
 )
 
-if (window) {
-  ;(window as any).Crate = Crate
+// Evaluate content inside <script> tag
+if (document) {
+  const { currentScript: script } = document
 
-  // Evaluate content inside <script> tag
-  if (document) {
-    const { currentScript: script } = document
+  // Allow webpack to inject global Crate variable
+  setTimeout(() => {
     if (script && !script.getAttribute('no-eval')) {
       const asyncAwait = (() => {
         try {
@@ -29,7 +29,7 @@ if (window) {
           : script.innerHTML
       )
     }
-  }
+  }, 0)
 }
 
 export default Crate

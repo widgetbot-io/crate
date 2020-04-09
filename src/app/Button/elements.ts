@@ -1,6 +1,6 @@
 import Color from 'color'
 
-import ShadowStyles from '../../controllers/emotion'
+import styled, { ShadowStyles } from '../../controllers/emotion'
 import CloseIcon from './icons/close'
 import OpenIcon from './icons/open'
 
@@ -102,22 +102,20 @@ export const Indicator = ShadowStyles(
 )
 
 export namespace Icons {
-  export const Root = ShadowStyles(
-    ({ styled }) => styled('div')`
-      width: 56px;
-      height: 100%;
-      border-radius: inherit;
+  export const Root = styled('div')`
+    width: 56px;
+    height: 100%;
+    border-radius: inherit;
 
-      & > * {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.16s linear, opacity 0.2s ease;
-      }
-    `
-  )
+    & > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.16s linear, opacity 0.2s ease;
+    }
+  `
 
   export const Open = ShadowStyles(
     ({ styled, css }) => styled(OpenIcon)`

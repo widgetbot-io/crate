@@ -1,11 +1,11 @@
 {
+  "extends": "../scripts/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "module": "commonjs",
-    "target": "es2015",
-    "declaration": true,
-    "jsx": "react",
-    "experimentalDecorators": true,
+    // "allowJs": false,
+    // "declaration": true,
+    "jsx": "preserve",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ""
   }
 }

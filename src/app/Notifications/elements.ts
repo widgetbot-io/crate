@@ -1,5 +1,6 @@
 import { TransitionGroup } from 'react-transition-group'
-import ShadowStyles from '../../controllers/emotion'
+
+import { ShadowStyles } from '../../controllers/emotion'
 
 export const Root = ShadowStyles(
   ({ styled, css }) => styled(TransitionGroup)`

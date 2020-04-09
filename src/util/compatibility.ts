@@ -9,6 +9,6 @@ const nativeRef = () => {
 
 // MooTools overwrites the .bind() method, this will restore it
 if ((window as any).MooTools) {
-  const window = nativeRef()
-  Function.prototype.bind = window.Function.prototype.bind
+  const $window = nativeRef()
+  Function.prototype.bind = $window.Function.prototype.bind
 }

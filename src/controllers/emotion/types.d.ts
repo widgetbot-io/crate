@@ -120,8 +120,8 @@ export interface ThemedReactEmotionModule<Theme> {
   default: ThemedReactEmotionInterface<Theme>
 }
 
-type ShadowStyles = (typeof emotion) & {
+type Emotion = (typeof emotion) & {
   styled: ThemedReactEmotionInterface<any>
 }
 
-export default ShadowStyles
+export default Emotion
