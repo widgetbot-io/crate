@@ -43,7 +43,7 @@ export function ShadowStyles<T>(component: (emotion: ThemedEmotion) => T): T {
 
 const wrap = <T extends keyof ThemedEmotion>(
   func: T
-): ThemedEmotion[T] => tag => (...args) => props => {
+): (tag) => (...args) => (props) => any => tag => (...args) => props => {
   let Component
 
   return (
