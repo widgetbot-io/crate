@@ -139,7 +139,7 @@ class Crate extends EmbedAPI {
       this.store.dispatch(actions.deleteMessage({ id: data.id }))
 
     // Hide the message after timeout
-    if (data.timeout) setTimeout(hide, data.timeout)
+    if (data.timeout) setTimeout(hide, Number(data.timeout))
 
     return { hide }
   }
