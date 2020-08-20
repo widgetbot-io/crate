@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import Theme from '../../types/theme'
 import create from './emotion'
-import Emotion, { ThemedReactEmotionInterface } from './types'
+import ShadowStyles, { ThemedReactEmotionInterface } from './types'
 
 export const createEmotion = (styleInjection: HTMLElement) => {
   const emotion = create(styleInjection)
@@ -16,50 +16,35 @@ export const createEmotion = (styleInjection: HTMLElement) => {
 
 export const { Provider, Consumer } = React.createContext(null)
 
-export interface ThemedEmotion extends Emotion {
+export interface ThemedEmotion extends ShadowStyles {
   styled: ThemedReactEmotionInterface<Theme>
 }
 
+// What does this do?
+// -------------------
 // This is a wrapper that uses React's context API
 // to dynamically get the correct emotion instance
 // (and correct shadow DOM).
-export function ShadowStyles<T>(component: (emotion: ThemedEmotion) => T): T {
-  return (props => {
-    let Component
+function ShadowStyles<T>(component: (emotion: ThemedEmotion) => T): T {
+  return class ShadowStyled extends React.PureComponent {
+    component
 
-    return (
-      <Consumer>
-        {({ emotion, styled }) => {
-          if (!Component) {
-            Component = component({ styled, ...emotion })
-          }
+    render() {
+      return (
+        <Consumer>
+          {({ emotion, styled }) => {
+            if (!this.component) {
+              this.component = component({ styled, ...emotion })
+            }
 
-          return <Component {...props} />
-        }}
-      </Consumer>
-    )
-  }) as any
+            return <this.component {...this.props} />
+          }}
+        </Consumer>
+      )
+    }
+  } as any
 }
 
-const wrap = <T extends keyof ThemedEmotion>(
-  func: T
-): (tag) => (...args) => (props) => any => tag => (...args) => props => {
-  let Component
-
-  return (
-    <Consumer>
-      {({ emotion, styled }) => {
-        if (!Component) {
-          Component = { styled, ...emotion }[func](tag)(...args)
-        }
-
-        return <Component {...props} />
-      }}
-    </Consumer>
-  )
-}
-
-const styled = wrap('styled')
-export default styled
+export default ShadowStyles
 
 export * from './emotion'

@@ -12,6 +12,7 @@ interface StateProps {
     shard: string
   }
   interactive: boolean
+  open: boolean
 }
 
 class Embed extends React.PureComponent<StateProps> {
@@ -37,7 +38,7 @@ class Embed extends React.PureComponent<StateProps> {
   }
 
   render() {
-    const { options } = this.props
+    const { options, open } = this.props
     const { deferred } = this.state
 
     return (
@@ -52,6 +53,8 @@ class Embed extends React.PureComponent<StateProps> {
               defer={deferred}
               onAPI={onAPI}
               className="react-embed"
+              // @ts-ignore
+              focusable={open}
             />
           )}
         </APIContext.Consumer>
@@ -61,12 +64,13 @@ class Embed extends React.PureComponent<StateProps> {
 }
 
 export default connect<StateProps, {}, {}, State>(
-  ({ interactive, options }) => ({
+  ({ interactive, options, open }) => ({
     options: {
       server: options.server,
       channel: options.channel,
       shard: options.shard
     },
-    interactive
+    interactive,
+    open
   })
 )(Embed)

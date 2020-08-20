@@ -1,6 +1,6 @@
-import WidgetBot from '@widgetbot/react-embed'
+import WidgetBot, { IProps } from '@widgetbot/react-embed'
 
-import styled, { ShadowStyles } from '../../controllers/emotion'
+import ShadowStyles from '../../controllers/emotion'
 
 export const Root = ShadowStyles(
   ({ styled, css }) => styled('div')`
@@ -55,11 +55,13 @@ export const Root = ShadowStyles(
   `
 )
 
-export const IFrame = styled(WidgetBot)`
-  height: 100%;
-  width: 100%;
-  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);
-  transition: border-radius 0.2s ease;
+export const IFrame = ShadowStyles(
+  ({ styled }) => styled(WidgetBot)`
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);
+    transition: border-radius 0.2s ease;
 
-  border-radius: 17px !important;
-`
+    border-radius: 17px !important;
+  `
+)

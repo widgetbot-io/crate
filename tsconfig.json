@@ -3,9 +3,9 @@
     "outDir": "dist",
     "module": "commonjs",
     "target": "es2015",
+    "declaration": true,
     "jsx": "react",
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ""
   }
 }
