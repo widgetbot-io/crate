@@ -4,6 +4,8 @@
 [![Docs](https://img.shields.io/badge/Docs-passing-green.svg?style=flat-square)](https://docs.widgetbot.io/crate/)
 [![JSDelivr](https://data.jsdelivr.com/v1/package/npm/@widgetbot/crate/badge)](https://www.jsdelivr.com/package/npm/@widgetbot/crate)
 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
 Clean & powerful popup Discord widgets for your website.
 
 ![Demo](https://i.imgur.com/oq4W4Rk.gif)
