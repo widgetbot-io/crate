@@ -1,4 +1,4 @@
-import { API } from '@widgetbot/react-embed'
+import { Client } from '@widgetbot/embed-api'
 import { cx } from 'emotion'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -12,7 +12,7 @@ import App from './app'
 export const APIContext = React.createContext(null)
 
 interface OwnProps {
-  onAPI: (api: API) => void
+  onAPI: (api: Client) => void
 }
 
 interface StateProps {

@@ -1,4 +1,4 @@
-import { API } from '@widgetbot/react-embed'
+import { Client } from '@widgetbot/embed-api'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
@@ -7,7 +7,7 @@ import App from '../../app'
 import { Node } from './root'
 
 interface Props {
-  onAPI: (api: API) => void
+  onAPI: (api: Client) => void
   node: Node
   store: any
 }
