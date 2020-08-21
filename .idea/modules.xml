@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/crate.iml" filepath="$PROJECT_DIR$/.idea/crate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react-embed/.idea/react-embed.iml" filepath="$PROJECT_DIR$/../react-embed/.idea/react-embed.iml" />
     </modules>
   </component>
 </project>
