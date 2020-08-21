@@ -53,7 +53,6 @@ class Embed extends React.PureComponent<StateProps> {
               defer={deferred}
               onAPI={onAPI}
               className="react-embed"
-              // @ts-ignore
               focusable={open}
             />
           )}
