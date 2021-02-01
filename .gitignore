@@ -7,6 +7,8 @@
 /es
 /lib
 /dist
+/.vscode
+/.idea
 
 # misc
 .DS_Store
