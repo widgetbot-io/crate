@@ -36,7 +36,7 @@ class Crate extends EmbedAPI {
 
   /**
    * Instantiate a new Crate instant
-   * @param options The options to use
+   * @param userOptions The options to use
    */
   constructor(userOptions: Options) {
     super()
