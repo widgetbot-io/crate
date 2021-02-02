@@ -10,6 +10,7 @@ interface StateProps {
     server: string
     channel: string
     shard: string
+    username: string
   }
   interactive: boolean
   open: boolean
@@ -67,7 +68,8 @@ export default connect<StateProps, {}, {}, State>(
     options: {
       server: options.server,
       channel: options.channel,
-      shard: options.shard
+      shard: options.shard,
+      username: options.username
     },
     interactive,
     open

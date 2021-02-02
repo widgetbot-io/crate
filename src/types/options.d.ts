@@ -9,6 +9,9 @@ interface Options {
   server: string
   channel?: string
 
+  // Dynamic username
+  username?: string
+
   // Where the button should appear on-screen
   location?: [horizontal, vertical]
 
