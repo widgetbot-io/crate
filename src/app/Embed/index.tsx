@@ -41,9 +41,6 @@ class Embed extends React.PureComponent<StateProps> {
     const { options, open } = this.props
     const { deferred } = this.state
 
-    if (!options.shard.startsWith('http')) options.shard = `https://${options.shard}`
-    if (options.shard.endsWith('/')) options.shard = options.shard.substring(0, options.shard.length - 1)
-
     return (
       <Root className="embed">
         <APIContext.Consumer>
