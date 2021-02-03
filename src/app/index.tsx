@@ -2,7 +2,7 @@ import { Client } from '@widgetbot/embed-api'
 import { cx } from 'emotion'
 import * as React from 'react'
 import { connect } from 'react-redux'
-import ShadowDOM from 'react-shadow'
+import root from 'react-shadow';
 
 import { stylis } from '../api/embedAPI'
 import { createEmotion, Provider } from '../controllers/emotion'
@@ -41,7 +41,7 @@ class Controller extends React.Component<StateProps & OwnProps> {
       (document.head as any).createShadowRoot || document.head.attachShadow
     )
 
-    return supported ? <ShadowDOM>{children}</ShadowDOM> : children
+    return supported ? <root.div>{children}</root.div> : children
   }
 
   render() {
