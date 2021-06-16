@@ -70,6 +70,7 @@ class Crate extends EmbedAPI {
    * Adds the event listeners for the embed-api transport
    */
   private addEventListeners() {
+    this.forceUpdate()
     const { api } = this
     if (!api) throw new Error(Messages.EMBED_API_INVOCATION)
 
