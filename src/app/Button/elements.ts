@@ -132,6 +132,7 @@ export namespace Icons {
           css`
             background: url(${url}) no-repeat center;
             background-size: ${size};
+            border-radius: inherit;
 
             * {
               display: none;
