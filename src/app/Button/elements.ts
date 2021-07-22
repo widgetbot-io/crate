@@ -122,7 +122,6 @@ export namespace Icons {
   export const Open = ShadowStyles(
     ({ styled, css }) => styled(OpenIcon)`
       padding: 12px;
-      border-radius: inherit;
 
       ${({ theme }) => {
         const [url, size] = theme.options.glyph

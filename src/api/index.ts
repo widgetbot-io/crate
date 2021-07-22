@@ -20,7 +20,7 @@ class Crate extends EmbedAPI {
       channel: null,
       location: ['bottom', 'right'],
 
-      color: '#7388D9',
+      color: '#5865f2',
       glyph: ['', ''],
       css: '',
 
