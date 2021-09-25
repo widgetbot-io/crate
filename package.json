@@ -33,7 +33,7 @@
     "react-redux": "^7.2.2",
     "react-shadow": "^19.0.2",
     "react-transition-group": "^4.4.2",
-    "redux": "^4.0.5",
+    "redux": "^4.1.1",
     "redux-actions": "^2.6.5",
     "reflect-metadata": "^0.1.13",
     "typescript": "^4.1.3"
