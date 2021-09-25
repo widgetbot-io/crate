@@ -22,7 +22,7 @@
     "@widgetbot/embed-api": "^1.1.3",
     "@widgetbot/react-embed": "^1.4.0",
     "color": "^3.2.1",
-    "create-emotion": "^9.2.4",
+    "create-emotion": "^11.0.0",
     "create-emotion-styled": "^9.2.3",
     "emotion": "^9.2.4",
     "emotion-theming": "^9.2.4",

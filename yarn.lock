@@ -662,7 +662,12 @@ create-emotion-styled@^9.2.3:
   dependencies:
     "@emotion/is-prop-valid" "^0.6.1"
 
-create-emotion@^9.2.12, create-emotion@^9.2.4:
+create-emotion@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/create-emotion/-/create-emotion-11.0.0.tgz#d5567f7823a31fcf9ad3bdc4a3fbffb2f9edc946"
+  integrity sha512-/d8K+hAWU180lRYBR9Bx9MSWbbzCROuKBgD963i+1dP+ivHmhwWs0sS2ijImudEpvsrCcEoh0VP/z1P++yG6+w==
+
+create-emotion@^9.2.12:
   version "9.2.12"
   resolved "https://registry.yarnpkg.com/create-emotion/-/create-emotion-9.2.12.tgz#0fc8e7f92c4f8bb924b0fef6781f66b1d07cb26f"
   integrity sha512-P57uOF9NL2y98Xrbl2OuiDQUZ30GVmASsv5fbsjF4Hlraip2kyAvMm+2PoYUvFFw03Fhgtxk3RqZSm2/qHL9hA==
