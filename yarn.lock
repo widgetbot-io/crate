@@ -159,15 +159,7 @@
   dependencies:
     "@types/react" "^16"
 
-"@types/react-redux@^6.0.16":
-  version "6.0.16"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.16.tgz#d0a953e5af57b1f3dbbf7f54ac386c0cf0347e41"
-  integrity sha512-80O9vdx+P2BzQuoK2E7ZF5GfUhgdjs7HaWWQXTAR1rUwLraO6nWpTqzUHdMWLFKIN0I+jw9Q/4oWKtIaDDecyg==
-  dependencies:
-    "@types/react" "*"
-    redux "^4.0.0"
-
-"@types/react-redux@^7.1.16":
+"@types/react-redux@^7.1.16", "@types/react-redux@^7.1.18":
   version "7.1.18"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.18.tgz#2bf8fd56ebaae679a90ebffe48ff73717c438e04"
   integrity sha512-9iwAsPyJ9DLTRH+OFeIrm9cAbIj1i2ANL3sKQFATqnPWRbg+jEFXyZOKHiQK/N86pNRXbb4HRxAxo0SIX1XwzQ==
