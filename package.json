@@ -47,7 +47,7 @@
     "@types/redux-actions": "^2.6.2",
     "babel-core": "^6.26.3",
     "babel-plugin-emotion": "^11.0.0",
-    "husky": "^7.0.2",
+    "husky": "^7.0.4",
     "pretty-quick": "^3.1.1",
     "tinyreq-cli": "^1.1.1"
   }
