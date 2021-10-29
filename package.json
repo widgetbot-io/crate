@@ -43,7 +43,7 @@
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.10",
     "@types/react-redux": "^7.1.19",
-    "@types/react-transition-group": "^4.4.3",
+    "@types/react-transition-group": "^4.4.4",
     "@types/redux-actions": "^2.6.2",
     "babel-core": "^6.26.3",
     "babel-plugin-emotion": "^11.0.0",
