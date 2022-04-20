@@ -11,6 +11,8 @@ interface Options {
 
   // Dynamic username
   username?: string
+  //Dynamic avatar
+  avatar?: string
 
   // Where the button should appear on-screen
   location?: [horizontal, vertical]
