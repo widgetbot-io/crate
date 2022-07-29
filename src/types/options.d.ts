@@ -11,8 +11,11 @@ interface Options {
 
   // Dynamic username
   username?: string
-  //Dynamic avatar
+  // Dynamic avatar
   avatar?: string
+
+  // JWT login
+  token?: string
 
   // Where the button should appear on-screen
   location?: [horizontal, vertical]
