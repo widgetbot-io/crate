@@ -33,8 +33,12 @@ export const options = (options: Options) => {
   expect('.css', 'string')
 
   expect('.notifications', 'boolean')
+  expect('.dmNotifications', 'boolean')
   expect('.indicator', 'boolean')
   expect('.timeout', 'number')
+
+  expect('.allChannelNotifications', 'boolean')
+  expect('.embedNotificationTimeout', 'number')
 
   expect('.defer', 'boolean')
   expect('.shard', 'string')

@@ -25,6 +25,7 @@ class Crate extends EmbedAPI {
       css: '',
 
       notifications: true,
+      dmNotifications: true,
       indicator: true,
       timeout: 10000,
 
@@ -77,21 +78,31 @@ class Crate extends EmbedAPI {
     let guestID: string
 
     api.on('signIn', user => {
-      guestID = user.id
+      guestID = 'id' in user ? user.id : user._id
     })
 
-    api.on('message', ({ message }) => {
-      if (!message.content || message.author.id === guestID) return
+    api.on('message', ({ channel, message }) => {
+      if (!this.options.notifications || !message.content || message.author.id === guestID) return
 
       this.notify({
         id: message.id,
-        content: message.content,
-        avatar: message.author.avatar
+        content: `${message.author.name}${channel.id !== this.options.channel ? ` in #${channel.name}` : ''}: ${message.content}`,
+        avatar: message.author.avatarUrl
       })
     })
 
     api.on('messageDelete', ({ id }) => {
       this.store.dispatch(actions.deleteMessage({ id, decrement: true }))
+    })
+
+    api.on('directMessage', ({ message }) => {
+      if (!this.options.dmNotifications || !message.content || message.author.id === guestID) return
+
+      this.notify({
+        id: message.id,
+        content: `${message.author.name}: ${message.content}`,
+        avatar: message.author.avatarUrl
+      })
     })
   }
 

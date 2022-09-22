@@ -27,12 +27,19 @@ interface Options {
   // Custom CSS to be injected into the Shadow root
   css?: string
 
-  // Message notifications
+  // Crate message notifications (non-DM)
   notifications?: boolean
-  // Unread message indicator
+  // Crate DM notifications
+  dmNotifications?: boolean
+  // Crate unread message indicator
   indicator?: boolean
-  // Notification timeout
+  // Crate notification timeout
   timeout?: number
+
+  // Enables notifications to be triggered for all channels, in crate and embed
+  allChannelNotifications?: boolean
+  // Embed notification timeout
+  embedNotificationTimeout?: number
 
   // Only load the widget once the user opens it
   defer?: boolean

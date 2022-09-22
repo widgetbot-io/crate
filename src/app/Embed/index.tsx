@@ -1,3 +1,4 @@
+import { Props } from '@widgetbot/react-embed'
 import * as React from 'react'
 import { connect } from 'react-redux'
 
@@ -6,14 +7,7 @@ import { State } from '../../types/store'
 import { IFrame, Root } from './elements'
 
 interface StateProps {
-  options: {
-    server: string
-    channel: string
-    shard: string
-    username: string
-    avatar: string
-    token: string
-  }
+  options: Props
   interactive: boolean
   open: boolean
 }
@@ -73,7 +67,9 @@ export default connect<StateProps, {}, {}, State>(
       shard: options.shard,
       username: options.username,
       avatar: options.avatar,
-      token: options.token
+      token: options.token,
+      notifications: options.allChannelNotifications,
+      notificationTimeout: options.embedNotificationTimeout
     },
     interactive,
     open

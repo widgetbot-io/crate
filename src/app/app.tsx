@@ -32,7 +32,7 @@ class App extends React.Component<StateProps> {
       <ThemeProvider theme={this.getTheme()}>
         <Root className="root">
           <Embed />
-          {options.notifications && !open && <Notifications />}
+          {!open && <Notifications />}
           <Button />
         </Root>
       </ThemeProvider>
