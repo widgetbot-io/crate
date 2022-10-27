@@ -58,8 +58,8 @@ export const expectValue = options => (
   isValid?: Function,
   acceptFalsy = true
 ) => {
-  const resolved = `options${path}`
-  const value = eval(resolved)
+  const value = path === '' ? options : options[path.slice(1)]
+
   const valid =
     (typeof isValid === 'function' ? isValid(value) : typeof value === type) ||
     (!value && acceptFalsy)
@@ -67,7 +67,7 @@ export const expectValue = options => (
   if (!valid) {
     console.error('Invalid options!', options)
     throw new TypeError(
-      `Expected '${resolved}' to be typeof '${type}', received '${(value
+      `Expected 'options[${path.slice(1)}]' to be typeof '${type}', received '${(value
         ? value.constructor.name
         : typeof value
       ).toLowerCase()}'`
