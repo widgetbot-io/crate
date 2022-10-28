@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 
 import * as validators from './validators'
+import get from 'lodash.get'
 
 type Validator = [number, Function]
 
@@ -58,7 +59,8 @@ export const expectValue = options => (
   isValid?: Function,
   acceptFalsy = true
 ) => {
-  const value = path === '' ? options : options[path.slice(1)]
+  const sliced = path.slice(1)
+  const value = path === '' ? options : get(options, sliced)
 
   const valid =
     (typeof isValid === 'function' ? isValid(value) : typeof value === type) ||
@@ -67,7 +69,7 @@ export const expectValue = options => (
   if (!valid) {
     console.error('Invalid options!', options)
     throw new TypeError(
-      `Expected 'options[${path.slice(1)}]' to be typeof '${type}', received '${(value
+      `Expected 'options[${sliced}]' to be typeof '${type}', received '${(value
         ? value.constructor.name
         : typeof value
       ).toLowerCase()}'`
