@@ -1,7 +1,7 @@
 import 'reflect-metadata'
+import get from 'lodash.get'
 
 import * as validators from './validators'
-import get from 'lodash.get'
 
 type Validator = [number, Function]
 
