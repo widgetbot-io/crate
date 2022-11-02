@@ -69,7 +69,7 @@ export const expectValue = options => (
   if (!valid) {
     console.error('Invalid options!', options)
     throw new TypeError(
-      `Expected 'options[${sliced}]' to be typeof '${type}', received '${(value
+      `Expected 'options${path}' to be typeof '${type}', received '${(value
         ? value.constructor.name
         : typeof value
       ).toLowerCase()}'`
