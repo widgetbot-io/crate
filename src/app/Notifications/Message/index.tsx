@@ -5,14 +5,14 @@ import { Notification } from '../../../types/store'
 import { Avatar, Content, Root } from './elements'
 import { defaultAvatar } from './util'
 
-class Message extends React.PureComponent<Notification & { in?: boolean }> {
+class Message extends React.PureComponent<Notification & { in?: boolean, onClick?: () => void }> {
   render() {
-    const { avatar, content } = this.props
+    const { avatar, content, onClick } = this.props
 
     return (
       <Transition in={this.props.in} timeout={200} unmountOnExit>
         {state => (
-          <Root className={`notification ${state}`}>
+          <Root className={`notification ${state}`} clickable={!!onClick} onClick={() => onClick?.()}>
             <Avatar src={avatar || defaultAvatar} className="avatar" />
             <Content source={content} className="content" />
           </Root>

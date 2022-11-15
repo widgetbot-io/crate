@@ -8,7 +8,8 @@ export interface Message {
 }
 
 export interface Notification extends Message {
-  id: string
+  id: string;
+  onClick?: () => void;
 }
 
 export interface State {

@@ -2,8 +2,12 @@ import ShadowStyles from '../../../controllers/emotion'
 
 const Markdown = require('react-markdown')
 
+interface Props {
+  clickable: boolean;
+}
+
 export const Root = ShadowStyles(
-  ({ styled, css }) => styled('div')`
+  ({ styled, css }) => styled.div<Props>`
     transition: all 0.5s cubic-bezier(0, 0.8, 0.25, 1.18);
     padding-bottom: 6px;
     overflow: auto;
@@ -17,6 +21,11 @@ export const Root = ShadowStyles(
         ${({ theme }) => (theme.coords.x.axis === 'right' ? 20 : -20)}px
       );
     }
+    
+    ${({ clickable }) => clickable ? css`
+      cursor: pointer;
+    ` : null
+  };
   `
 )
 

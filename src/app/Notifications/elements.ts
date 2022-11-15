@@ -4,7 +4,6 @@ import ShadowStyles from '../../controllers/emotion'
 export const Root = ShadowStyles(
   ({ styled, css }) => styled(TransitionGroup)`
     display: flex;
-    pointer-events: none;
     flex-direction: ${({ theme }) =>
       theme.coords.y.axis === 'bottom' ? `column-reverse` : `column`};
 

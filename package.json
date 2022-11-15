@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@emotion/stylis": "^0.6.10",
-    "@widgetbot/embed-api": "^1.2.1",
+    "@widgetbot/embed-api": "^1.2.4",
     "@widgetbot/react-embed": "^1.6.0",
     "color": "^3.2.1",
     "create-emotion": "^9.2.4",

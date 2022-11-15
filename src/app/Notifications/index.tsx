@@ -15,7 +15,7 @@ class Notifications extends React.PureComponent<StateProps> {
 
     return (
       <Root className="notifications">
-        {messages.map(message => <Message key={message.id} {...message} />)}
+        {messages.map(message => <Message key={message.id} {...message} onClick={() => message.onClick?.()} />)}
       </Root>
     )
   }

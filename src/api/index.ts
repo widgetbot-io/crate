@@ -75,7 +75,11 @@ class Crate extends EmbedAPI {
     const { api } = this
     if (!api) throw new Error(Messages.EMBED_API_INVOCATION)
 
-    let guestID: string
+    let guestID: string;
+
+    const navigate = (channelId: string) => {
+
+    }
 
     api.on('signIn', user => {
       guestID = 'id' in user ? user.id : user._id
@@ -87,7 +91,8 @@ class Crate extends EmbedAPI {
       this.notify({
         id: message.id,
         content: `${message.author.name}${channel.id !== this.options.channel ? ` in #${channel.name}` : ''}: ${message.content}`,
-        avatar: message.author.avatarUrl
+        avatar: message.author.avatarUrl,
+        onClick: () => this.navigate(message.channelId)
       })
     })
 
@@ -96,12 +101,13 @@ class Crate extends EmbedAPI {
     })
 
     api.on('directMessage', ({ message }) => {
-      if (!this.options.dmNotifications || !message.content || message.author.id === guestID) return
+      if (!this.options.dmNotifications || !message.content || message.author.id === guestID) return;
 
       this.notify({
         id: message.id,
         content: `${message.author.name}: ${message.content}`,
-        avatar: message.author.avatarUrl
+        avatar: message.author.avatarUrl,
+        onClick: () => this.navigate((<any>message).channelId)
       })
     })
   }
@@ -134,7 +140,7 @@ class Crate extends EmbedAPI {
    * Notifies a message to the user
    */
   notify(
-    content: string | Message & { timeout?: string | false; id?: string }
+    content: string | Message & { timeout?: string | false; id?: string, onClick?: () => void }
   ) {
     const props = typeof content === 'string' ? { content } : content
 
@@ -154,6 +160,15 @@ class Crate extends EmbedAPI {
     if (data.timeout) setTimeout(hide, Number(data.timeout))
 
     return { hide }
+  }
+
+  navigate(channelId: string) {
+    this.store.dispatch(actions.toggle(true));
+
+    this.emit('navigate', {
+      guild: this.options.server,
+      channel: channelId,
+    });
   }
 
   /**
