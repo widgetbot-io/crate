@@ -1,6 +1,6 @@
 {
   "name": "@widgetbot/crate",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "Clean & powerful popup Discord widgets for your website",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
