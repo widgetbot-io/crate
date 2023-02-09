@@ -110,6 +110,10 @@ class Crate extends EmbedAPI {
         onClick: () => this.navigate((<any>message).channelId)
       })
     })
+
+    api.on('unreadCountUpdate', ({ count }) => {
+      this.store.dispatch(actions.updateUnreadCount(count))
+    })
   }
 
   /*********   Public Methods   *********/

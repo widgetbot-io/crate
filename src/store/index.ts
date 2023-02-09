@@ -8,7 +8,8 @@ import {
   REMOVE_NOTIFICATION,
   TOGGLE,
   TOGGLE_VISIBILITY,
-  UPDATE_OPTIONS
+  UPDATE_OPTIONS,
+  UPDATE_UNREAD_COUNT
 } from './actions/constants'
 
 const store = handleActions<State, any>(
@@ -63,6 +64,11 @@ const store = handleActions<State, any>(
         if (index !== -1) {
           draft.notifications.splice(index, 1)
         }
+      }),
+
+    [UPDATE_UNREAD_COUNT]: (state, { payload }: Action<number>) =>
+      produce(state, draft => {
+        draft.unread = payload
       })
   },
   null
