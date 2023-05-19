@@ -13,6 +13,8 @@ class Notifications extends React.PureComponent<StateProps> {
   render() {
     const messages = [...this.props.notifications].reverse()
 
+    if (!messages.length) return null;
+
     return (
       <Root className="notifications">
         {messages.map(message => <Message key={message.id} {...message} onClick={() => message.onClick?.()} />)}
