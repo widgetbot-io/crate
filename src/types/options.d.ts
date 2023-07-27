@@ -13,6 +13,8 @@ interface Options {
   username?: string
   // Dynamic avatar
   avatar?: string
+  // The settings group to use
+  settingsGroup?: string
 
   // JWT login
   token?: string

@@ -20,7 +20,7 @@
   "dependencies": {
     "@emotion/stylis": "^0.6.10",
     "@widgetbot/embed-api": "^1.2.6",
-    "@widgetbot/react-embed": "^1.6.1",
+    "@widgetbot/react-embed": "^1.8.0",
     "color": "^3.2.1",
     "create-emotion": "^9.2.4",
     "create-emotion-styled": "^9.2.8",

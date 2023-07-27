@@ -8,6 +8,11 @@ export const options = (options: Options) => {
   expect('.server', 'string')
   expect('.channel', 'string')
 
+  expect('.username', 'string')
+  expect('.avatar', 'string')
+  expect('.settingsGroup', 'string')
+  expect('.token', 'string')
+
   expect(
     '.location',
     `['top' | 'bottom' | number, 'left' | 'right' | number]`,

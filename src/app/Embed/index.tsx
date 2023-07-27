@@ -69,7 +69,8 @@ export default connect<StateProps, {}, {}, State>(
       avatar: options.avatar,
       token: options.token,
       notifications: options.allChannelNotifications,
-      notificationTimeout: options.embedNotificationTimeout
+      notificationTimeout: options.embedNotificationTimeout,
+      settingsGroup: options.settingsGroup
     },
     interactive,
     open
