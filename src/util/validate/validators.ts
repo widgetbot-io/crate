@@ -12,6 +12,12 @@ export const options = (options: Options) => {
   expect('.avatar', 'string')
   expect('.settingsGroup', 'string')
   expect('.token', 'string')
+  
+  expect(
+    '.accessibility',
+    'string[]',
+    value => value instanceof Array && value.every(v => typeof v === 'string')
+  )
 
   expect(
     '.location',

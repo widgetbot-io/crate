@@ -13,6 +13,8 @@ interface Options {
   username?: string
   // Dynamic avatar
   avatar?: string
+  // Accessibility settings
+  accessibility?: string[]
   // The settings group to use
   settingsGroup?: string
 

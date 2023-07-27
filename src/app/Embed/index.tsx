@@ -70,6 +70,7 @@ export default connect<StateProps, {}, {}, State>(
       token: options.token,
       notifications: options.allChannelNotifications,
       notificationTimeout: options.embedNotificationTimeout,
+      accessibility: options.accessibility,
       settingsGroup: options.settingsGroup
     },
     interactive,
