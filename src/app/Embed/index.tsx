@@ -18,7 +18,7 @@ class Embed extends React.PureComponent<StateProps> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.interactive && !this.props.interactive) {
+    if (nextProps.interactive && nextProps.open && this.state.deferred) {
       // User toggled open embed
       this.setState({ deferred: false })
     }
