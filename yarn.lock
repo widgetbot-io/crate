@@ -932,17 +932,17 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.5.tgz#75a2a8e7d8ab4b230414505d92335d1dcb53a6df"
   integrity sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==
 
-"@types/react-dom@^17.0.11":
-  version "17.0.17"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.17.tgz#2e3743277a793a96a99f1bf87614598289da68a1"
-  integrity sha512-VjnqEmqGnasQKV0CWLevqMTXBYG9GbwuE6x3VetERLh0cq2LTptFE73MrQi2S7GkKXCf2GgwItB/melLnxfnsg==
+"@types/react-dom@^17.0.20":
+  version "17.0.20"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.20.tgz#e0c8901469d732b36d8473b40b679ad899da1b53"
+  integrity sha512-4pzIjSxDueZZ90F52mU3aPoogkHIoSIDG+oQ+wQK7Cy2B9S+MvOqY0uEA/qawKz381qrEDkvpwyt8Bm31I8sbA==
   dependencies:
     "@types/react" "^17"
 
-"@types/react-redux@^6.0.20":
-  version "6.0.20"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.20.tgz#900a90a7d6519314ddc38b8c0d7ac7f040f33fd4"
-  integrity sha512-JKm64hnxMBIbSqD6ZtiaeGzNuAlyTs/qHvazTFG1yjLtmg8NDVXhpmCzJsVHRY9Wkr6Kq/fDA4ja3Nw2dPsa/A==
+"@types/react-redux@^6.0.21":
+  version "6.0.21"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.21.tgz#a2fd59d023107b620a15041bb8c0446e149ab75e"
+  integrity sha512-B23h4GtBEB+j0+MmBG+mT+c7CzLsYVgM3+iJqzeREPAn7O2JvbGF/EEDKNBu9XQ+LiHBHJHb65zEXNa+mg2+HQ==
   dependencies:
     "@types/react" "*"
     redux "^4.0.0"
@@ -972,10 +972,19 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@^17", "@types/react@^17.0.39":
+"@types/react@^17":
   version "17.0.48"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.48.tgz#a4532a8b91d7b27b8768b6fc0c3bccb760d15a6c"
   integrity sha512-zJ6IYlJ8cYYxiJfUaZOQee4lh99mFihBoqkOSEGV+dFi9leROW6+PgstzQ+w3gWTnUfskALtQPGHK6dYmPj+2A==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^17.0.64":
+  version "17.0.64"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.64.tgz#468162c66c33ddb4548eb1a0e36682028d9e9a62"
+  integrity sha512-IlgbX/vglDTwrCRgad6fTCzOT+D/5C0xwuvrzfuqfhg9gJrkFqAGADpUFlEtqbrP1IEo9QLSbo41MaFfoIu9Aw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -1001,17 +1010,17 @@
   resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.1.3.tgz#c7fd8069d7ce2ec7740d8bf4140c786c636fb3d6"
   integrity sha1-x/2AadfOLsd0DYv0FAx4bGNvs9Y=
 
-"@widgetbot/embed-api@^1.2.6":
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.2.6.tgz#0cbee8536b9eace52b3c697d5c13596115fb958d"
-  integrity sha512-rsE0SPVb1Gc9kiCcHOSwyfS7xGi2mPaRus/o5i/ucPkNSjurhlRUlJBilb1wXTwzLSt8IfY9sNDtvrHHaj1RVA==
+"@widgetbot/embed-api@^1.2.9":
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.2.9.tgz#e60249c220ee19a407b68f7a54f57d9bf9bbce82"
+  integrity sha512-do6kfNLAc6zRgWXBjg6H/wXOeBmSCXAcy3e1tvoN6YXPncKNO5atTrMLlysU68XMuw6QOaIjRQKCIDHCf3dEQg==
   dependencies:
     post-robot "^8.0.28"
 
-"@widgetbot/react-embed@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.8.0.tgz#21c6dad23326a1cb84ffe57aefdb51bae91a0819"
-  integrity sha512-FCt+2nlVuIsQGls4W88N7IcWAOMsG0Te4wiEmCEzh3SsnfC7Q8e21B+3NeRHeMpaM06EyM4aM8EM0t9H3bM5rw==
+"@widgetbot/react-embed@^1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.8.1.tgz#5882afa3bbb43ff344a8cd30a3f808643f717140"
+  integrity sha512-uIVkUndHh0pFEHC36KAGoCfuJLdBjYRqCdsdWiD5TRE//NYLvsEQ2cX6qQCuzj7mYd8O/YMbbCbcVwAkxUYa7w==
   dependencies:
     "@widgetbot/embed-api" "^1.1.3"
     react "^18.2.0"
@@ -5498,10 +5507,10 @@ react-markdown@^5.0.3:
     unist-util-visit "^2.0.0"
     xtend "^4.0.1"
 
-react-redux@^7.2.8:
-  version "7.2.8"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.8.tgz#a894068315e65de5b1b68899f9c6ee0923dd28de"
-  integrity sha512-6+uDjhs3PSIclqoCk0kd6iX74gzrGc3W5zcAjbrFgEdIjRSQObdIwfx80unTkVUYvbQ95Y8Av3OvFHq1w5EOUw==
+react-redux@^7.2.9:
+  version "7.2.9"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.9.tgz#09488fbb9416a4efe3735b7235055442b042481d"
+  integrity sha512-Gx4L3uM182jEEayZfRbI/G11ZpYdNAnBs70lFVMNdHJI76XYtR+7m0MN+eAs7UHBPhWXcnFPaS+9owSCJQHNpQ==
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@types/react-redux" "^7.1.20"
@@ -5510,18 +5519,18 @@ react-redux@^7.2.8:
     prop-types "^15.7.2"
     react-is "^17.0.2"
 
-react-shadow@^19.0.3:
-  version "19.0.3"
-  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-19.0.3.tgz#4fa00f10cb1dfe2edd296684ff9807eef440ebb7"
-  integrity sha512-B1DoQC/rOyOjDdpgC1bd7nfhrYEF9ukV/vz8HcKaFTNmUkUmFnQCp4NHgEPxDfe3HJ1Mdr5ePzu+ZYAOvX6bNg==
+react-shadow@^19.1.0:
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-19.1.0.tgz#410b347df08d7d998756bddfb474aa497145b9aa"
+  integrity sha512-N5p1X73t/bl/2k3pL56EK4m1aM6QJabLJpbUs+OxD/trpDn283hKskEfwDDgie30ftxsmnw6av67rMffeBTZVg==
   dependencies:
     humps "^2.0.1"
     react-use "^15.3.3"
 
-react-transition-group@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.2.tgz#8b59a56f09ced7b55cbd53c36768b922890d5470"
-  integrity sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==
+react-transition-group@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
+  integrity sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==
   dependencies:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
@@ -5623,10 +5632,10 @@ redux@^4.0.0:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
 
-redux@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.2.0.tgz#46f10d6e29b6666df758780437651eeb2b969f13"
-  integrity sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==
+redux@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.2.1.tgz#c08f4306826c49b5e9dc901dee0452ea8fce6197"
+  integrity sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==
   dependencies:
     "@babel/runtime" "^7.9.2"
 
