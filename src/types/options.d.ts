@@ -9,6 +9,8 @@ interface Options {
   server: string
   channel?: string
 
+  // Thread ID
+  thread?: string
   // Dynamic username
   username?: string
   // Dynamic avatar

@@ -65,6 +65,7 @@ export default connect<StateProps, {}, {}, State>(
       server: options.server,
       channel: options.channel,
       shard: options.shard,
+      thread: options.thread,
       username: options.username,
       avatar: options.avatar,
       token: options.token,

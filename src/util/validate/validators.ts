@@ -8,6 +8,7 @@ export const options = (options: Options) => {
   expect('.server', 'string')
   expect('.channel', 'string')
 
+  expect('.thread', 'string')
   expect('.username', 'string')
   expect('.avatar', 'string')
   expect('.settingsGroup', 'string')
