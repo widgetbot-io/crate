@@ -1,2 +1,5 @@
 export { default as cdn } from './util/cdn'
 export { default } from './api'
+export { horizontal, vertical, default as Options } from './types/options'
+export { Message, Notification, State } from './types/store'
+export { default as Theme } from './types/theme'
