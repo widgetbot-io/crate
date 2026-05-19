@@ -8,6 +8,7 @@ import { IFrame, Root } from './elements'
 
 interface StateProps {
   options: Props
+  extraParams: { [key: string]: string }
   interactive: boolean
   open: boolean
 }
@@ -35,7 +36,7 @@ class Embed extends React.PureComponent<StateProps> {
   }
 
   render() {
-    const { options, open } = this.props
+    const { options, extraParams, open } = this.props
     const { deferred } = this.state
 
     return (
@@ -45,7 +46,8 @@ class Embed extends React.PureComponent<StateProps> {
             <IFrame
               {...options}
               options={{
-                preset: 'crate'
+                preset: 'crate',
+                ...extraParams
               }}
               defer={deferred}
               onAPI={onAPI}
@@ -73,6 +75,9 @@ export default connect<StateProps, {}, {}, State>(
       notificationTimeout: options.embedNotificationTimeout,
       accessibility: options.accessibility,
       settingsGroup: options.settingsGroup
+    },
+    extraParams: {
+      ...(options.emitLatestMessage && { emitLatestMessage: '1' })
     },
     interactive,
     open

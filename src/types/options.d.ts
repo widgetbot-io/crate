@@ -47,6 +47,11 @@ interface Options {
   // Embed notification timeout
   embedNotificationTimeout?: number
 
+  // Emit a `latestMessage` event with the most recent message in the channel
+  // each time a channel finishes loading (and on navigation), so hosts don't
+  // have to wait for a new message to know the latest one.
+  emitLatestMessage?: boolean
+
   // Only load the widget once the user opens it
   defer?: boolean
   // Connect to a custom WidgetBot server

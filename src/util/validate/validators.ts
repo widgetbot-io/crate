@@ -52,6 +52,8 @@ export const options = (options: Options) => {
   expect('.allChannelNotifications', 'boolean')
   expect('.embedNotificationTimeout', 'number')
 
+  expect('.emitLatestMessage', 'boolean')
+
   expect('.defer', 'boolean')
   expect('.shard', 'string')
 
