@@ -1012,6 +1012,13 @@
   dependencies:
     post-robot "^8.0.28"
 
+"@widgetbot/embed-api@^1.2.18":
+  version "1.2.18"
+  resolved "https://registry.yarnpkg.com/@widgetbot/embed-api/-/embed-api-1.2.18.tgz#afd7251f7baadf0ccd0658b75b9a6c3637710e0d"
+  integrity sha512-Hg3udIECBQ3gLs9fgB8eHTENe5cuAFxGNwkoKWWrPx7bfxiK6RT8mL1NUW6IEAPskyou5osLJIO80Y5ruhnleg==
+  dependencies:
+    post-robot "^8.0.28"
+
 "@widgetbot/react-embed@^1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@widgetbot/react-embed/-/react-embed-1.9.0.tgz#775dee7cde04409d62c8246f04ebac4e32361611"

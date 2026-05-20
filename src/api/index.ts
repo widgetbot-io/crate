@@ -82,7 +82,7 @@ class Crate extends EmbedAPI {
     }
 
     api.on('signIn', user => {
-      guestID = 'id' in user ? user.id : user._id
+      guestID = user.id
     })
 
     api.on('message', ({ channel, message }) => {
