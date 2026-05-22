@@ -1,0 +1,80 @@
+# Publishes @widgetbot/crate to npm when a GitHub Release is published.
+#
+# The Release's tag IS the version. CI bumps package.json to match the tag,
+# commits that bump back to the default branch, builds, then publishes to npm.
+#
+# Releasing:
+#   1. If @widgetbot/react-embed got new exports you depend on, manually bump
+#      that dep in package.json + run `yarn install` to refresh yarn.lock,
+#      and commit both files BEFORE drafting the release.
+#   2. In the GitHub UI, draft a release with tag `v3.9.0` (matching semver)
+#      and publish it. CI handles the rest.
+#
+# Requirements:
+#   - NPM_TOKEN secret with publish rights on @widgetbot/crate
+#   - Default GITHUB_TOKEN must be able to push to the default branch.
+#     If the branch is protected, either allow Actions to bypass the rule
+#     or replace GITHUB_TOKEN below with a PAT stored as a secret.
+
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write    # commit the version bump back to master
+  id-token: write    # npm provenance attestation
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      # Parcel 1.x's webpack pipeline uses an md4 hash that newer OpenSSL refuses.
+      NODE_OPTIONS: --openssl-legacy-provider
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          cache: yarn
+
+      - name: Parse version from tag
+        id: tag
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::Tag $GITHUB_REF_NAME is not valid semver"
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Bump package.json to ${{ steps.tag.outputs.version }}
+        run: npm version "${{ steps.tag.outputs.version }}" --no-git-tag-version --allow-same-version
+
+      - name: Commit + push bump
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet package.json; then
+            echo "package.json already at v${{ steps.tag.outputs.version }} — nothing to commit"
+          else
+            git add package.json
+            git commit -m "chore: release v${{ steps.tag.outputs.version }}"
+            git push origin HEAD:master
+          fi
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn build
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
