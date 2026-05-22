@@ -8,7 +8,7 @@ export const enhancer =
   undefined
 
 export const log = (method: keyof Console, ...data) =>
-  console[method](
+  (console as any)[method](
     '%c<{ crate.js }>',
     'font-weight: bold; font-style: italic',
     ...data

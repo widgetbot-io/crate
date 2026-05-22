@@ -5,8 +5,9 @@
 #
 # Releasing:
 #   1. If @widgetbot/react-embed got new exports you depend on, manually bump
-#      that dep in package.json + run `yarn install` to refresh yarn.lock,
-#      and commit both files BEFORE drafting the release.
+#      that dep in package.json + run `npm install --legacy-peer-deps` to
+#      refresh package-lock.json, and commit both files BEFORE drafting the
+#      release.
 #   2. In the GitHub UI, draft a release with tag `v3.9.0` (matching semver)
 #      and publish it. CI handles the rest.
 #
@@ -43,7 +44,7 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-          cache: yarn
+          cache: npm
 
       - name: Parse version from tag
         id: tag
@@ -70,9 +71,10 @@ jobs:
             git push origin HEAD:master
           fi
 
-      - run: yarn install --frozen-lockfile
+      # crate's dep graph needs --legacy-peer-deps (React 17 + old peer ranges).
+      - run: npm ci --legacy-peer-deps
 
-      - run: yarn build
+      - run: npm run build
 
       - name: Publish to npm
         run: npm publish --provenance --access public
