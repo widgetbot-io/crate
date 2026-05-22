@@ -5,9 +5,13 @@ export type horizontal = 'top' | 'bottom' | number
 export type vertical = 'left' | 'right' | number
 
 interface Options {
-  // Server + channel IDs
-  server: string
+  // Server + channel IDs (Discord mode)
+  server?: string
   channel?: string
+
+  // Telegram chat + topic IDs (Telegram mode — when set, switches to telegram-widget)
+  chat?: string
+  topic?: string
 
   // Thread ID
   thread?: string

@@ -26,3 +26,26 @@ See the [documentation](https://docs.widgetbot.io/crate/) for more options.
   })
 </script>
 ```
+
+## Telegram
+
+Pass `chat` (instead of `server` / `channel`) and the `shard` URL of your
+deployed Telegram widget host:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async>
+  const crate = new Crate({
+    chat: '-1003784217881',
+    shard: 'https://your-telegram-widget.example.com',
+    // topic: '12', // supergroup topic, optional
+  })
+
+  crate.on('ready', () => console.log('telegram-widget ready'))
+  crate.on('signIn', user => console.log('signed in as', user))
+</script>
+```
+
+When `chat` is set, crate switches into Telegram mode: navigation events use
+`chatId`/`topicId` and the default button color is Telegram blue. `shard` is
+required in Telegram mode — there is no default host.
+

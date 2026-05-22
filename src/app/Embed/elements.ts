@@ -1,9 +1,8 @@
-import WidgetBot from '@widgetbot/react-embed'
+import WidgetBot, { TelegramWidget } from '@widgetbot/react-embed'
 
 import ShadowStyles from '../../controllers/emotion'
 
-export const Root = ShadowStyles(
-  ({ styled, css }) => styled('div')`
+const positioning = ({ styled, css }) => styled('div')`
     position: fixed;
     z-index: 2147482999;
     transition: opacity 0.4s ease,
@@ -53,10 +52,10 @@ export const Root = ShadowStyles(
             }
           `};
   `
-)
 
-export const IFrame = ShadowStyles(
-  ({ styled }) => styled(WidgetBot)`
+export const Root = ShadowStyles(positioning)
+
+const iframeStyles = (component: any) => ({ styled }) => styled(component)`
     height: 100%;
     width: 100%;
     box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);
@@ -64,4 +63,6 @@ export const IFrame = ShadowStyles(
 
     border-radius: 17px !important;
   `
-)
+
+export const IFrame = ShadowStyles(iframeStyles(WidgetBot))
+export const TelegramIFrame = ShadowStyles(iframeStyles(TelegramWidget))

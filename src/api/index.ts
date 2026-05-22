@@ -41,6 +41,25 @@ class Crate extends EmbedAPI {
    */
   constructor(userOptions: Options) {
     super()
+    // Telegram mode: when `chat` is supplied, swap Discord-flavored defaults
+    // for Telegram-flavored ones before the first setOptions call. `shard`
+    // is intentionally NOT defaulted — Telegram users must pass their own
+    // widget host URL.
+    if (userOptions && userOptions.chat) {
+      if (!userOptions.shard) {
+        throw new Error(
+          'Crate Telegram mode requires a `shard` option pointing at the widget host.'
+        )
+      }
+      this.options.set({
+        ...this.options.get(),
+        server: null,
+        channel: null,
+        chat: null,
+        topic: null,
+        color: '#2AABEE'
+      })
+    }
     const options = this.setOptions(userOptions)
     this.store = createStore(store, defaultState(options.get()), enhancer)
 
@@ -85,7 +104,7 @@ class Crate extends EmbedAPI {
       guestID = user.id
     })
 
-    api.on('message', ({ channel, message }) => {
+    const notifyMessage = ({ channel, message }) => {
       if (!this.options.notifications || !message.content || message.author.id === guestID) return
 
       this.notify({
@@ -94,7 +113,10 @@ class Crate extends EmbedAPI {
         avatar: message.author.avatarUrl,
         onClick: () => this.navigate(message.channelId)
       })
-    })
+    }
+
+    api.on('message', notifyMessage)
+    api.on('latestMessage', notifyMessage)
 
     api.on('messageDelete', ({ id }) => {
       this.store.dispatch(actions.deleteMessage({ id, decrement: true }))
@@ -169,10 +191,20 @@ class Crate extends EmbedAPI {
   navigate(channelId: string) {
     this.store.dispatch(actions.toggle(true));
 
-    this.emit('navigate', {
-      guild: this.options.server,
-      channel: channelId,
-    });
+    if (this.options.chat) {
+      // Telegram navigation payload — the embed-api `navigate` event type is
+      // declared with Discord-flavored keys (guild/channel); cast to `any`
+      // until that type is extended upstream.
+      this.emit('navigate', {
+        chatId: this.options.chat,
+        topicId: channelId,
+      } as any);
+    } else {
+      this.emit('navigate', {
+        guild: this.options.server,
+        channel: channelId,
+      });
+    }
   }
 
   /**
